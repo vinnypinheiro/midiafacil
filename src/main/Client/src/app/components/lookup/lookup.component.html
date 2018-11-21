@@ -1,0 +1,32 @@
+<div #lookup class="lookup w-100">
+    <label for="key">{{ fieldLabel }}</label>
+
+    <div class="lookup-field">
+        <div class="input-group input-group-sm">
+
+            <input id="key" type="text" class="lookup-key form-control input-group-prepend col-12" autocomplete="off" spellcheck="false">
+
+            <div class="lookup-icon">
+                <div class="lookup-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+
+                <div class="lookup-loading">
+                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                </div>
+            </div>
+
+           <!-- <input type="text" class="lookup-description form-control col-9" value="" disabled>-->
+        </div>
+
+    </div>
+
+    <div class="lookup-dialog bg-white">
+
+        <div class="detail py-1 px-2 bg-white" *ngFor="let row of sourceData; let i = index" (click)="onClick($event)" [attr.data-index]="i">
+            <div class="title font-weight-bold">{{ row.codigo }}</div>
+            <div class="description">{{ row.nome }}</div>
+        </div>
+
+    </div>
+</div>

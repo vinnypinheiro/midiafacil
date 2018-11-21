@@ -1,0 +1,78 @@
+<div class="col-sm-1" *ngFor="let reportgroup of this.reportGroups">
+  <h2>{{reportgroup.label}}</h2>
+  <li *ngFor="let report of reportgroup.reportList" class="user-header" (click)="callReport(report)">
+    <i class="far fa-file-alt"></i>
+    <a>{{report.label}}</a>
+  </li>
+</div>
+
+
+<div id="div_filter" class="collapse ibox-content">
+  <div *ngFor="let whereclause of selectedReport.filterData.whereClauses" class="form-inline">
+    <!--{{whereclause | json}}<br/>-->
+    <div class="form-group">
+      <label>Campo</label>
+      <label>{{whereclause.Label}}</label>
+    </div>
+
+    <div class="form-group">
+      <label for="tipo">Tipo</label>
+      <select id="tipo" class="form-control" [(ngModel)]="whereclause.matchType">
+        <option value="EQUALS">Valor Exato</option>
+        <option value="NOT_EQUAL">Diferente</option>
+        <option value="GREATER">Maior</option>
+        <option value="GREATER_EQUAL">Maior ou Igual</option>
+        <option value="LESS">Menor</option>
+        <option value="LESS_EQUAL">Menor ou Igual</option>
+        <option value="LIKE_START">Iniciando com</option>
+        <option value="LIKE_END">Terminando com</option>
+        <option value="LIKE">Contendo</option>
+        <option value="NOT_LIKE">Nao Contendo</option>
+        <option value="BETWEEN">Entre</option>
+        <!--<option *ngIf="whereclause.field?.type ==='string'"  value="LIKE" >Contendo</option>-->
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Valor</label>
+      <input *ngIf="whereclause.field?.type ==='STRING' || whereclause.field?.type ==='ENUM'" type="text"
+             placeholder="valor" [(ngModel)]="whereclause.iniValue" class="form-control">
+      <input *ngIf="whereclause.field?.type ==='NUMBER'" type="number" placeholder="valor"
+             [(ngModel)]="whereclause.iniValue" class="form-control">
+      <div *ngIf="whereclause.field?.type ==='DATE'">
+        <div class="input-group date">
+          <input type="date"
+                 class="form-control input-sm"
+                 name="datainicio"
+                 [ngModel]="whereclause.iniValue |date:'dd/MM/yyyy'"/>
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="whereclause.matchType ==='BETWEEN'">
+      <label>Valor final</label>
+      <input *ngIf="whereclause.field?.type ==='STRING' || whereclause.field?.type ==='ENUM'" type="text"
+             placeholder="valor" [(ngModel)]="whereclause.endValue" class="form-control">
+      <input *ngIf="whereclause.field?.type ==='NUMBER'" type="number" placeholder="valor"
+             [(ngModel)]="whereclause.endValue" class="form-control">
+      <div *ngIf="whereclause.field?.type ==='DATE'" class="input-group date">
+        <input type="date"
+               [(ngModel)]="whereclause.iniValue"
+               class="form-control input-sm"
+               name="data"/>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+  </div>
+
+  <div class="clearfix">
+    <br/>
+    <button class="btn btn-sm btn-primary float-left m-t-n-xs"
+            type="button">Pesquisar
+    </button>
+  </div>
+</div>
+
+
+
+

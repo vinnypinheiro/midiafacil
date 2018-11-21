@@ -1,0 +1,85 @@
+<div [class]="class" style="padding: 0px">
+
+
+    <div class="input-group l3_lookup">
+        <!--<div class="input-group-prepend" *ngIf="edicao">-->
+        <!--</div>-->
+        <input type="text" class="form-control p-w-xxs" *ngIf="edicao" [value]="code" (change)="onCodeChange(codeField.value)" #codeField/>
+        <span class="input-group-addon input-group-append input-group-prepend " (click)="showDialog()" style="cursor: pointer;">
+            <i class="fa fa-search" style="font-size: 8px"></i>
+        </span>
+         <div class="input-group-append" [ngClass]="{'w-75':edicao, 'w-100':!edicao}">
+            <input type="text" class="w-100 form-control" [value]="edicao?description: code + ' - '+description" disabled/>
+        </div>
+    </div>
+
+    <div [id]="modalIdentifier" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>
+                                <ng-content></ng-content>
+                            </h5>
+                        </div>
+                        <div class="ibox-content p-1">
+                            <div class="table-responsive data-grid">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 20%">Código</th>
+                                        <th style="width: 80%">Descrição</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let row of dataList" [ngClass]="{'overRow': row['over'] || row.id==rowSelected?.id}" (mouseover)="row['over']=true" (mouseleave)="row['over']=false" (click)="onSelectRow(row)">
+                                        <td style="width: fit-content">{{row.codigo}}</td>
+                                        <td style="width: fit-content">{{row.nome}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="ibox-footer">
+                            <div class="row">
+                                <div class="col-sm-5 ">
+                                    <input type="text" class="form-control" [value]="code" (change)="onCodeChange(searchField.value)" #searchField/>
+                                </div>
+                                <div class="col-sm-1 nopadding">
+                                    <p>
+                                        <a class="btn btn-white btn-bitbucket">
+                                            {{page}} / {{total_pages}}
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6 nopadding">
+                                    <p>
+                                        <a class="btn btn-white btn-bitbucket" [ngClass]="{'disabled' : !stateButons.first}" (click)="onButtonActionClick('first')">
+                                            <i class="fa fa-angle-double-left m-r-xs"></i>
+                                        </a>
+                                        <a class="btn btn-white btn-bitbucket" [ngClass]="{'disabled' : !stateButons.prior}" (click)="onButtonActionClick('prior')">
+                                            <i class="fa fa-angle-left m-r-xs"></i>
+                                        </a>
+                                        <a class="btn btn-white btn-bitbucket" [ngClass]="{'disabled' : !stateButons.next}" (click)="onButtonActionClick('next')">
+                                            <i class="fa fa-angle-right m-r-xs"></i>
+                                        </a>
+                                        <a class="btn btn-white btn-bitbucket" [ngClass]="{'disabled' : !stateButons.last}" (click)="onButtonActionClick('last')">
+                                            <i class="fa fa-angle-double-right m-r-xs"></i>
+                                        </a>
+                                        <button class="btn btn-info ml-2" type="button" (click)="onCancelClick()"><i class="fa fa-times"></i>&nbsp;Cancelar</button>
+                                        <button class="btn btn-success ml-1" type="button" (click)="onConfirmSelectRow()" [disabled]="!rowSelected"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Selecionar</span></button>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

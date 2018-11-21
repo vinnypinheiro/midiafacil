@@ -1,0 +1,135 @@
+<div class="mail-box-header l3-toolbar">
+  <div class="mail-tools tooltip-demo m-t-md">
+
+    <span class="toolbar-title">{{title}}</span>
+
+    <div class="pull-right">
+
+      <!--GROUP 1-->
+      <div class="btn-group">
+
+        <button type="button"
+                class="btn btn-primary"
+                [disabled]="!stateButons.open"
+                (click)="onButtonActionClick('open')"><i class="fas fa-folder-open m-r-xs"></i> Abrir
+        </button>
+
+        <button type="button"
+                class="btn btn-primary"
+                [disabled]="!stateButons.new"
+                (click)="onButtonActionClick('new')"><i class="fas fa-file"></i> Novo
+        </button>
+
+      </div>
+      <!----------------------------------------------------------------------------------------------------------------->
+
+      <!--GROUP ACTIONS-->
+      <div class="btn-group">
+
+        <div class="dropdown report-dropdown ">
+
+          <button aria-expanded="true"
+                  class="dropdown-toggle btn btn-primary"
+                  data-toggle="dropdown"
+                  href="#">
+            <span><i class="fas fa-external-link-square-alt"></i> Atalhos</span>
+          </button>
+
+          <ul class="dropdown-menu user-box  animated row">
+            <li>Açao 1</li>
+            <li>Açao 2</li>
+            <li>Açao 3</li>
+          </ul>
+
+        </div>
+
+      </div>
+      <!----------------------------------------------------------------------------------------------------------------->
+
+      <!--GROUP REPORT PRINTS-->
+      <div class="btn-group">
+        <div class="input-group">
+
+          <button type="button"
+                  class="btn btn-primary"
+                  [disabled]="!stateButons.print">
+            <i class="fa fa-print m-r-xs"></i>Imprimir</button>
+
+          <div class="input-group-append">
+
+            <div class="dropdown report-dropdown" *ngFor="let grupo of reportGroups">
+
+              <button aria-expanded="true"
+                      class="dropdown-toggle btn btn-primary"
+                      data-toggle="dropdown"
+                      [disabled]="!stateButons.print"
+                      href="#">
+                <span></span>
+              </button>
+
+              <ul class="dropdown-menu user-box  animated row"
+                  *ngIf="grupo.reportList.length > 1">
+
+                <li *ngFor="let report of grupo.reportList">
+                  <a (click)="sharedService.printReport(report)">{{report.label}}</a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!--PAGINATION-->
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" [disabled]="!stateButons.first"
+                (click)="onButtonActionClick('first')"><i class="fa fa-angle-double-left m-r-xs"></i>
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="!stateButons.prior"
+                (click)="onButtonActionClick('prior')"><i class="fa fa-angle-left m-r-xs"></i>
+        </button>
+
+        <div class="col"><span class="pagination-text"> {{page}}/{{pages}}</span></div>
+
+        <button type="button" class="btn btn-primary" [disabled]="!stateButons.next"
+                (click)="onButtonActionClick('next')"><i class="fa fa-angle-right m-r-xs"></i>
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="!stateButons.last"
+                (click)="onButtonActionClick('last')"><i class="fa fa-angle-double-right m-r-xs"></i>
+        </button>
+      </div>
+      <!----------------------------------------------------------------------------------------------------------------->
+    </div>
+
+  </div>
+</div>
+
+<!--GROUP WIZARD FILTER-->
+<div class="btn-group float-right" style="padding-right: 10px; padding-bottom: 10px">
+  <div class="input-group">
+
+    <input type="text" class="form-control" [(ngModel)]="filterRowValue"/>
+
+    <div class="input-group-append">
+
+      <button type="button"
+              class="btn btn-primary"
+              (click)="onFilterRowButtonClick()"><i class="fa fa-search m-r-xs"></i>Buscar
+      </button>
+    </div>
+
+  </div>
+
+  <button type="button"
+          class="btn btn-primary"
+          data-toggle="collapse"
+          data-target="#div_filter"
+  style="margin-left: 5px;">
+    <i class="fa fa-filter m-r-xs"></i>
+  </button>
+
+</div>

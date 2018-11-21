@@ -1,0 +1,31 @@
+:host {
+    padding: 0px 0px;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.nopadding {
+    padding-right: 5px !important;;
+    padding-left: 5px !important;;
+}
+
+.ibox {
+    margin-bottom: 0;
+}
+
+.overRow {
+    background-color: #1c84c6 !important;
+    color: white;
+}
+
+.table-responsive{
+    min-height: 370px;
+    max-height: 370px;
+}
+
+.ibox-content {
+  margin-right: 0;
+  margin-left: 0;
+}
