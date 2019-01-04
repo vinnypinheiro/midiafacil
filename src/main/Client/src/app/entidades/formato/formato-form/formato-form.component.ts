@@ -5,25 +5,46 @@ import {FilterData} from '../../../components/interfaces';
 import {CommonsService} from '../../../commons-service'; 
 import {Formato} from '../formato'; 
 import {FormatoService} from '../formato.service'; 
-import {MaterialService} from '../../material/material.service'; 
+import {MaterialService} from '../../material/material.service';
+
+import {FormBuilder} from "@angular/forms";
+import {fuseAnimations} from "../../../../@fuse/animations";
 
 @Component({
  selector: 'gov-formato-form', 
  templateUrl: './formato-form.component.html', 
- //styleUrls: ['./formato-form.component.css'] 
+  styleUrls: ['./formato-form-component.scss'] ,
+    animations   : fuseAnimations,
 }) 
-export class FormatoFormComponent extends CommonsForm<Formato> implements OnInit { 
+export class FormatoFormComponent extends CommonsForm<Formato> implements OnInit {
 
-    constructor(apiService: FormatoService, 
+
+
+    constructor(private fb: FormBuilder,
+                apiService: FormatoService,
                             private materialService: MaterialService, 
                 route: ActivatedRoute, 
  router: Router ) { 
          super(apiService, route, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+
+     }
+
+    //campanha reactive form
+    activeForm = this.fb.group({
+        nome: null,
+
+    });
+
+    saveEntity() {
+        // TODO: Use EventEmitter with form value
+        console.warn(this.activeForm.value);
+        this.activeBean = this.activeForm.value;
+        this.save();
+        //this.apiService.save(this.clienteForm.value);
+    }
 
      getLookupService(lookupName: string): CommonsService<any> {
          switch (lookupName) { 

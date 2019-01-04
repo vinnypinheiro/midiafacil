@@ -1,7 +1,5 @@
 package br.com.solutis.desafio.report;
 
-import br.com.solutis.desafio.helper.PropertiesReader;
-
 import java.util.HashMap;
 
 /**
@@ -13,70 +11,74 @@ public class PlanoDeMidiaRadios extends Report {
     public  void buildSqlWithId(Long id) {
         sql = " ";
         sql += " select \n";
-        sql += " ag.nomefantasia as agencia, \n";
-        sql += "         'midia' as midia, \n";
-        sql += " cli.nomefantasia as cliente, \n";
+        sql += " a.nomefantasia as agencia, \n";
+        sql += "         'RÁDIOS' as midia, \n";
+        sql += " c.nomefantasia as cliente,  \n";
         sql += " '' as responsavel, \n";
-        sql += "         '' as campanha, \n";
-        sql += " '' as formato, \n";
+        sql += "         ca.nome as campanha, \n";
+        sql += " v.cidade as mercado, \n";
+        sql += " 'GIF PADRÃO' as formato, \n";
         sql += " '' as periodo, \n";
         sql += " '' as programa, \n";
         sql += " '' as hora, \n";
         sql += " '' as mercado, \n";
-        sql += " cli.nomefantasia as veiculo, \n";
-        sql += " ag.site as site, \n";
+        sql += "v.nomefantasia as veiculo,  \n";
+        sql += "  'ww.com.br' as site, \n";
         sql += " '' as responsavel, \n";
         sql += " pii.qtd as qtd, \n";
-        sql += " pii.valor as custo_unitario, \n";
-
-        sql += " pii.dia01  as d1, \n";
-        sql += " pii.dia02  as d2, \n";
-        sql += " pii.dia03  as d3, \n";
-        sql += " pii.dia04  as d4, \n";
-        sql += " pii.dia05  as d5, \n";
-        sql += " pii.dia06  as d6, \n";
-        sql += " pii.dia07  as d7, \n";
-        sql += " pii.dia08  as d8, \n";
-        sql += " pii.dia09  as d9, \n";
-        sql += " pii.dia10  as d10, \n";
-        sql += " pii.dia11  as d11, \n";
-        sql += " pii.dia12  as d12, \n";
-        sql += " pii.dia13  as d13, \n";
-        sql += " pii.dia14  as d14, \n";
-        sql += " pii.dia15  as d15, \n";
-        sql += " pii.dia16  as d16, \n";
-        sql += " pii.dia17  as d17, \n";
-        sql += " pii.dia18  as d18, \n";
-        sql += " pii.dia19  as d19, \n";
-        sql += " pii.dia20  as d20, \n";
-        sql += " pii.dia21  as d21, \n";
-        sql += " pii.dia22  as d22, \n";
-        sql += " pii.dia23  as d23, \n";
-        sql += " pii.dia24  as d24, \n";
-        sql += " pii.dia25  as d25, \n";
-        sql += " pii.dia26  as d26, \n";
-        sql += " pii.dia27  as d27, \n";
-        sql += " pii.dia28  as d28, \n";
-        sql += " pii.dia29  as d29, \n";
-        sql += " pii.dia30  as d30, \n";
-        sql += " pii.dia31  as d31, \n";
-        sql += " to_char(pii.data, 'MM') as mes, \n";
-        sql += " to_char(pii.data, 'YYYY') as ano, \n";
+        sql += " pii.valor_unit as custo_unitario, \n";
+        sql += " a.nomefantasia as agencia, \n";
+        sql += "  cast( pii.dia01 as int8) as d1, \n";
+        sql += "  cast( pii.dia02 as int8)  as d2, \n";
+        sql += "  cast( pii.dia03 as int8)  as d3, \n";
+        sql += "  cast( pii.dia04 as int8)  as d4, \n";
+        sql += "  cast( pii.dia05 as int8)  as d5, \n";
+        sql += "  cast( pii.dia06 as int8)  as d6, \n";
+        sql += "  cast( pii.dia07 as int8)  as d7, \n";
+        sql += "  cast( pii.dia08 as int8)  as d8, \n";
+        sql += "  cast( pii.dia09 as int8)  as d9, \n";
+        sql += "  cast( pii.dia10 as int8)  as d10, \n";
+        sql += "  cast( pii.dia11 as int8)  as d11, \n";
+        sql += "  cast( pii.dia12 as int8)  as d12, \n";
+        sql += "  cast( pii.dia13 as int8) as d13, \n";
+        sql += "  cast( pii.dia14 as int8)  as d14, \n";
+        sql += "  cast( pii.dia15 as int8)  as d15, \n";
+        sql += "  cast( pii.dia16 as int8) as d16, \n";
+        sql += "  cast( pii.dia17 as int8)  as d17, \n";
+        sql += "  cast( pii.dia18 as int8)  as d18, \n";
+        sql += "  cast( pii.dia19 as int8)  as d19, \n";
+        sql += "  cast( pii.dia20 as int8)  as d20, \n";
+        sql += "  cast( pii.dia21 as int8)  as d21, \n";
+        sql += "  cast( pii.dia22 as int8)  as d22, \n";
+        sql += "  cast( pii.dia23 as int8)  as d23, \n";
+        sql += "  cast( pii.dia24 as int8)  as d24, \n";
+        sql += "  cast( pii.dia25 as int8)  as d25, \n";
+        sql += "  cast( pii.dia26 as int8) as d26, \n";
+        sql += "  cast( pii.dia27 as int8)  as d27, \n";
+        sql += "  cast( pii.dia28 as int8)  as d28, \n";
+        sql += "  cast( pii.dia29 as int8)  as d29, \n";
+        sql += "  cast( pii.dia30 as int8)  as d30, \n";
+        sql += "  cast( pii.dia31 as int8)  as d31, \n";
+        sql += " 'Janiero' as mes, \n";
+        sql += " '2019' as ano, \n";
         sql += " '' as nome \n";
+        sql += " from pedido_insercao_item pii \n";
+        sql += " left join veiculo v on (v.id = pii.veiculo_id) \n";
+        sql += " left join programa p on (p.veiculo_id = pii.programa_id) \n";
+        sql += " left join plano_midia pm on (pm.id = "+id+") \n";
+        sql += " left join agencia a on (a.id = pm.agencia_id) \n";
+        sql += " left join cliente c on (c.id = pm.cliente_id) \n";
+        sql += " left join campanha ca on (ca.id = pm.campanha_id)  \n";
+        sql += " where pii.planomidia_id = "+id+" \n order by pii.id";
 
-        sql += " from pedidoinsercaoitem pii \n";
-        sql += " left join pedidoinsercao pi on (pi.id = pii.pedidoinsercao_id) \n";
-        sql += " left join agencia ag on (ag.id = pi.agencia_id) \n";
-        //sql += " left join tipomidia tm on (tm.id = ag.tipomidia_id) \n";
-        sql += " left join cliente cli on (cli.id = pi.cliente_id) \n";
 
-        sql += " where pii.pedidoinsercao_id = "+id+" \n";
+
     }
 
     public HashMap<String,Object> getParametros(){
         HashMap<String,Object> parametros = new HashMap<String,Object>();
 
-        String LOGO = PropertiesReader.getAplicationPath()+"resources/logo.png";
+        String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
 
 

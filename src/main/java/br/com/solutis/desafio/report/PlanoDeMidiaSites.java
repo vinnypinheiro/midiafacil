@@ -1,7 +1,5 @@
 package br.com.solutis.desafio.report;
 
-import br.com.solutis.desafio.helper.PropertiesReader;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,40 +11,37 @@ public class PlanoDeMidiaSites extends Report {
 
 
     public  void buildSqlWithId(Long id) {
-    sql = " ";
-    sql += " select \n";
-    sql += " ag.nomefantasia as agencia, \n";
-    sql += "         '' as midia, \n";
-    sql += " cli.nomefantasia as cliente, \n";
-    sql += " '' as responsavel, \n";
-    sql += "         '' as campanha, \n";
-    sql += " '' as formato, \n";
-    sql += " '' as periodo, \n";
-    sql += " '' as programa, \n";
-    sql += " '' as hora, \n";
-    sql += " '' as mercado, \n";
-    sql += " cli.nomefantasia as veiculo, \n";
-    sql += "         ag.site as site, \n";
-    sql += " '' as responsavel, \n";
-    sql += " pii.qtd as qtd, \n";
-    sql += "         pii.valor as custo_unitario, \n";
-    sql += " '' as nome \n";
-
-    sql += " from pedido_insercao_item pii \n";
-    sql += " left join pedido_insercao pi on (pi.id = pii.pedidoinsercao_id) \n";
-    sql += " left join agencia ag on (ag.id = pi.agencia_id) \n";
-    //sql += " left join tipomidia tm on (tm.id = ag.tipomidia_id) \n";
-    sql += " left join cliente cli on (cli.id = pi.cliente_id) \n";
-
-    sql += " where pii.pedidoinsercao_id = "+id+" \n";
+        sql += " select         \n" ;
+        sql += " 'midia' as midia, \n" ;
+        sql += " ag.nomefantasia as agencia, \n" ;
+        sql += " cl.nomefantasia as cliente, \n" ;
+        sql += " 'GIF PADRÃO' as formato, \n" ;
+        sql += " 'nome' as nome, \n" ;
+        sql += " v.cidade as mercado, \n" ;
+        sql += " v.nomefantasia as veiculo, \n" ;
+        sql += " v.site as site, \n" ;
+        sql += " pii.qtd as qtd,  \n" ;
+        sql += " p.valor as custo_unitario, \n" ;
+        sql += " p.descricao as responsavel, \n" ;
+        sql += " 'JAN/2019' as periodo, \n" ;
+        sql += " 'ROTATIVO' as programa, \n" ;
+        sql += " 'ROTATIVO' as hora, \n" ;
+        sql += " cp.nome as campanha \n" ;
+        sql += " from pedido_insercao_item pii \n" ;
+        sql += " left join plano_midia pm on (pm.id =  "+id+") \n" ;
+        sql += " left join agencia ag on (ag.id = pm.agencia_id) \n" ;
+        sql += " left join programa p on (p.veiculo_id = pii.veiculo_id) \n" ;
+        sql += " left join cliente cl on (cl.id = pm.cliente_id) \n" ;
+        sql += " left join campanha cp on (cp.id = pm.campanha_id) \n" ;
+        sql += " left join veiculo v on (v.id = pii.veiculo_id) \n" ;
+        sql += " where pii.planomidia_id = "+id+" \n" ;
     }
 
     public HashMap<String,Object> getParametros(){
         HashMap<String,Object> parametros = new HashMap<String,Object>();
 
-        String LOGO = PropertiesReader.getAplicationPath()+"resources/logo.png";
+        String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
-
 
         return  parametros;
     }

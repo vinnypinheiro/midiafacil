@@ -1,53 +1,73 @@
-import {Component, OnInit} from '@angular/core'; 
-import {Router} from '@angular/router'; 
-import {FilterData} from '../../../components/interfaces'; 
-import {FieldSearch} from '../../../utils/utils'; 
- import {CommonsGrid} from '../../../commons-grid'; 
-import {ReportGroup} from '../../../shared/report-group'; 
-import {Material} from '../material'; 
-import {MaterialService} from '../material.service'; 
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {FilterData} from '../../../components/interfaces';
+import {FieldSearch} from '../../../utils/utils';
+import {CommonsGrid} from '../../../commons-grid';
+import {ReportGroup} from '../../../shared/report-group';
+import {Material} from '../material';
+import {MaterialService} from '../material.service';
 
-@Component({ 
-  selector: 'gov-material-grid', 
-  templateUrl: './material-grid.component.html', 
-  //styleUrls: ['./material-grid.component.css'] 
-}) 
-export class MaterialGridComponent extends CommonsGrid<Material> implements OnInit { 
+import {fuseAnimations} from "../../../../@fuse/animations";
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
-     constructor(apiService: MaterialService, router: Router) { 
-         super(apiService, router); 
-     } 
+@Component({
+    selector: 'gov-material-grid',
+    templateUrl: './material-grid.component.html',
+    styleUrls: ['./material-grid-component.scss'] ,
+    animations   : fuseAnimations,
+})
+export class MaterialGridComponent extends CommonsGrid<Material> implements OnInit {
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
 
-     onNavigateClick(filterData: FilterData): void { 
-         this.loadByFilter(filterData); 
-     } 
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-     getDefaultFilter(): FilterData { 
-         const filterData = super.getDefaultFilter(); 
-         filterData.order = 'material.descricao ' 
-         return filterData; 
-     } 
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','descricao', 'formato'];
 
-     getRowFilter(): FilterData { 
-         let filter= this.buildRowFilter('trb_material'); 
-         filter.whereClauses[0].dataType='INTEGER'; 
-         return filter; 
-     } 
+    constructor(apiService: MaterialService, router: Router) {
+        super(apiService, router);
+    }
 
-     getTableName(): string { 
-         return 'material' ; 
-     } 
+    ngOnInit() {
+        this.dataSource.paginator = this.paginator;
+        this.loadByFilter(this.getDefaultFilter());
+    }
 
-     getFieldList(): FieldSearch[] { 
-         let retorno = []; 
-         retorno[0] = new FieldSearch('descricao','descricao','STRING'); 
-         return retorno; 
-     } 
-getReportList():ReportGroup[]{ 
-    return []; 
-} 
+    loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+            this.dataSource.data = response.content;
+
+            this.activeBean = null;
+        });
+    }
+
+    onNavigateClick(filterData: FilterData): void {
+        this.loadByFilter(filterData);
+    }
+
+    getDefaultFilter(): FilterData {
+        const filterData = super.getDefaultFilter();
+        filterData.order = 'material.descricao '
+        return filterData;
+    }
+
+    getRowFilter(): FilterData {
+        let filter= this.buildRowFilter('trb_material');
+        filter.whereClauses[0].dataType='INTEGER';
+        return filter;
+    }
+
+    getTableName(): string {
+        return 'material' ;
+    }
+
+    getFieldList(): FieldSearch[] {
+        let retorno = [];
+        retorno[0] = new FieldSearch('descricao','descricao','STRING');
+        return retorno;
+    }
+    getReportList():ReportGroup[]{
+        return [];
+    }
 }

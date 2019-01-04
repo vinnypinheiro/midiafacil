@@ -1,7 +1,6 @@
 package br.com.solutis.desafio.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +12,9 @@ import br.com.solutis.desafio.domain.Produto;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class PedidoInsercaoItem implements Serializable {
     @Id
     @GeneratedValue
@@ -58,14 +60,32 @@ public class PedidoInsercaoItem implements Serializable {
     private Double qtd;
     private Double valor;
     private Date vencimento;
-    @ManyToOne
-    @JoinColumn(name = "pedidoinsercao_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_pedidoinsercao"))    private PedidoInsercao pedidoinsercao_id;
+    private Double valorUnit;
+
+
+
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_produto"))    private Produto produto_id;
 
+    @JsonBackReference(value="pedidoinsercao-planomidia")
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "planomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_planomidia"))    private PlanoMidia planomidia_id;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_cliente"))    private Cliente cliente_id ;
+
+    @ManyToOne
+    @JoinColumn(name = "veiculo_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_veiculo"))    private Veiculo veiculo_id ;
+
+    @ManyToOne
+    @JoinColumn(name = "peca_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_peca"))    private Peca peca_id ;
+
+    @ManyToOne
+    @JoinColumn(name = "programa_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_programa"))    private Programa programa_id ;
+
+    @JsonBackReference(value="pedidoinsercaoitem-pedidoinsercao")
+    @ManyToOne
+    @JoinColumn(name = "pedidoinsercao_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercaoitem_pedidoinsercao"))    private PedidoInsercao pedidoinsercao_id;
 
 
 
@@ -341,6 +361,7 @@ public class PedidoInsercaoItem implements Serializable {
     public void setVencimento(Date vencimento) {
         this.vencimento = vencimento;
     }
+
     public PedidoInsercao getPedidoinsercao_id() {
         return pedidoinsercao_id;
     }
@@ -348,6 +369,7 @@ public class PedidoInsercaoItem implements Serializable {
     public void setPedidoinsercao_id(PedidoInsercao pedidoinsercao_id) {
         this.pedidoinsercao_id = pedidoinsercao_id;
     }
+
     public Produto getProduto_id() {
         return produto_id;
     }
@@ -384,5 +406,44 @@ public class PedidoInsercaoItem implements Serializable {
         this.planomidia_id = planomidia_id;
     }
 
+    public Veiculo getVeiculo_id() {
+        return veiculo_id;
+    }
 
+    public void setVeiculo_id(Veiculo veiculo_id) {
+        this.veiculo_id = veiculo_id;
+    }
+
+
+    public Peca getPeca_id() {
+        return peca_id;
+    }
+
+    public void setPeca_id(Peca peca_id) {
+        this.peca_id = peca_id;
+    }
+
+    public Programa getPrograma_id() {
+        return programa_id;
+    }
+
+    public void setPrograma_id(Programa programa_id) {
+        this.programa_id = programa_id;
+    }
+
+    public Double getValorUnit() {
+        return valorUnit;
+    }
+
+    public void setValorUnit(Double valorUnit) {
+        this.valorUnit = valorUnit;
+    }
+
+    public Cliente getCliente_id() {
+        return cliente_id;
+    }
+
+    public void setCliente_id(Cliente cliente_id) {
+        this.cliente_id = cliente_id;
+    }
 }

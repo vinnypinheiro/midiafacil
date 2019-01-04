@@ -1,429 +1,456 @@
-<!--BARRA SUPERIOR--> 
-<div class="row wrapper border-bottom white-bg page-heading"> 
-      <div class="col-lg-12"> 
-          <h2>Veiculo</h2> 
+<!--BARRA SUPERIOR-->
+<div id="veiculo" class="page-layout carded fullwidth inner-scroll">
 
-          <ol class="breadcrumb"> 
-              <li> 
-                  <a routerLink="/">Início</a> 
-              </li> 
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-              <li> 
-                  <a routerLink="/veiculo">Veiculo</a> 
-              </li> 
+    <!-- CENTER -->
+    <div class="center">
 
-              <li class="active"> 
-                   <strong>{{activeBean.id}}</strong> 
-              </li> 
-          </ol> 
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
 
-      </div> 
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
 
-      </div> 
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/e-commerce/products'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
 
-        <!--TOOLBAR--> 
-<div class="row"> 
-  <div class="mail-box-header l3-toolbar" [class.sticky]="stickyMenu" #stickyBar> 
- 
-    <div class="btn-group"> 
- 
-      <button class="btn btn-primary" 
-        type="button" (click)="enableEdit()" 
-                [disabled]="operation === Operation.CREATE || operation === Operation.UPDATE"> 
-        <i class="fas fa-pencil-alt"></i> Editar</button> 
- 
- 
-      <button class="btn btn-primary" 
-        type="button" 
-        (click)="delete('este imóvel')"> 
-        <i class="fas fa-eraser"></i> Apagar</button> 
- 
-      <button class="btn btn-primary"  
-         (click)="this.save()"  
-         type="button" 
-        [disabled]="operation !== Operation.CREATE && operation !== Operation.UPDATE"> 
-         <i class="fas fa-save"></i> Salvar</button> 
-    </div> 
- 
-    <div class="btn-group"> 
- 
-      <div class="dropdown report-dropdown "> 
- 
-        <button aria-expanded="true" 
-        class="dropdown-toggle btn btn-primary" 
-        data-toggle="dropdown" href="#"><i class="fas fa-external-link-square-alt"></i>Atalhos 
-                </button> 
- 
-        <ul class="dropdown-menu user-box  animated row"> 
-          <a><li>Açao 1</li></a> 
-          <a><li>Açao 2</li></a> 
-          <a><li>Açao 3</li></a> 
-        </ul> 
- 
-      </div> 
-    </div> 
- 
-    <div class="btn-group"> 
-      <div class="input-group"> 
-        <button class="btn btn-primary"><i class="fa fa-print m-r-xs"></i> Imprimir</button> 
- 
-        <div class="input-group-append"> 
-          <div class="dropdown report-dropdown"> 
-            <button aria-expanded="true" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"> 
-              <span></span> 
-            </button> 
- 
-            <ul class="dropdown-menu user-box  animated row"> 
-              <a><li>Relatorio 1</li></a> 
-              <a><li>Relatorio 2</li></a> 
-              <a><li>Relatorio 3</li></a> 
-            </ul> 
-          </div> 
-        </div> 
-      </div> 
-    </div> 
- 
-    <button class="btn btn-primary pull-right" 
-        type="button" 
-        (click)="openGrid()"> 
-      <i class="fas fa-times-circle"></i> Fechar</button> 
- 
-  </div> 
-  </div> 
-<!--**************************************************************************************************************--> 
-<div class="ibox-content l3-form"> 
-      <div  class="form-horizontal row"> 
-         <!--CAMPO ACESSOS--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">acessos</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.acessos"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO ALCANCE--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">alcance</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.alcance"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO APRESENTADOR--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">apresentador</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.apresentador"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO BAIRRO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">bairro</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.bairro"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO BANCO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">banco</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.banco"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO BANCOAGENCIA--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">bancoagencia</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.bancoagencia"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO BANCOCONTA--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">bancoconta</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.bancoconta"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO CIDADE--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">cidade</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.cidade"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO CNPJ--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">cnpj</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.cnpj"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO CONTATO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">contato</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.contato"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO CPF--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">cpf</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.cpf"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO DATA_CADASTRO--> 
-         <div class='form-group col-sm-4' 
->             <label class="col-sm-2 control-label">data_cadastro</label> 
-             <div class="col-sm-10"> 
-                 <div class="input-group date"> 
-                     <input type="text" 
-                            class="form-control input-sm" 
-                            name="data_cadastro" 
-                            [ngModel]="activeBean.data_cadastro |date:'dd/MM/yyyy'" 
-                            [readonly]="operation==Operation.SELECT"/> 
-                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
-                 </div> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO EMAIL--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">email</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.email"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO EMAIL1--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">email1</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.email1"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO EMAIL2--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">email2</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.email2"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO EMAILCONTATO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">emailcontato</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.emailcontato"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO ENDERECO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">endereco</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.endereco"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO FAIXAHORARIA--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">faixahoraria</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.faixahoraria"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO FAX--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">fax</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.fax"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO INSCRICAOESTADUAL--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">inscricaoestadual</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.inscricaoestadual"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO INSCRICAOMUNICIPAL--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">inscricaomunicipal</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.inscricaomunicipal"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO NOMEFANTASIA--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">nomefantasia</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.nomefantasia"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO OBS--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">obs</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.obs"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO RAZAOSOCIAL--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">razaosocial</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.razaosocial"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO SITE--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">site</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.site"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO TELEFONE--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">telefone</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.telefone"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO TELEFONE2--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">telefone2</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.telefone2"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO UF_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">uf_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="uf_id" 
-                                   [(ngModel)]="activeBean.uf_id_id" 
-                                   [code]="activeBean.uf_id_codigo" 
-                                   [description]="activeBean.uf_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item uf_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2" *ngIf="pageType ==='edit'">
+                        {{  activeBean.nomefantasia }}
+                    </div>
+                    <div class="h2" *ngIf="pageType ==='new'">
+                        New Product
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>Informações do veiculo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO TIPOMIDIA_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">tipomidia_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="tipomidia_id" 
-                                   [(ngModel)]="activeBean.tipomidia_id_id" 
-                                   [code]="activeBean.tipomidia_id_codigo" 
-                                   [description]="activeBean.tipomidia_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item tipomidia_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
+            <button mat-raised-button
+                    class="save-product-button"
+                    (click)="saveVeiculo()">
+                <span>Salvar</span>
+            </button>
 
-         <!--**************************************************************************************************************--> 
-      </div> 
+            <button mat-raised-button
+                    class="save-product-button"
+                    *ngIf="pageType ==='edit'" (click)="saveVeiculo()">
+                <span>Salvar Veiculo</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <form name="activeForm" [formGroup]="activeForm" (ngSubmit)="saveVeiculo()" class="product w-100-p" fxLayout="column" fxFlex>
+
+                    <mat-tab-group>
+
+                        <mat-tab label="Dados Cadastrais">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Nome Fantasia</mat-label>
+                                    <input matInput placeholder="Nome Fantasia"
+                                           name="nomefantasia"
+                                           formControlName="nomefantasia"
+                                           required>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Razão Social</mat-label>
+                                    <input matInput placeholder="Razão Social"
+                                           name="razaosocial"
+                                           formControlName="razaosocial"
+                                    >
+                                </mat-form-field>
+
+
+                                <div fxLayout="row" fxLayoutGap="20px">
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>CNPJ</mat-label>
+                                        <input matInput placeholder=""
+                                               name="cnpj"
+                                               formControlName="cnpj">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>Inscrição Estadual</mat-label>
+                                        <input matInput placeholder=""
+                                               name="inscricaoestadual"
+                                               formControlName="inscricaoestadual">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                        <mat-label>Inscrição Municipal</mat-label>
+                                        <input matInput placeholder=""
+                                               name="inscricaomunicipal"
+                                               formControlName="inscricaomunicipal">
+                                    </mat-form-field>
+
+                                </div>
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Observação</mat-label>
+                                    <textarea matInput placeholder=""
+                                              name="obs"
+                                              formControlName="obs"
+                                              rows="5">
+                                      </textarea>
+                                </mat-form-field>
+
+
+
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Endereços" formArrayName="enderecoList">
+
+                            <div class="p-24">
+                                <button (click)="addAddress()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+                                    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                        <mat-label>Endereço</mat-label>
+                                        <input matInput placeholder=""
+                                               name="endereco"
+                                               formControlName="endereco"
+                                               required>
+                                    </mat-form-field>
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Bairro</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="bairro"
+                                                   formControlName="bairro">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>CEP</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="cep"
+                                                   formControlName="cep">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Cidade</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="cidade"
+                                                   formControlName="cidade">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>UF</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="estado"
+                                                   formControlName="estado">
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Contatos" formArrayName="contatoList">
+                            <div class="p-24">
+                                <button (click)="addContato()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of contatoArray.controls; let i = index;" [formGroupName]="i">
+
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Tipo de Contato</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="tipocontato"
+                                                   formControlName="tipocontato"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Nome do Contato</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="contato"
+                                                   formControlName="contato"
+                                                   required>
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Telefone</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="telefone"
+                                                   formControlName="telefone">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="60">
+                                            <mat-label>E-mail</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="email"
+                                                   formControlName="email">
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Telefones" formArrayName="telefoneList">
+
+                            <div class="p-24">
+                                <button (click)="addTelefone()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of telefoneArray.controls; let i = index;" [formGroupName]="i">
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
+                                            <mat-label>Tipo</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="tipotelefone"
+                                                   formControlName="tipotelefone"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Telefone</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="telefone"
+                                                   formControlName="telefone">
+                                        </mat-form-field>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="E-mails" formArrayName="emailList">
+
+                            <div class="p-24">
+                                <button (click)="addEmail()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of emailArray.controls; let i = index;" [formGroupName]="i">
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
+                                            <mat-label>Tipo</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="tipoemail"
+                                                   formControlName="tipoemail"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>E-mail</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="email"
+                                                   formControlName="email">
+                                        </mat-form-field>
+
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </mat-tab>
+
+                        <mat-tab label="Sites" formArrayName="siteList">
+
+                            <div class="p-24">
+                                <button (click)="addSite()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of siteArray.controls; let i = index;" [formGroupName]="i">
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
+                                            <mat-label>Tipo</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="tiposite"
+                                                   formControlName="tiposite"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Endereço do Site</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="site"
+                                                   formControlName="site">
+                                        </mat-form-field>
+
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Contas Bancárias" formArrayName="contaBancariaList">
+
+                            <div class="p-24">
+                                <button (click)="addContasBancarias()" mat-stroked-button>
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+
+
+                            <div *ngFor="let group of contasBancariasArray.controls; let i = index;" [formGroupName]="i">
+                                <div class="tab-content p-24" fusePerfectScrollbar >
+
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
+                                            <mat-label>Banco</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="banco"
+                                                   formControlName="banco"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Agência</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="agencia"
+                                                   formControlName="agencia">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Conta</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="conta"
+                                                   formControlName="conta">
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutGap="20px">
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
+                                            <mat-label>Tipo da Conta</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="tipoconta"
+                                                   formControlName="tipoconta"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                                            <mat-label>Operação</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="operacao"
+                                                   formControlName="operacao">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Favorecido</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="favorecido"
+                                                   formControlName="favorecido"
+                                                   required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>CNPJ/CPF</mat-label>
+                                            <input matInput placeholder=""
+                                                   name="cnpjcpf"
+                                                   formControlName="cnpjcpf"
+                                                   required>
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+
+                    </mat-tab-group>
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
 </div>
+
 

@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>Adicionar Peça</h2>
+<mat-dialog-content class="mat-typography"  style="min-width: 550px;">
+    <!-- REACTIVE FORM EXAMPLE -->
+
+    <form [formGroup]="pecaForm" (ngSubmit)="saveCliente()"  class=" p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+          fxFlex="1 0 auto" name="form">
+
+       <!-- <div class="h2 mb-24">Reactive Form Example</div>-->
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+
+            <mat-form-field appearance="outline" fxFlex="30" class="w-50-p">
+                <mat-label>Peça</mat-label>
+                <mat-select formControlName="peca" required>
+                    <mat-option [value]="'A'">
+                       A
+                    </mat-option>
+                    <mat-option [value]="'B'">
+                       B
+                    </mat-option>
+                    <mat-option [value]="'C'">
+                       C
+                    </mat-option>
+                    <mat-option [value]="'D'">
+                        D
+                    </mat-option>
+                    <mat-option [value]="'E'">
+                        E
+                    </mat-option>
+                    <mat-option [value]="'F'">
+                        F
+                    </mat-option>
+                </mat-select>
+                <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                <mat-error>Country is required!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="70">
+                <mat-label>Produto</mat-label>
+                <mat-select formControlName="produto_id" required>
+                    <mat-option [value]="produto" *ngFor="let produto of data.produtoList">
+                        {{produto.descricao}}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+            <mat-form-field appearance="outline" fxFlex="100" class="pr-4">
+                <mat-label>Título</mat-label>
+                <input matInput  formControlName="titulo"  required>
+                <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                <mat-error>First Name is required!</mat-error>
+            </mat-form-field>
+
+        </div>
+
+
+    </form>
+
+    <!-- / REACTIVE FORM EXAMPLE -->
+</mat-dialog-content>
+
+
+
+
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="this.closeDialog()">Cancelar</button>
+    <button (click)="this.savePeca()" mat-button [mat-dialog-close]="true" cdkFocusInitial>Salvar Peça</button>
+</mat-dialog-actions>

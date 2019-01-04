@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import br.com.solutis.desafio.domain.Formato;
 import br.com.solutis.desafio.domain.TipoProduto;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,12 +17,17 @@ public class Produto implements Serializable {
     private Long id;
 
     private String descricao;
-    private String midia;
-    private Double preco;
+
+    @ManyToOne
+    @JoinColumn(name = "material_id", nullable = true, foreignKey = @ForeignKey(name = "fk_produto_material"))    private Material material_id;
+
+    @ManyToOne
+    @JoinColumn(name = "tipomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_produto_tipomidia"))    private TipoMidia tipomidia_id;
+
+
     @ManyToOne
     @JoinColumn(name = "formato_id", nullable = true, foreignKey = @ForeignKey(name = "fk_produto_formato"))    private Formato formato_id;
-    @ManyToOne
-    @JoinColumn(name = "tipoproduto_id", nullable = true, foreignKey = @ForeignKey(name = "fk_produto_tipoproduto"))    private TipoProduto tipoproduto_id;
+
 
  public Long getId() {
         return id;
@@ -36,32 +42,29 @@ public class Produto implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public String getMidia() {
-        return midia;
+
+
+    public Material getMaterial_id() {
+        return material_id;
     }
 
-    public void setMidia(String midia) {
-        this.midia = midia;
-    }
-    public Double getPreco() {
-        return preco;
+    public void setMaterial_id(Material material_id) {
+        this.material_id = material_id;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public TipoMidia getTipomidia_id() {
+        return tipomidia_id;
     }
+
+    public void setTipomidia_id(TipoMidia tipomidia_id) {
+        this.tipomidia_id = tipomidia_id;
+    }
+
     public Formato getFormato_id() {
         return formato_id;
     }
 
     public void setFormato_id(Formato formato_id) {
         this.formato_id = formato_id;
-    }
-    public TipoProduto getTipoproduto_id() {
-        return tipoproduto_id;
-    }
-
-    public void setTipoproduto_id(TipoProduto tipoproduto_id) {
-        this.tipoproduto_id = tipoproduto_id;
     }
 }

@@ -44,7 +44,7 @@ public class VeiculoService {
     }
 
     public Page<Veiculo> getList(Integer pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, 20, Sort.Direction.ASC, "id");
+        PageRequest pageRequest = new PageRequest(pageNumber - 1, 300, Sort.Direction.ASC, "id");
         return veiculoRepository.findAll(pageRequest);
     }
 

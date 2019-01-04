@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'; 
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {Router} from '@angular/router'; 
 import {FilterData} from '../../../components/interfaces'; 
 import {FieldSearch} from '../../../utils/utils'; 
@@ -7,20 +7,56 @@ import {ReportGroup} from '../../../shared/report-group';
 import {Cliente} from '../cliente'; 
 import {ClienteService} from '../cliente.service'; 
 
+
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+
+import { fuseAnimations } from '@fuse/animations';
+
 @Component({ 
   selector: 'gov-cliente-grid', 
   templateUrl: './cliente-grid.component.html', 
-  //styleUrls: ['./cliente-grid.component.css'] 
+  styleUrls    : ['./cliente-grid-component.scss'],
+  animations   : fuseAnimations,
 }) 
+
+
 export class ClienteGridComponent extends CommonsGrid<Cliente> implements OnInit { 
+
+
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','nomefantasia', 'email', 'telefone'];
+
+ 
+    @ViewChild(MatSort)
+    sort: MatSort;
+
+    @ViewChild('filter')
+    filter: ElementRef;
 
      constructor(apiService: ClienteService, router: Router) { 
          super(apiService, router); 
      } 
+     
 
      ngOnInit() { 
-         super.ngOnInit(); 
+
+        this.dataSource.paginator = this.paginator;
+        this.loadByFilter(this.getDefaultFilter());
+               
      } 
+     loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+          this.dataSource.data = response.content;
+
+          /*
+          this.filterData = response.filterData;
+          this.toolBar.updateStatus(this.filterData.totalPages, this.filterData.page);*/
+          this.activeBean = null;
+        });
+      }
 
      onNavigateClick(filterData: FilterData): void { 
          this.loadByFilter(filterData); 

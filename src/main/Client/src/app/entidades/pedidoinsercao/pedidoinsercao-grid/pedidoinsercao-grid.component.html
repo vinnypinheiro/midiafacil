@@ -1,70 +1,104 @@
-<!--BARRA SUPERIOR--> 
-<div class="row wrapper border-bottom white-bg page-heading"> 
-     <div class="col-lg-12"> 
-         <h2> <i class="fa fa-sign-in-alt"></i> PedidoInsercao </h2> 
+<div id="pedido-insercao" class="page-layout carded fullwidth inner-scroll">
 
-         <ol class="breadcrumb"> 
-             <li> 
-                 <a routerLink="/">Início</a> 
-             </li> 
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-             <li class="active"> 
-               <strong>PedidoInsercao</strong> 
-             </li>
-         </ol> 
-     </div> 
+    <!-- CENTER -->
+    <div class="center">
 
-</div> 
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="column" fxLayoutAlign="center center"
+             fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
-<!--**************************************************************************************************************--> 
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0"
+                 fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    library_books
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                Pedidos de Inserção
+                </span>
+            </div>
+            <!-- / APP TITLE -->
 
-<div class="row"> 
-   <gov-tool-bar (buttonActionClick)="onButtonActionClick($event)" (filterRowValueChange)="onFilterValueChange($event)"></gov-tool-bar> 
-    <gov-filter [grid]=this></gov-filter> 
-</div> 
-<div class="ibox-content l3-grid"> 
-     <div class="row"> 
-         <div class="table-responsive"> 
-             <table class="table table-striped table-bordered "> 
-                 <thead> 
-                     <tr> 
-                         <th style="width: 2%"> 
-                             <label class="l3-checkbox"> 
-                                 <input type="checkbox"> 
-                                 <span class="checkmark"></span> 
-                             </label> 
-                         </th> 
-                         <th style="width: auto">codigo</th> 
-                         <th style="width: auto">informacoesimportantes</th> 
-                         <th style="width: auto">obs</th> 
-                         <th style="width: auto">plano_midia_insercao_item_id</th> 
-                         <th style="width: auto">agencia_id</th> 
-                         <th style="width: auto">cliente_id</th> 
-                         <th style="width: auto">veiculo_id</th> 
-                     </tr> 
-                 </thead> 
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Procurar Pedido de Inserção...">
+                </div>
+            </div>
+            <!-- / SEARCH -->
 
-                 <tbody> 
-                     <tr *ngFor="let row of dataList"> 
-                         <td> 
-                             <label class="l3-checkbox"> 
-                                 <input type="checkbox" 
-                                         [checked]="activeBean && (activeBean.id === row.id)" 
-                                         (change)="onSelectionChange($event.target.checked, row)"> 
-                                 <span class="checkmark"></span> 
-                             </label> 
-                         </td> 
-                     <td>{{row.codigo}}</td> 
-                     <td>{{row.informacoesimportantes}}</td> 
-                     <td>{{row.obs}}</td> 
-                     <td>{{row.plano_midia_insercao_item_id}}</td> 
-                     <td>{{row.agencia_id_nome }}</td> 
-                     <td>{{row.cliente_id_nome }}</td> 
-                     <td>{{row.veiculo_id_nome }}</td> 
-                     </tr> 
-                 </tbody> 
-             </table> 
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/pedidoinsercao/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <mat-icon>person_add</mat-icon>
+                <span>    Novo Pedido de Inserção</span>
+            </button>
+            <!-- / ADD BUTTON -->
 
-         </div> 
-     </div> 
-</div> 
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="products-table"
+                       #table [dataSource]="dataSource"
+                       matSort
+                       [@animateStagger]="{value:'50'}"
+                       fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="ID">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-cell *matCellDef="let pedidoinsercao">
+                        <p class="text-truncate">{{pedidoinsercao.id}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="mercado">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mercado</mat-header-cell>
+                    <mat-cell *matCellDef="let pedidoinsercao">
+                        <p class="text-truncate">{{pedidoinsercao.veiculo_id?.nomefantasia}}</p>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="veiculo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Veículo</mat-header-cell>
+                    <mat-cell *matCellDef="let pedidoinsercao">
+                        <p class="text-truncate">{{pedidoinsercao.veiculo_id?.nomefantasia}}</p>
+                    </mat-cell>
+                </ng-container>
+
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let pedidoinsercao; columns: displayedColumns;"
+                         class="product"
+                         matRipple
+                         [routerLink]="'/pedidoinsercao/view/'+pedidoinsercao.id+'/'">
+                </mat-row>
+
+            </mat-table>
+
+
+
+            <mat-paginator [length]="100"
+                           [pageSize]="10"
+                           [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

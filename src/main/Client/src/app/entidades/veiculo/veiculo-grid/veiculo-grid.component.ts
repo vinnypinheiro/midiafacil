@@ -1,26 +1,55 @@
-import {Component, OnInit} from '@angular/core'; 
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router'; 
 import {FilterData} from '../../../components/interfaces'; 
 import {FieldSearch} from '../../../utils/utils'; 
  import {CommonsGrid} from '../../../commons-grid'; 
 import {ReportGroup} from '../../../shared/report-group'; 
 import {Veiculo} from '../veiculo'; 
-import {VeiculoService} from '../veiculo.service'; 
+import {VeiculoService} from '../veiculo.service';
+
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({ 
   selector: 'gov-veiculo-grid', 
-  templateUrl: './veiculo-grid.component.html', 
-  //styleUrls: ['./veiculo-grid.component.css'] 
+  templateUrl: './veiculo-grid.component.html',
+    styleUrls    : ['./veiculo-grid-component.scss'],
+    animations   : fuseAnimations,
 }) 
-export class VeiculoGridComponent extends CommonsGrid<Veiculo> implements OnInit { 
+export class VeiculoGridComponent extends CommonsGrid<Veiculo> implements OnInit {
+
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','nomefantasia', 'email', 'telefone', 'programa'];
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    @ViewChild(MatSort)
+    sort: MatSort;
+
+    @ViewChild('filter')
+    filter: ElementRef;
 
      constructor(apiService: VeiculoService, router: Router) { 
          super(apiService, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+         this.dataSource.paginator = this.paginator;
+         this.loadByFilter(this.getDefaultFilter());
+     }
+
+    loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+            this.dataSource.data = response.content;
+            this.activeBean = null;
+        });
+    }
 
      onNavigateClick(filterData: FilterData): void { 
          this.loadByFilter(filterData); 

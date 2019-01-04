@@ -1,5 +1,6 @@
 package br.com.solutis.desafio.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -12,6 +13,8 @@ import java.util.List;
 import br.com.solutis.desafio.domain.Agencia;
 import br.com.solutis.desafio.domain.Campanha;
 import br.com.solutis.desafio.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -26,18 +29,23 @@ public class PlanoMidia implements Serializable {
     private String obs;
     private Date data;
     private String programa;
+    private  String situacao;
+    private String tipo;
 
     @ManyToOne
     @JoinColumn(name = "agencia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_planomidia_agencia"))    private Agencia agencia_id;
+
     @ManyToOne
     @JoinColumn(name = "campanha_id", nullable = true, foreignKey = @ForeignKey(name = "fk_planomidia_campanha"))    private Campanha campanha_id;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = true, foreignKey = @ForeignKey(name = "fk_planomidia_cliente"))    private Cliente cliente_id;
 
+    @JsonManagedReference(value="peca-planomidia")
     @OneToMany(mappedBy = "planomidia_id", orphanRemoval = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Peca> pecalist = new ArrayList<>();
 
-
+    @JsonManagedReference(value="pedidoinsercao-planomidia")
     @OneToMany(mappedBy = "planomidia_id", orphanRemoval = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PedidoInsercaoItem> pedidoDeInsercaoItemlist = new ArrayList<>();
 
@@ -131,7 +139,21 @@ public class PlanoMidia implements Serializable {
         this.pedidoDeInsercaoItemlist = pedidoDeInsercaoItemlist;
     }
 
+    public String getSituacao() {
+        return situacao;
+    }
 
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
 
 

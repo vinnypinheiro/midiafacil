@@ -1,0 +1,156 @@
+<div id="media-plan-view" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-16" [routerLink]="'/apps/e-commerce/orders'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        Pedido de Inserção: {{entity?.id}}
+                    </div>
+                    <div class="subtitle secondary-text">
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <!-- ADD BUTTON -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/cliente/new'"
+                    class="fuse-white mt-24 mt-md-0">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button color="primary"
+                    (click)="printReport('PedidoDeInsercaoSites', entity.id )"
+                    class="  mt-24 mt-md-0">
+                <mat-icon>print</mat-icon>
+                <span>   Imprimir</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            </div>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <mat-tab-group fxLayout="column" fxFlex>
+
+                    <mat-tab label="Resumo">
+
+                        <div class="order-details tab-content p-24" fusePerfectScrollbar>
+
+                            <div class="section pb-48">
+
+                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">account_circle</mat-icon>
+                                    <h2>Cliente:</h2>
+                                    <div class="h2 secondary-text">  {{entity.cliente_id?.nomefantasia}}</div>
+
+
+                                </div>
+
+                                <div class="customer mb-32" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">account_circle</mat-icon>
+                                    <h2>Campanha:</h2>
+                                    <div class="h2 secondary-text">  Campanha teste </div>
+                                </div>
+
+
+                            <div class="section pb-48">
+
+                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">access_time</mat-icon>
+                                    <div class="h2 secondary-text">Status Do Plano de Mídia</div>
+                                </div>
+
+                                <table class="simple">
+                                    <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Atualizado</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <td>
+                                                <span class="status h6 p-4 purple-300">
+                                                  Em Aberto
+                                                </span>
+                                        </td>
+
+                                        <td>
+                                                <span>
+                                                    3 de Dezembro de 2018
+                                                </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <form class="update-status p-24"
+                                      fxLayout="row" fxLayoutAlign="start center">
+
+                                    <mat-form-field appearance="outline" class="mr-16" fxFlex>
+                                        <mat-label>Atulizar Status</mat-label>
+                                        <mat-select
+                                                    required>
+                                            <mat-option>
+                                               Cancelado
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <button mat-raised-button class="mat-accent">
+
+                                       Atualizar Status
+                                    </button>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

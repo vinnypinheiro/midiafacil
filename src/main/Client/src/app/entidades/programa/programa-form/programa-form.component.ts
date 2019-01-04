@@ -6,6 +6,7 @@ import {CommonsService} from '../../../commons-service';
 import {Programa} from '../programa'; 
 import {ProgramaService} from '../programa.service'; 
 import {VeiculoService} from '../../veiculo/veiculo.service'; 
+import { Veiculo } from '../../veiculo/veiculo';
 
 @Component({
  selector: 'gov-programa-form', 
@@ -13,6 +14,8 @@ import {VeiculoService} from '../../veiculo/veiculo.service';
  //styleUrls: ['./programa-form.component.css'] 
 }) 
 export class ProgramaFormComponent extends CommonsForm<Programa> implements OnInit { 
+
+    veiculo: Veiculo[] = [];
 
     constructor(apiService: ProgramaService, 
                             private veiculoService: VeiculoService, 
@@ -23,6 +26,13 @@ export class ProgramaFormComponent extends CommonsForm<Programa> implements OnIn
 
      ngOnInit() { 
          super.ngOnInit(); 
+
+         this.veiculoService.loadByFilter(this.getDefaultFilter()).subscribe(response => {
+            this.veiculo = response.content;
+      
+          });
+
+
      } 
 
      getLookupService(lookupName: string): CommonsService<any> {

@@ -1,0 +1,93 @@
+<div id="campanha" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+             fxLayoutAlign.gt-sm="start center">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+               {{entity.nome}}
+            </div>
+        </div>
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button mat-raised-button color="accent" (click)="saveEntity()" aria-label="Send Message">Salvar Campanha</button>
+
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <form [formGroup]="activeForm" (ngSubmit)="saveEntity()"  class="  p-24 mr-24" fxLayout="column" fxFlex name="form">
+
+            <div class="p-24 " >
+                <mat-card style=" border-left: #f5564a solid 9px;">
+
+                    <div fxLayout="row" class="w-100-p">
+
+                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                            <mat-label>Campanha</mat-label>
+                            <input matInput placeholder=""
+                                   name="nome"
+                                   formControlName="nome">
+                        </mat-form-field>
+
+                    </div>
+
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Cliente</mat-label>
+                            <mat-select formControlName="cliente_id" required>
+
+                                <mat-option [value]="clienteFor" *ngFor="let clienteFor of cliente; let i= index;">
+                                    {{clienteFor.nomefantasia }}
+                                </mat-option>
+
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+
+                        <mat-form-field fxFlex="30">
+                            <mat-label>Início</mat-label>
+                            <input formControlName="datainicio" matInput [matDatepicker]="datainiciopicker" placeholder="Início da Campanha ">
+                            <mat-datepicker-toggle matSuffix [for]="datainiciopicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datainiciopicker></mat-datepicker>
+                        </mat-form-field>
+
+
+                    </div>
+
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+
+
+                        <mat-form-field fxFlex="30">
+                            <mat-label>Fim </mat-label>
+                            <input formControlName="datafim" matInput [matDatepicker]="datafimpicker" placeholder="Fim da Campanha ">
+                            <mat-datepicker-toggle matSuffix [for]="datafimpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datafimpicker></mat-datepicker>
+                        </mat-form-field>
+
+
+                    </div>
+
+                </mat-card>
+            </div>
+
+        </form>
+
+
+    </div>
+    <!-- / CONTENT -->
+
+
+</div>

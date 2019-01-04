@@ -13,7 +13,7 @@ import {SharedService} from "./shared/shared.service";
 
 export abstract class CommonsGrid<T extends DomainBase> implements OnInit {
 
-  public dataList: T[];
+
   public activeBean = <T> {};
 
   @ViewChild(ToolBarComponent)
@@ -35,7 +35,8 @@ export abstract class CommonsGrid<T extends DomainBase> implements OnInit {
 
   loadByFilter(filterData: FilterData) {
     this.apiService.loadByFilter(filterData).subscribe(response => {
-      this.dataList = response.content;/*
+      /*
+      this.dataList = response.content;
       this.filterData = response.filterData;
       this.toolBar.updateStatus(this.filterData.totalPages, this.filterData.page);*/
       this.activeBean = null;
@@ -102,7 +103,7 @@ export abstract class CommonsGrid<T extends DomainBase> implements OnInit {
   getDefaultFilter() {
     return <FilterData>{
       page: 1,
-      limit: 15,
+      limit: 300,
       whereClauses: []
     };
   }

@@ -90,8 +90,23 @@
  
   </div> 
   </div> 
+
+  <!--CAMPO cliente-->
+  <div class="form-group col-sm-4">
+      <label class="col-sm-5 col-form-label">Veiculo</label>
+      <div class="col-sm-12">
+
+        <select [(ngModel)]="activeBean.veiculo_id" class="form-control m-b"
+                name="account">
+                 <option *ngFor="let v of veiculo; " [ngValue]="v">{{v.nomefantasia }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+
 <!--**************************************************************************************************************--> 
-<div class="ibox-content l3-form"> 
+<div class="ibox-content "> 
       <div  class="form-horizontal row"> 
          <!--CAMPO DESCRICAO--> 
          <div class="form-group col-sm-4">
@@ -106,7 +121,7 @@
          <!--**************************************************************************************************************--> 
          <!--CAMPO HORARIO--> 
          <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">horario</label> 
+             <label class="col-sm-2 control-label">Horário</label> 
              <div class="col-sm-10"> 
                  <input type="text"  
                      [readonly]="operation==Operation.SELECT"
@@ -115,21 +130,21 @@
              </div> 
          </div> 
          <!--**************************************************************************************************************--> 
-         <!--CAMPO VEICULO_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">veiculo_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="veiculo_id" 
-                                   [(ngModel)]="activeBean.veiculo_id_id" 
-                                   [code]="activeBean.veiculo_id_codigo" 
-                                   [description]="activeBean.veiculo_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item veiculo_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
 
-         <!--**************************************************************************************************************--> 
+         <!--CAMPO HORARIO--> 
+         <div class="form-group col-sm-4">
+          <label class="col-sm-2 control-label">Valor</label> 
+          <div class="col-sm-10"> 
+              <input type="text"  
+                  [readonly]="operation==Operation.SELECT"
+                  [(ngModel)]="activeBean.valor"
+                  class="form-control "/> 
+          </div> 
+      </div> 
+      <!--**************************************************************************************************************--> 
+       
+
+        
       </div> 
 </div>
 

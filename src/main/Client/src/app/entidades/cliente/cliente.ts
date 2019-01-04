@@ -1,36 +1,29 @@
 import {DomainBase} from '../../utils/utils'; 
+import { Endereco } from '../endereco/endereco';
+import { ContaBancaria } from '../contabancaria/contabancaria';
+import { Contato } from '../contato/contato';
+import { Sites } from '../sites/sites';
+import { Telefone } from '../telefone/telefone';
+import { Email } from '../email/email';
+import { Programa } from '../programa/programa';
 
 export interface Cliente extends DomainBase { 
 
-     acessos: string; 
-     alcance: string; 
-     apresentador: string; 
-     bairro: string; 
-     banco: string; 
-     bancoagencia: string; 
-     bancoconta: string; 
-     cidade: string; 
-     cnpj: string; 
-     contato: string; 
-     cpf: string; 
-     data_cadastro: Date; 
-     email: string; 
-     email1: string; 
-     email2: string; 
-     emailcontato: string; 
-     endereco: string; 
-     faixahoraria: string; 
-     fax: string; 
-     inscricaoestadual: string; 
-     inscricaomunicipal: string; 
-     nomefantasia: string; 
-     obs: string; 
-     razaosocial: string; 
-     site: string; 
-     telefone: string; 
-     telefone2: string; 
-     uf_id_id :  number; 
-     uf_id_nome :  string; 
-     uf_id_codigo :  string; 
-     atividade_principal: string; 
+    data_cadastro: Date; 
+    nomefantasia: string;
+    razaosocial: string; 
+    inscricaoestadual: string; 
+    inscricaomunicipal: string; 
+    cnpj: string; 
+    cpf: string;      
+    obs: string; 
+   
+   
+    contaBancariaList: ContaBancaria[];
+    contatoList: Contato[];
+    siteList: Sites[];
+    telefoneList: Telefone[];
+    emailList: Email[];
+    programaLIst: Programa [];
+    enderecoList: Endereco[];
 }

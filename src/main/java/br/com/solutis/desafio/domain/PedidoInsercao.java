@@ -5,9 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import br.com.solutis.desafio.domain.Agencia;
 import br.com.solutis.desafio.domain.Cliente;
 import br.com.solutis.desafio.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,16 +21,42 @@ public class PedidoInsercao implements Serializable {
     @GeneratedValue
     private Long id;
 
+    private Date dataemissao;
+    private String status;
+    private String periodo;
+    private String osagencia;
+    private Double totalbruto;
+    private Double comissao;
+    private Double totalliquido;
+
+    private String vencimentotxt;
+    private String faturamentotxt;
+    private String praca;
+
+
     private String codigo;
     private String informacoesimportantes;
     private String obs;
-    private Long plano_midia_insercao_item_id;
+
     @ManyToOne
     @JoinColumn(name = "agencia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercao_agencia"))    private Agencia agencia_id;
+
+    @ManyToOne
+    @JoinColumn(name = "planomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercao_planomidia"))    private PlanoMidia planomidia_id;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercao_cliente"))    private Cliente cliente_id;
+
     @ManyToOne
-    @JoinColumn(name = "veiculo_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercao_veiculo"))    private Cliente veiculo_id;
+    @JoinColumn(name = "veiculo_id", nullable = true, foreignKey = @ForeignKey(name = "fk_pedidoinsercao_veiculo"))    private Veiculo veiculo_id;
+
+    @JsonManagedReference(value="peca-pedidoinsercao")
+    @OneToMany(mappedBy = "pedidoinsercao_id", orphanRemoval = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Peca> pecaList = new ArrayList<>();
+
+    @JsonManagedReference(value="pedidoinsercaoitem-pedidoinsercao")
+    @OneToMany(mappedBy = "pedidoinsercao_id", orphanRemoval = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PedidoInsercaoItem> pedidoinsercaoitemList = new ArrayList<>();
 
  public Long getId() {
         return id;
@@ -54,13 +85,7 @@ public class PedidoInsercao implements Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
-    public Long getPlano_midia_insercao_item_id() {
-        return plano_midia_insercao_item_id;
-    }
 
-    public void setPlano_midia_insercao_item_id(Long plano_midia_insercao_item_id) {
-        this.plano_midia_insercao_item_id = plano_midia_insercao_item_id;
-    }
     public Agencia getAgencia_id() {
         return agencia_id;
     }
@@ -75,11 +100,116 @@ public class PedidoInsercao implements Serializable {
     public void setCliente_id(Cliente cliente_id) {
         this.cliente_id = cliente_id;
     }
-    public Cliente getVeiculo_id() {
+
+    public Veiculo getVeiculo_id() {
         return veiculo_id;
     }
 
-    public void setVeiculo_id(Cliente veiculo_id) {
+    public void setVeiculo_id(Veiculo veiculo_id) {
         this.veiculo_id = veiculo_id;
+    }
+
+    public Date getDataemissao() {
+        return dataemissao;
+    }
+
+    public void setDataemissao(Date dataemissao) {
+        this.dataemissao = dataemissao;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getOsagencia() {
+        return osagencia;
+    }
+
+    public void setOsagencia(String osagencia) {
+        this.osagencia = osagencia;
+    }
+
+    public Double getTotalbruto() {
+        return totalbruto;
+    }
+
+    public void setTotalbruto(Double totalbruto) {
+        this.totalbruto = totalbruto;
+    }
+
+    public Double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Double comissao) {
+        this.comissao = comissao;
+    }
+
+    public Double getTotalliquido() {
+        return totalliquido;
+    }
+
+    public void setTotalliquido(Double totalliquido) {
+        this.totalliquido = totalliquido;
+    }
+
+    public String getVencimentotxt() {
+        return vencimentotxt;
+    }
+
+    public void setVencimentotxt(String vencimentotxt) {
+        this.vencimentotxt = vencimentotxt;
+    }
+
+    public String getFaturamentotxt() {
+        return faturamentotxt;
+    }
+
+    public void setFaturamentotxt(String faturamentotxt) {
+        this.faturamentotxt = faturamentotxt;
+    }
+
+    public String getPraca() {
+        return praca;
+    }
+
+    public void setPraca(String praca) {
+        this.praca = praca;
+    }
+
+    public List<Peca> getPecaList() {
+        return pecaList;
+    }
+
+    public void setPecaList(List<Peca> pecaList) {
+        this.pecaList = pecaList;
+    }
+
+    public List<PedidoInsercaoItem> getPedidoinsercaoitemList() {
+        return pedidoinsercaoitemList;
+    }
+
+    public void setPedidoinsercaoitemList(List<PedidoInsercaoItem> pedidoinsercaoitemList) {
+        this.pedidoinsercaoitemList = pedidoinsercaoitemList;
+    }
+
+    public PlanoMidia getPlanomidia_id() {
+        return planomidia_id;
+    }
+
+    public void setPlanomidia_id(PlanoMidia planomidia_id) {
+        this.planomidia_id = planomidia_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

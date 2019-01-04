@@ -1,0 +1,155 @@
+<h2 mat-dialog-title>Adicionar Grade Site</h2>
+<mat-dialog-content class="mat-typography">
+    <!-- REACTIVE FORM EXAMPLE -->
+
+    <style>
+        .mat-select-trigger { min-width: 125px; }
+
+        .dia{
+            width: 70px;
+        }
+
+        .qtd{
+            width:70px;
+        }
+    </style>
+
+
+    <form [formGroup]="gradeForm" (ngSubmit)="saveGrade()"  class="  mr-24" fxLayout="column" fxLayoutAlign="start"
+          name="form">
+
+        <div fxLayout="row" fxLayoutGap="20px"  class="tab-content " >
+
+            <mat-form-field appearance="outline" fxFlex="30">
+                <mat-label>Mês</mat-label>
+                <mat-select formControlName="mes" required>
+                    <mat-option [value]="'Janeiro'">
+                        Janeiro
+                    </mat-option>
+                    <mat-option [value]="'Fevereiro'">
+                        Fevereiro
+                    </mat-option>
+                    <mat-option [value]="'Março'">
+                        Março
+                    </mat-option>
+                    <mat-option [value]="'abril'">
+                        abril
+                    </mat-option>
+                    <mat-option [value]="'Maio'">
+                        Maio
+                    </mat-option>
+                    <mat-option [value]="'Junho'">
+                        Junho
+                    </mat-option>
+                    <mat-option [value]="'Julho'">
+                        Julho
+                    </mat-option>
+                    <mat-option [value]="'Agosto'">
+                        Agosto
+                    </mat-option>
+                    <mat-option [value]="'Setembro'">
+                        Setembro
+                    </mat-option>
+                    <mat-option [value]="'Outubro'">
+                        Outubro
+                    </mat-option>
+                    <mat-option [value]="'Novembro'">
+                        Novembro
+                    </mat-option>
+                    <mat-option [value]="'Dezembro'">
+                        Dezembro
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="30">
+                <mat-label>Ano</mat-label>
+                <mat-select formControlName="ano" required>
+                    <mat-option [value]="'2018'">
+                        2018
+                    </mat-option>
+                    <mat-option [value]="'2019'">
+                        2019
+                    </mat-option>
+                    <mat-option [value]="'2020'">
+                        2020
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+
+        <div  fxLayout="row" fxLayoutGap="20px"  class="tab-content " >
+
+            <mat-form-field appearance="outline" fxFlex="20" >
+                <mat-label>Peça</mat-label>
+                <mat-select formControlName="peca_id" required>
+                    <mat-option [value]="peca" *ngFor="let peca of pecas">
+                        {{peca.peca}}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex="30">
+                <mat-label>Veículo</mat-label>
+                <mat-select formControlName="veiculo_id" required (selectionChange)="setProgramaList($event, veiculo_id)">
+                    <input style="height: 57px; background: antiquewhite;" matInput type="text"  placeholder="Buscar..."  (keyup)="filterListCareUnit($event.target.value)">
+                    <mat-option (blur)="attVeiculos()" [value]="veiculo" *ngFor="let veiculo of veiculoFilter">
+                        {{veiculo.nomefantasia}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex="30">
+                <mat-label>Programa</mat-label>
+                <mat-select formControlName="programa_id" required (selectionChange)="setUnitPrice($event)">
+
+                    <mat-option [value]="programa" *ngFor="let programa of programaList">
+                        {{programa.descricao}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="2px"  class="tab-content " >
+
+
+                <mat-form-field appearance="outline" class="qtd" disabled="true">
+                    <mat-label>Quant.</mat-label>
+                    <input matInput formControlName="qtd">
+                </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" (change)="setTotalPrice()">
+                <mat-label>Valor Unit.</mat-label>
+                <input matInput
+                       name="valorUnit"
+                       formControlName="valorUnit">
+                <span matPrefix>R$&nbsp;</span>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                <mat-label>Valor Total</mat-label>
+                <input matInput
+                       name="valor"
+                       formControlName="valor">
+                <span matPrefix>R$&nbsp;</span>
+            </mat-form-field>
+
+        </div>
+    </form>
+
+        <!-- / REACTIVE FORM EXAMPLE -->
+</mat-dialog-content>
+
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close (click)="this.closeDialog()">Cancelar</button>
+            <button (click)="this.saveGrade()" mat-button [mat-dialog-close]="true" cdkFocusInitial>Salvar Grade</button>
+        </mat-dialog-actions>

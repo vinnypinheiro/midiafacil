@@ -5,25 +5,52 @@ import {FilterData} from '../../../components/interfaces';
 import {CommonsService} from '../../../commons-service'; 
 import {Campanha} from '../campanha'; 
 import {CampanhaService} from '../campanha.service'; 
-import {ClienteService} from '../../cliente/cliente.service'; 
+import {ClienteService} from '../../cliente/cliente.service';
+import {Cliente} from "../../cliente/cliente";
+import {FormBuilder} from "@angular/forms";
+import {fuseAnimations} from "../../../../@fuse/animations";
 
 @Component({
  selector: 'gov-campanha-form', 
  templateUrl: './campanha-form.component.html', 
- //styleUrls: ['./campanha-form.component.css'] 
+ styleUrls: ['./campanha-form-component.scss'],
+    animations   : fuseAnimations,
 }) 
-export class CampanhaFormComponent extends CommonsForm<Campanha> implements OnInit { 
+export class CampanhaFormComponent extends CommonsForm<Campanha> implements OnInit {
 
-    constructor(apiService: CampanhaService, 
+    cliente: Cliente[] = [];
+
+    constructor(private fb: FormBuilder,
+        apiService: CampanhaService,
                             private clienteService: ClienteService, 
                 route: ActivatedRoute, 
  router: Router ) { 
          super(apiService, route, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+         this.clienteService.loadByFilter(this.getDefaultFilter()).subscribe(response => {
+             this.cliente = response.content;
+
+         });
+     }
+
+    //campanha reactive form
+    activeForm = this.fb.group({
+        datafim: null,
+        datainicio: null,
+        nome: null,
+        cliente_id:  null,
+
+    });
+
+    saveEntity() {
+        // TODO: Use EventEmitter with form value
+        console.warn(this.activeForm.value);
+        this.activeBean = this.activeForm.value;
+        this.save();
+        //this.apiService.save(this.clienteForm.value);
+    }
 
      getLookupService(lookupName: string): CommonsService<any> {
          switch (lookupName) { 
@@ -52,7 +79,7 @@ export class CampanhaFormComponent extends CommonsForm<Campanha> implements OnIn
      } 
 
      onButtonActionClick(): void { 
-         //console.log(this.activeBean.campanha.id); 
+
      } 
 } 
 

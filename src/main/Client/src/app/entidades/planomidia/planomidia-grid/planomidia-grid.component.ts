@@ -1,26 +1,54 @@
-import {Component, OnInit} from '@angular/core'; 
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router'; 
 import {FilterData} from '../../../components/interfaces'; 
 import {FieldSearch} from '../../../utils/utils'; 
  import {CommonsGrid} from '../../../commons-grid'; 
 import {ReportGroup} from '../../../shared/report-group'; 
 import {PlanoMidia} from '../planomidia'; 
-import {PlanoMidiaService} from '../planomidia.service'; 
+import {PlanoMidiaService} from '../planomidia.service';
+import {fuseAnimations} from "../../../../@fuse/animations";
+
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({ 
   selector: 'gov-planomidia-grid', 
-  templateUrl: './planomidia-grid.component.html', 
-  //styleUrls: ['./planomidia-grid.component.css'] 
+  templateUrl: './planomidia-grid.component.html',
+    styleUrls    : ['./media-plan-grid-component.scss'],
+    animations   : fuseAnimations,
 }) 
-export class PlanoMidiaGridComponent extends CommonsGrid<PlanoMidia> implements OnInit { 
+export class PlanoMidiaGridComponent extends CommonsGrid<PlanoMidia> implements OnInit {
+
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','agencia', 'cliente', 'emissao', 'situacao', 'valor'];
+
+    @ViewChild(MatSort)
+    sort: MatSort;
+
+    @ViewChild('filter')
+    filter: ElementRef;
 
      constructor(apiService: PlanoMidiaService, router: Router) { 
          super(apiService, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+         this.dataSource.paginator = this.paginator;
+         this.loadByFilter(this.getDefaultFilter());
+     }
+
+    loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+            this.dataSource.data = response.content;
+            console.log(this.dataSource.data);
+            /*
+            this.filterData = response.filterData;
+            this.toolBar.updateStatus(this.filterData.totalPages, this.filterData.page);*/
+            this.activeBean = null;
+        });
+    }
 
      onNavigateClick(filterData: FilterData): void { 
          this.loadByFilter(filterData); 

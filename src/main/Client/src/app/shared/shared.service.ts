@@ -9,8 +9,12 @@ import {Report} from "./report";
 import {DataType, FieldSearch, MatchType} from "../utils/utils";
 
 
+
+
+
 @Injectable()
 export class SharedService {
+
 
   public loginResponse:LoginResponse;
   public isLogged: boolean;

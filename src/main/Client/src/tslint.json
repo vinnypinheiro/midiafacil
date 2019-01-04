@@ -4,14 +4,23 @@
         "directive-selector": [
             true,
             "attribute",
-            "gov",
+            [
+                "fuse",
+                ""
+            ],
             "camelCase"
         ],
         "component-selector": [
             true,
             "element",
-            "gov",
-            "kebab-case"
+            [
+                "fuse",
+                ""
+            ],
+            [
+                "kebab-case",
+                "camelCase"
+            ]
         ]
     }
 }

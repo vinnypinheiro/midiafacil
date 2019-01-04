@@ -1,38 +1,35 @@
 import {DomainBase} from '../../utils/utils'; 
+import { Programa } from '../programa/programa';
+
+
+import { Endereco } from '../endereco/endereco';
+import { Sites } from '../sites/sites';
+import { Telefone } from '../telefone/telefone';
+import { Email } from '../email/email';
+import { Contato } from '../contato/contato';
+import { ContaBancaria } from '../contabancaria/contabancaria';
+
 
 export interface Veiculo extends DomainBase { 
 
-     acessos: string; 
-     alcance: string; 
-     apresentador: string; 
-     bairro: string; 
-     banco: string; 
-     bancoagencia: string; 
-     bancoconta: string; 
-     cidade: string; 
-     cnpj: string; 
-     contato: string; 
-     cpf: string; 
      data_cadastro: Date; 
-     email: string; 
-     email1: string; 
-     email2: string; 
-     emailcontato: string; 
-     endereco: string; 
-     faixahoraria: string; 
-     fax: string; 
+     nomefantasia: string;
+     razaosocial: string; 
      inscricaoestadual: string; 
      inscricaomunicipal: string; 
-     nomefantasia: string; 
-     obs: string; 
-     razaosocial: string; 
-     site: string; 
-     telefone: string; 
-     telefone2: string; 
-     uf_id_id :  number; 
-     uf_id_nome :  string; 
-     uf_id_codigo :  string; 
-     tipomidia_id_id :  number; 
-     tipomidia_id_nome :  string; 
-     tipomidia_id_codigo :  string; 
+     cnpj: string; 
+     cpf: string;      
+     obs: string;
+     email: string;
+     telefone: string;
+    
+    
+     contaBancariaList: ContaBancaria[];
+     contatoList: Contato[];
+     siteList: Sites[];
+     telefoneList: Telefone[];
+     emailList: Email[];
+    programalist: Programa [];
+     enderecolist: Endereco[];
+
 }

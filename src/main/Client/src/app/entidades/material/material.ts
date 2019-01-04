@@ -1,9 +1,9 @@
-import {DomainBase} from '../../utils/utils'; 
+import {DomainBase} from '../../utils/utils';
+import {Formato} from "../formato/formato";
 
 export interface Material extends DomainBase { 
 
-     descricao: string; 
-     tipo_midia_id_id :  number; 
-     tipo_midia_id_nome :  string; 
-     tipo_midia_id_codigo :  string; 
+     descricao: string;
+
+    formatolist: Formato;
 }

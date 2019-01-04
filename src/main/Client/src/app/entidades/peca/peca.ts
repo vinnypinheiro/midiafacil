@@ -2,6 +2,7 @@ import {DomainBase} from '../../utils/utils';
 import {PlanoMidia} from "../planomidia/planomidia";
 import {TipoMidia} from "../tipomidia/tipomidia";
 import {TipoMidiaDigital} from "../tipomidiadigital/tipomidiadigital";
+import {Produto} from "../produto/produto";
 
 export interface Peca extends DomainBase {
 
@@ -22,4 +23,5 @@ export interface Peca extends DomainBase {
      planomidia_id :  PlanoMidia;
      tipomidia_id :  TipoMidia;
      tipomidiadigital_id : TipoMidiaDigital;
+     produto_id: Produto;
 }

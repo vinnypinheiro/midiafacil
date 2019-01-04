@@ -1,26 +1,46 @@
-import {Component, OnInit} from '@angular/core'; 
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router'; 
 import {FilterData} from '../../../components/interfaces'; 
 import {FieldSearch} from '../../../utils/utils'; 
  import {CommonsGrid} from '../../../commons-grid'; 
 import {ReportGroup} from '../../../shared/report-group'; 
 import {Campanha} from '../campanha'; 
-import {CampanhaService} from '../campanha.service'; 
+import {CampanhaService} from '../campanha.service';
+import {MatPaginator, MatTableDataSource} from "@angular/material";
+
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({ 
   selector: 'gov-campanha-grid', 
   templateUrl: './campanha-grid.component.html', 
-  //styleUrls: ['./campanha-grid.component.css'] 
+  styleUrls: ['./campanha-grid-component.scss'],
+    animations   : fuseAnimations,
 }) 
-export class CampanhaGridComponent extends CommonsGrid<Campanha> implements OnInit { 
+export class CampanhaGridComponent extends CommonsGrid<Campanha> implements OnInit {
+
+
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','cliente', 'campanha', 'inicio', 'fim'];
 
      constructor(apiService: CampanhaService, router: Router) { 
          super(apiService, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+         this.dataSource.paginator = this.paginator;
+         this.loadByFilter(this.getDefaultFilter());
+     }
+
+    loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+            this.dataSource.data = response.content;
+
+            this.activeBean = null;
+        });
+    }
 
      onNavigateClick(filterData: FilterData): void { 
          this.loadByFilter(filterData); 

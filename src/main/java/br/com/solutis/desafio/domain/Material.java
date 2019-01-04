@@ -5,7 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.solutis.desafio.domain.TipoMidia;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -15,8 +19,10 @@ public class Material implements Serializable {
     private Long id;
 
     private String descricao;
-    @ManyToOne
-    @JoinColumn(name = "tipomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_material_tipomidia"))    private TipoMidia tipo_midia_id;
+
+    @JsonManagedReference(value="material-formato")
+    @OneToMany(mappedBy = "material_id", orphanRemoval = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Formato> formatolist = new ArrayList<>();
 
  public Long getId() {
         return id;
@@ -31,11 +37,12 @@ public class Material implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public TipoMidia getTipo_midia_id() {
-        return tipo_midia_id;
+
+    public List<Formato> getFormatolist() {
+        return formatolist;
     }
 
-    public void setTipo_midia_id(TipoMidia tipo_midia_id) {
-        this.tipo_midia_id = tipo_midia_id;
+    public void setFormatolist(List<Formato> formatolist) {
+        this.formatolist = formatolist;
     }
 }

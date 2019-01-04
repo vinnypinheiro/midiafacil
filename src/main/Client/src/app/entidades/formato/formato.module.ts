@@ -3,9 +3,30 @@ import { RouterModule } from '@angular/router';
 import {FormatoGridComponent} from './formato-grid/formato-grid.component'; 
 import {FormatoFormComponent} from './formato-form/formato-form.component'; 
 import {AuthGuard} from '../../security/auth.guard'; 
-import {NgModule} from '@angular/core'; 
-import {FormatoService} from './formato.service'; 
-import {SharedModule} from '../../shared/shared.module'; 
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../shared/shared.module';
+
+
+import {
+    MatButtonModule, MatCardModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatDatepickerModule
+
+} from '@angular/material';
+import {ReactiveFormsModule} from "@angular/forms";
+import {FuseSharedModule} from "../../../@fuse/shared.module";
  
 const ROUTES  = [ 
         { 
@@ -21,7 +42,26 @@ const ROUTES  = [
  
         @NgModule({ 
                 imports: [RouterModule.forChild(ROUTES), 
-                SharedModule 
+                SharedModule ,
+                    ReactiveFormsModule,
+                    MatButtonModule,
+                    MatChipsModule,
+                    MatExpansionModule,
+                    MatFormFieldModule,
+                    MatIconModule,
+                    MatInputModule,
+                    MatPaginatorModule,
+                    MatRippleModule,
+                    MatSelectModule,
+                    MatSortModule,
+                    MatSnackBarModule,
+                    MatTableModule,
+                    MatTabsModule,
+                    MatDialogModule,
+                    MatCardModule,
+                    MatDatepickerModule,
+
+                    FuseSharedModule,
                 ], 
                 declarations: [ 
                 FormatoGridComponent, 

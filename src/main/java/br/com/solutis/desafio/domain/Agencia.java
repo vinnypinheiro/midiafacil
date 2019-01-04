@@ -37,6 +37,7 @@ public class Agencia implements Serializable {
     private String site;
     private String telefone;
     private String telefone2;
+
     @ManyToOne
     @JoinColumn(name = "uf_id", nullable = true, foreignKey = @ForeignKey(name = "fk_agencia_uf"))    private Uf uf_id;
 

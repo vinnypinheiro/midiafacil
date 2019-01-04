@@ -1,60 +1,96 @@
-<!--BARRA SUPERIOR--> 
-<div class="row wrapper border-bottom white-bg page-heading"> 
-     <div class="col-lg-12"> 
-         <h2> <i class="fa fa-sign-in-alt"></i> TipoMidia </h2> 
+<div id="tipomidia" class="page-layout carded fullwidth inner-scroll">
 
-         <ol class="breadcrumb"> 
-             <li> 
-                 <a routerLink="/">Início</a> 
-             </li> 
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-             <li class="active"> 
-               <strong>TipoMidia</strong> 
-             </li>
-         </ol> 
-     </div> 
+    <!-- CENTER -->
+    <div class="center">
 
-</div> 
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="column" fxLayoutAlign="center center"
+             fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
-<!--**************************************************************************************************************--> 
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0"
+                 fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    person
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                Tipod de Mídia
+                </span>
+            </div>
+            <!-- / APP TITLE -->
 
-<div class="row"> 
-   <gov-tool-bar (buttonActionClick)="onButtonActionClick($event)" (filterRowValueChange)="onFilterValueChange($event)"></gov-tool-bar> 
-    <gov-filter [grid]=this></gov-filter> 
-</div> 
-<div class="ibox-content l3-grid"> 
-     <div class="row"> 
-         <div class="table-responsive"> 
-             <table class="table table-striped table-bordered "> 
-                 <thead> 
-                     <tr> 
-                         <th style="width: 2%"> 
-                             <label class="l3-checkbox"> 
-                                 <input type="checkbox"> 
-                                 <span class="checkmark"></span> 
-                             </label> 
-                         </th> 
-                         <th style="width: auto">nome</th> 
-                         <th style="width: auto">material_id</th> 
-                     </tr> 
-                 </thead> 
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Procurar tipomidia...">
+                </div>
+            </div>
+            <!-- / SEARCH -->
 
-                 <tbody> 
-                     <tr *ngFor="let row of dataList"> 
-                         <td> 
-                             <label class="l3-checkbox"> 
-                                 <input type="checkbox" 
-                                         [checked]="activeBean && (activeBean.id === row.id)" 
-                                         (change)="onSelectionChange($event.target.checked, row)"> 
-                                 <span class="checkmark"></span> 
-                             </label> 
-                         </td> 
-                     <td>{{row.nome}}</td> 
-                     <td>{{row.material_id_nome }}</td> 
-                     </tr> 
-                 </tbody> 
-             </table> 
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/tipomidia/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <mat-icon>person_add</mat-icon>
+                <span>    Novo Tipo de Mídia</span>
+            </button>
+            <!-- / ADD BUTTON -->
 
-         </div> 
-     </div> 
-</div> 
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table class="products-table"
+                       #table [dataSource]="dataSource"
+                       matSort
+                       [@animateStagger]="{value:'50'}"
+                       fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="ID" class="w-20-p">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-cell *matCellDef="let tipomidia">
+                        <p class="text-truncate">{{tipomidia.id}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="nome">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Descrição</mat-header-cell>
+                    <mat-cell *matCellDef="let tipomidia" fxHide fxShow.gt-xs>
+                        <p class="price text-truncate">
+                            {{tipomidia.nome}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let tipomidia; columns: displayedColumns;"
+                         class="product"
+                         matRipple
+                         [routerLink]="'/tipomidia/view/'+tipomidia.id+'/'">
+                </mat-row>
+
+            </mat-table>
+
+
+
+            <mat-paginator [length]="100"
+                           [pageSize]="10"
+                           [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

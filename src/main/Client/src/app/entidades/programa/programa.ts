@@ -1,10 +1,10 @@
 import {DomainBase} from '../../utils/utils'; 
+import { Veiculo } from '../veiculo/veiculo';
 
 export interface Programa extends DomainBase { 
 
      descricao: string; 
      horario: string; 
-     veiculo_id_id :  number; 
-     veiculo_id_nome :  string; 
-     veiculo_id_codigo :  string; 
+     valor: number;
+     veiculo_id: Veiculo;
 }

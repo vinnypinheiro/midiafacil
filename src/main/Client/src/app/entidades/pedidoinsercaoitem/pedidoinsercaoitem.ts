@@ -1,6 +1,11 @@
 import {DomainBase} from '../../utils/utils';
 import {PlanoMidia} from "../planomidia/planomidia";
 
+import {Veiculo} from "../veiculo/veiculo";
+import { Peca } from '../peca/peca';
+import { Programa } from '../programa/programa';
+import {PedidoInsercao} from "../pedidoinsercao/pedidoinsercao";
+
 export interface PedidoInsercaoItem extends DomainBase {
 
      data: Date;
@@ -42,12 +47,11 @@ export interface PedidoInsercaoItem extends DomainBase {
      obs: string;
      qtd: number;
      valor: number;
+     valorUnit: number;
      vencimento: Date;
-     pedidoinsercao_id :  number;
-     pedidoinsercao_id_nome :  string;
-     pedidoinsercao_id_codigo :  string;
+     pedidoinsercao_id :  PedidoInsercao;
      planomidia_id :  PlanoMidia;
-     produto_id_id :  number;
-     produto_id_nome :  string;
-     produto_id_codigo :  string;
+     veiculo_id :  Veiculo;
+     peca_id :  Peca;
+     programa_id :  Programa;
 }

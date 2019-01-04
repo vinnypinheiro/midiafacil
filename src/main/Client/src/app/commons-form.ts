@@ -5,6 +5,7 @@ import {CommonsService} from './commons-service';
 import {FilterData, WhereClause} from './components/interfaces';
 import {LookupFieldComponent} from './components/lookup-field/lookup-field.component';
 
+
 declare var $: any;
 
 export abstract class CommonsForm<T extends DomainBase> implements OnInit, AfterViewInit {
@@ -15,6 +16,7 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
     public operation: Operation;
     protected lookupFilters = {};
     stickyMenu: boolean = false;
+
 
     constructor(public apiService: CommonsService<T>,
                 protected route: ActivatedRoute,
@@ -37,6 +39,7 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
               }
 
           });
+          
       this.iCheckGreenLoad();
       this.ControlCollapse();
       }
@@ -50,13 +53,7 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
     }
 
     ngAfterViewInit(): void {
-        $('.input-group.date').datepicker({
-            autoclose: true,
-            language: 'pt-BR',
-            enableOnReadonly: false
-        }).on('changeDate', (e) => {
-            // this.activeBean.empenho_data = e.date;
-        });
+
     }
 
     onLookupCodeChange(value: any): void {
@@ -80,7 +77,7 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
     getDefaultFilter() {
         return <FilterData>{
             page: 1,
-            limit: 15,
+            limit: 300,
             whereClauses: []
         };
     }
@@ -88,7 +85,7 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
     buildFilter(param: any): FilterData {
         let filter = this.getDefaultFilter();
         filter.page = 1;
-        filter.limit = param.limit ? param.limit : 15;
+        filter.limit = param.limit ? param.limit : 300;
         filter.order = param.order ? param.order : undefined;
         for(let whereClause of param.whereClauses){
             filter.whereClauses.push(whereClause);

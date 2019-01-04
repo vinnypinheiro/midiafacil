@@ -15,8 +15,7 @@ public class TipoMidia implements Serializable {
     private Long id;
 
     private String nome;
-    @ManyToOne
-    @JoinColumn(name = "material_id", nullable = true, foreignKey = @ForeignKey(name = "fk_tipomidia_material"))    private Material material_id;
+
 
  public Long getId() {
         return id;
@@ -30,12 +29,5 @@ public class TipoMidia implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public Material getMaterial_id() {
-        return material_id;
-    }
-
-    public void setMaterial_id(Material material_id) {
-        this.material_id = material_id;
     }
 }

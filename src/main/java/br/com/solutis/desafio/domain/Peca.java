@@ -1,5 +1,6 @@
 package br.com.solutis.desafio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,6 +28,10 @@ public class Peca implements Serializable {
     private String titulo;
     @ManyToOne
     @JoinColumn(name = "formato_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_formato"))    private Formato formato_id;
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_produto"))    private Produto produto_id;
+
     @ManyToOne
     @JoinColumn(name = "formatorevista_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_formatorevista"))    private FormatoRevista formatorevista_id;
     @ManyToOne
@@ -35,13 +40,16 @@ public class Peca implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tipomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_tipomidia"))    private TipoMidia tipomidia_id;
 
+    @JsonBackReference(value="peca-planomidia")
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "planomidia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_planomidia"))    private PlanoMidia planomidia_id;
 
     @ManyToOne
     @JoinColumn(name = "tipomidiadigital_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_tipomidiadigital"))    private TipoMidiaDigital tipomidiadigital_id;
 
+    @JsonBackReference(value="peca-pedidoinsercao")
+    @ManyToOne
+    @JoinColumn(name = "pedidoinsercao_id", nullable = true, foreignKey = @ForeignKey(name = "fk_peca_pedidoinsercao"))    private PedidoInsercao pedidoinsercao_id;
 
 
  public Long getId() {
@@ -134,6 +142,19 @@ public class Peca implements Serializable {
         this.planomidia_id = planomidia_id;
     }
 
+    public Produto getProduto_id() {
+        return produto_id;
+    }
 
+    public void setProduto_id(Produto produto_id) {
+        this.produto_id = produto_id;
+    }
 
+    public PedidoInsercao getPedidoinsercao_id() {
+        return pedidoinsercao_id;
+    }
+
+    public void setPedidoinsercao_id(PedidoInsercao pedidoinsercao_id) {
+        this.pedidoinsercao_id = pedidoinsercao_id;
+    }
 }

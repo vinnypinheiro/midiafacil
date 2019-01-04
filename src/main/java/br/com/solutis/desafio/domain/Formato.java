@@ -1,5 +1,6 @@
 package br.com.solutis.desafio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -15,8 +16,10 @@ public class Formato implements Serializable {
     private Long id;
 
     private String nome;
+
+    @JsonBackReference(value="material-formato")
     @ManyToOne
-    @JoinColumn(name = "material_id", nullable = true, foreignKey = @ForeignKey(name = "fk_formato_material"))    private Material material_id;
+    @JoinColumn(name = "material_id", nullable = true, foreignKey = @ForeignKey(name = "fk_formato_material_"))   private Material material_id;
 
  public Long getId() {
         return id;
@@ -31,6 +34,7 @@ public class Formato implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public Material getMaterial_id() {
         return material_id;
     }

@@ -1,188 +1,247 @@
-<!--BARRA SUPERIOR--> 
-<div class="row wrapper border-bottom white-bg page-heading"> 
-      <div class="col-lg-12"> 
-          <h2>PedidoInsercao</h2> 
+<div id="pedidoinsercao" class="page-layout simple tabbed">
 
-          <ol class="breadcrumb"> 
-              <li> 
-                  <a routerLink="/">Início</a> 
-              </li> 
+    <!-- HEADER -->
+    <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="space-between end">
 
-              <li> 
-                  <a routerLink="/pedidoinsercao">PedidoInsercao</a> 
-              </li> 
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+             fxLayoutAlign.gt-sm="start center">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                ADICIONAR PEDIDO DE INSERÇÃO
+            </div>
+        </div>
 
-              <li class="active"> 
-                   <strong>{{activeBean.id}}</strong> 
-              </li> 
-          </ol> 
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button mat-raised-button color="accent" aria-label="Send Message">Enviar Mensagem</button>
+            <button mat-raised-button color="primary" [routerLink]="'/pedidoinsercao/edit/'+entity?.id+'/'" aria-label="Follow">Editar Pedido Insercao</button>
+            <mat-chip (click)="printAccount('client')" color="primary"><i class="material-icons">
+                print
+            </i></mat-chip>
+        </div>
 
-      </div> 
+    </div>
+    <!-- / HEADER -->
 
-      </div> 
+    <!-- CONTENT -->
+    <div class="content p-24">
 
-        <!--TOOLBAR--> 
-<div class="row"> 
-  <div class="mail-box-header l3-toolbar" [class.sticky]="stickyMenu" #stickyBar> 
- 
-    <div class="btn-group"> 
- 
-      <button class="btn btn-primary" 
-        type="button" (click)="enableEdit()" 
-                [disabled]="operation === Operation.CREATE || operation === Operation.UPDATE"> 
-        <i class="fas fa-pencil-alt"></i> Editar</button> 
- 
- 
-      <button class="btn btn-primary" 
-        type="button" 
-        (click)="delete('este imóvel')"> 
-        <i class="fas fa-eraser"></i> Apagar</button> 
- 
-      <button class="btn btn-primary"  
-         (click)="this.save()"  
-         type="button" 
-        [disabled]="operation !== Operation.CREATE && operation !== Operation.UPDATE"> 
-         <i class="fas fa-save"></i> Salvar</button> 
-    </div> 
- 
-    <div class="btn-group"> 
- 
-      <div class="dropdown report-dropdown "> 
- 
-        <button aria-expanded="true" 
-        class="dropdown-toggle btn btn-primary" 
-        data-toggle="dropdown" href="#"><i class="fas fa-external-link-square-alt"></i>Atalhos 
-                </button> 
- 
-        <ul class="dropdown-menu user-box  animated row"> 
-          <a><li>Açao 1</li></a> 
-          <a><li>Açao 2</li></a> 
-          <a><li>Açao 3</li></a> 
-        </ul> 
- 
-      </div> 
-    </div> 
- 
-    <div class="btn-group"> 
-      <div class="input-group"> 
-        <button class="btn btn-primary"><i class="fa fa-print m-r-xs"></i> Imprimir</button> 
- 
-        <div class="input-group-append"> 
-          <div class="dropdown report-dropdown"> 
-            <button aria-expanded="true" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"> 
-              <span></span> 
-            </button> 
- 
-            <ul class="dropdown-menu user-box  animated row"> 
-              <a><li>Relatorio 1</li></a> 
-              <a><li>Relatorio 2</li></a> 
-              <a><li>Relatorio 3</li></a> 
-            </ul> 
-          </div> 
-        </div> 
-      </div> 
-    </div> 
- 
-    <button class="btn btn-primary pull-right" 
-        type="button" 
-        (click)="openGrid()"> 
-      <i class="fas fa-times-circle"></i> Fechar</button> 
- 
-  </div> 
-  </div> 
-<!--**************************************************************************************************************--> 
-<div class="ibox-content l3-form"> 
-      <div  class="form-horizontal row"> 
-         <!--CAMPO CODIGO--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">codigo</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.codigo"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO INFORMACOESIMPORTANTES--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">informacoesimportantes</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.informacoesimportantes"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO OBS--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">obs</label> 
-             <div class="col-sm-10"> 
-                 <input type="text"  
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.obs"
-                     class="form-control "/> 
-             </div> 
-         </div> 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO PLANO_MIDIA_INSERCAO_ITEM_ID--> 
-         <div class="form-group col-sm-4">
-             <label class="col-sm-2 control-label">plano_midia_insercao_item_id</label> 
-             <div class="col-sm-10"> 
-                 <input type="number" 
-                     [readonly]="operation==Operation.SELECT"
-                     [(ngModel)]="activeBean.plano_midia_insercao_item_id"
-                     class="form-control "/> 
-             </div> 
-         </div> 
+        <form [formGroup]="pedidoInsercaoForm" (ngSubmit)="savePedidoInsercao()"  class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+              fxFlex="1 0 auto" name="form">
 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO AGENCIA_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">agencia_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="agencia_id" 
-                                   [(ngModel)]="activeBean.agencia_id_id" 
-                                   [code]="activeBean.agencia_id_codigo" 
-                                   [description]="activeBean.agencia_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item agencia_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO CLIENTE_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">cliente_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="cliente_id" 
-                                   [(ngModel)]="activeBean.cliente_id_id" 
-                                   [code]="activeBean.cliente_id_codigo" 
-                                   [description]="activeBean.cliente_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item cliente_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
+                    <!-- <div class="h2 mb-24">Reactive Form Example</div>-->
 
-         <!--**************************************************************************************************************--> 
-         <!--CAMPO VEICULO_ID--> 
-         <div class="col-sm-6"> 
-             <label class="col-sm-2 control-label">veiculo_id</label> 
-             <div class="col-sm-10"> 
-                 <gov-lookup-field class="form-control input-sm" name="veiculo_id" 
-                                   [(ngModel)]="activeBean.veiculo_id_id" 
-                                   [code]="activeBean.veiculo_id_codigo" 
-                                   [description]="activeBean.veiculo_id_nome" 
-                                   [readonly]="operation==Operation.SELECT" 
-                                   (lookupCodeChange)="onLookupCodeChange($event)">Selecione o item veiculo_id 
-                 </gov-lookup-field>
-             </div>
-         </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-         <!--**************************************************************************************************************--> 
-      </div> 
+                        <div class="info-line" fxFlex="30" class="pl-4">
+                            <div class="title"><i class="material-icons">
+                                person
+                            </i>
+                                Veículo</div>
+                            <div class="info">{{pedidoinsercaoitem.veiculo_id?.nomefantasia}}</div>
+                        </div>
+
+                        <div class="info-line" fxFlex="30" class="pl-4">
+                            <div class="title"><i class="material-icons">
+                                person
+                            </i>
+                                Agencia</div>
+                            <div class="info">{{planoMidia.agencia_id?.nomefantasia}}</div>
+                        </div>
+
+                        <div class="info-line" fxFlex="30" class="pl-4">
+                            <div class="title"><i class="material-icons">
+                                person
+                            </i>
+                                Cliente</div>
+                            <div class="info">{{planoMidia.cliente_id?.nomefantasia}}</div>
+                        </div>
+
+                    </div>
+
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+
+
+                        <mat-form-field appearance="outline" fxFlex="20" class="pl-4">
+                            <mat-label>OS Agência</mat-label>
+                            <input  formControlName="osagencia" matInput required>
+                            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                            <mat-error>Last Name is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                            <mat-label>Praça</mat-label>
+                            <input matInput  formControlName="praca"  required>
+                            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                        </mat-form-field>
+
+                    </div>
+
+            <div class="p-24 " >
+                <mat-card style=" border-left: #f5564a solid 9px;">
+
+                    <h2>Peças</h2>
+                    <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Peça</button>
+
+                    <table class="simple">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Peça</th>
+                            <th >Título</th>
+                            <th >Duração</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="product-row">
+                            <td>
+                                {{pedidoinsercaoitem.peca_id?.id}}
+                            </td>
+
+                            <td>
+                                {{pedidoinsercaoitem.peca_id?.peca}}
+                            </td>
+                            <td>
+                                {{pedidoinsercaoitem.peca_id?.titulo}}
+                            </td>
+                            <td>
+                                {{pedidoinsercaoitem.peca_id?.duracao}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </mat-card>
+            </div>
+
+            <div class="p-24" >
+                <mat-card style=" border-left: #039be5 solid 9px;">
+                    <h2>Grades / Programas </h2>
+                    <button mat-raised-button color="primary"  >Adicionar Grade</button>
+
+                    <table class="simple">
+                        <thead>
+                        <tr>
+                            <th class="w-80">ID</th>
+                            <th>Período</th>
+                            <th>Veículo</th>
+                            <th>Programa</th>
+                            <th>Inserções</th>
+                            <th>Valor Unit.</th>
+                            <th>Valor Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="product-row">
+                            <td>
+                                {{pedidoinsercaoitem.id}}
+                            </td>
+
+                            <td>
+                                {{pedidoinsercaoitem.mes}}
+                            </td>
+                            <td>
+                                {{pedidoinsercaoitem.veiculo_id?.nomefantasia}}
+                            </td>
+                            <td>
+                                {{pedidoinsercaoitem.programa_id?.descricao}}
+                            </td>
+                            <td>
+                                {{pedidoinsercaoitem.qtd}}
+                            </td>
+                            <td>
+                                R$ {{pedidoinsercaoitem.valorUnit}}
+                            </td>
+
+                            <td>
+                                R$ {{pedidoinsercaoitem.valor}}
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </mat-card>
+            </div>
+
+            <div class="p-24" >
+                <mat-card style=" border-left: #398014 solid 9px;">
+                    <h2>  Negociação</h2>
+
+                    <h3>Valor a Faturar </h3>
+                    <h3>R${{pedidoinsercaoitem.valor}}</h3>
+
+                    <h3>Desconto padrao Agência</h3>
+
+                </mat-card>
+            </div>
+
+            <div class="p-24" >
+
+                <mat-card style=" border-left: #398014 solid 9px;">
+
+                    <div class="w-100-p" >
+
+                        <h2> Vencimento</h2>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="vencimentotxt" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="w-100-p">
+
+                        <h2> Faturamento</h2>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="faturamentotxt" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="w-100-p" >
+
+                        <h2> Observações Importantes</h2>
+                        <br>
+
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="informacoesimportantes" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+
+
+
+
+                </mat-card>
+
+            </div>
+
+        </form>
+
+        <button mat-raised-button
+                class="save-product-button"
+                (click)="savePedidoInsercao()">
+            <span>Salvar</span>
+        </button>
+
+    </div>
+    <!-- / CONTENT -->
+
+
 </div>
-

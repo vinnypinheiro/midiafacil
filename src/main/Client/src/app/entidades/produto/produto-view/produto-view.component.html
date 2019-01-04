@@ -1,0 +1,93 @@
+<div id="produto" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+             fxLayoutAlign.gt-sm="start center">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+               {{entity.nome}}
+            </div>
+        </div>
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button mat-raised-button color="accent" (click)="saveEntity()" aria-label="Send Message">Salvar Produto</button>
+
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <form [formGroup]="activeForm" (ngSubmit)="saveEntity()"  class="  p-24 mr-24" fxLayout="column" fxFlex name="form">
+
+            <div class="p-24 " >
+                <mat-card style=" border-left: #f5564a solid 9px;">
+
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+
+                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="100">
+                            <mat-label>Produto</mat-label>
+                            <input matInput placeholder=""
+                                   name="descricao"
+                                   formControlName="descricao">
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Tipo de Mídia</mat-label>
+                            <mat-select formControlName="tipomidia_id" required >
+
+                                <mat-option [value]="tm" *ngFor="let tm of tipomidia; let i= index;">
+                                    {{tm.nome }}
+                                </mat-option>
+
+                            </mat-select>
+
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Material</mat-label>
+                            <mat-select formControlName="material_id" required (selectionChange)="setFormatoList($event, material_id)">
+
+                                <mat-option [value]="m" *ngFor="let m of material; let i= index;">
+                                    {{m.descricao }}
+                                </mat-option>
+
+                            </mat-select>
+
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Formato</mat-label>
+                            <mat-select formControlName="formato_id" required >
+
+                                <mat-option [value]="f" *ngFor="let f of formatoList; let i= index;">
+                                    {{f.nome }}
+                                </mat-option>
+
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+
+                </mat-card>
+            </div>
+
+        </form>
+
+
+    </div>
+    <!-- / CONTENT -->
+
+
+</div>

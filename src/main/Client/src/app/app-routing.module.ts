@@ -1,6 +1,5 @@
 import {LoginComponent} from "./security/login/login.component";
 import {LogoutComponent} from "./security/logout/LogoutComponent";
-import {MainPageComponent} from "./main-page/main-page.component";
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {AuthGuard} from "./security/auth.guard";
@@ -15,8 +14,7 @@ import {ReportScreenEconomicoComponent} from "./screen-reports/report-screen-eco
 import {ReportScreenTransporteComponent} from "./screen-reports/report-screen-transporte/report-screen-transporte.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full', canActivate: [AuthGuard]},
-  {path: 'home', component: MainPageComponent,canActivate: [AuthGuard]},
+  {path: '', redirectTo: '/sample', pathMatch: 'full', canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
 

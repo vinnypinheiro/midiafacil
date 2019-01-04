@@ -1,26 +1,48 @@
-import {Component, OnInit} from '@angular/core'; 
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router'; 
 import {FilterData} from '../../../components/interfaces'; 
 import {FieldSearch} from '../../../utils/utils'; 
  import {CommonsGrid} from '../../../commons-grid'; 
 import {ReportGroup} from '../../../shared/report-group'; 
 import {Produto} from '../produto'; 
-import {ProdutoService} from '../produto.service'; 
+import {ProdutoService} from '../produto.service';
+
+
+import {fuseAnimations} from "../../../../@fuse/animations";
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({ 
   selector: 'gov-produto-grid', 
   templateUrl: './produto-grid.component.html', 
-  //styleUrls: ['./produto-grid.component.css'] 
+  styleUrls: ['./produto-grid-component.scss'] ,
+
+    animations   : fuseAnimations,
 }) 
-export class ProdutoGridComponent extends CommonsGrid<Produto> implements OnInit { 
+export class ProdutoGridComponent extends CommonsGrid<Produto> implements OnInit {
+
+
+    public dataList: any;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    dataSource = new MatTableDataSource;
+    displayedColumns: string[] = ['ID','descricao','tipomidia','material', 'formato'];
 
      constructor(apiService: ProdutoService, router: Router) { 
          super(apiService, router); 
      } 
 
-     ngOnInit() { 
-         super.ngOnInit(); 
-     } 
+     ngOnInit() {
+         this.dataSource.paginator = this.paginator;
+         this.loadByFilter(this.getDefaultFilter());
+     }
+
+    loadByFilter(filterData: FilterData) {
+        this.apiService.loadByFilter(filterData).subscribe(response => {
+            this.dataSource.data = response.content;
+
+            this.activeBean = null;
+        });
+    }
 
      onNavigateClick(filterData: FilterData): void { 
          this.loadByFilter(filterData); 
