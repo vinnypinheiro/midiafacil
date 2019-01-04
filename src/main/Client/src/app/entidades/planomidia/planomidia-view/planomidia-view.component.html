@@ -1,0 +1,321 @@
+<div id="media-plan-view" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-16" (click)="backClicked()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        Plano de Mídia: {{entity?.id}}
+                    </div>
+                    <div class="subtitle secondary-text">
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <!-- ADD BUTTON -->
+                <button mat-raised-button
+                        [routerLink]="'/planomidia/import/'+entity?.id+'/'"
+                        class="add-product-button fuse-white mt-24 mt-md-0">
+                    <mat-icon>description</mat-icon>
+                    <span> Gerar Pedidos De Inserção</span>
+                </button>
+                <!-- / ADD BUTTON -->
+
+                <!-- ADD BUTTON -->
+                <button mat-raised-button
+                        [routerLink]="'/cliente/new'"
+                        class="fuse-white mt-24 mt-md-0">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- / ADD BUTTON -->
+
+                <!-- PRINT BUTTON -->
+                <button mat-raised-button color="primary"
+                        (click)="printReport( entity.id )"
+                        class="  mt-24 mt-md-0">
+                    <mat-icon>print</mat-icon>
+                    <span>   Imprimir</span>
+                </button>
+                <!-- / PRINT BUTTON -->
+
+            </div>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <mat-tab-group fxLayout="column" fxFlex>
+
+                    <mat-tab label="Resumo">
+
+                        <div class="order-details tab-content p-24" fusePerfectScrollbar>
+
+                            <div class="section pb-48">
+
+                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">today</mat-icon>
+                                    <h2 class="secondary-text"> Emissão:</h2>
+                                    <h1 >&nbsp;{{entity?.data | date}}</h1>
+
+                                </div>
+
+                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                    <i class="fas fa-igloo"></i>
+                                    <h2 class="secondary-text">Agência: &nbsp; </h2>
+                                    <h1 >  {{entity?.agencia_id.nomefantasia}}</h1>
+
+                                </div>
+
+                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">account_circle</mat-icon>
+                                    <h2 class="secondary-text">Cliente: &nbsp; </h2>
+                                    <h1 >  {{entity?.cliente_id.nomefantasia}}</h1>
+
+                                </div>
+
+                                <div class="customer mb-32" fxLayout="row" fxLayoutAlign="start center">
+                                    <mat-icon class="m-0 mr-16 secondary-text">account_circle</mat-icon>
+                                    <h2 class="secondary-text">Campanha: &nbsp;</h2>
+                                    <h1 >  {{entity?.campanha_id.nome}} </h1>
+                                </div>
+
+
+                                <div class="row"  fxLayout="row" fxLayoutAlign="start center">
+
+                                    <mat-card style=" border-left: #f5564a solid 9px; margin-left: 10px; " class="w-100-p">
+                                        <div class="section pb-48">
+
+                                            <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
+                                                <mat-icon class="m-0 mr-16 secondary-text">access_time</mat-icon>
+                                                <div class="h2 secondary-text">Status Do Plano de Mídia</div>
+                                            </div>
+
+                                            <table class="simple">
+                                                <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Atualizado</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                <span class="status h6 p-4 purple-300">
+                                                  Em Aberto
+                                                </span>
+                                                    </td>
+
+                                                    <td>
+                                                <span>
+                                                    3 de Dezembro de 2018
+                                                </span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <form class="update-status p-24"
+                                                  fxLayout="row" fxLayoutAlign="start center">
+
+                                                <mat-form-field appearance="outline" class="mr-16" fxFlex>
+                                                    <mat-label>Atulizar Status</mat-label>
+                                                    <mat-select
+                                                        required>
+                                                        <mat-option>
+                                                            Cancelado
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <button mat-raised-button class="mat-accent">
+
+                                                    Atualizar Status
+                                                </button>
+                                            </form>
+
+                                        </div>
+
+                                    </mat-card>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="Peças">
+                        <div class="products tab-content p-24" fusePerfectScrollbar>
+
+                            <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Peça</button>
+
+
+
+                            <table class="simple">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Peça</th>
+                                    <th >Título</th>
+                                    <th >Produto</th>
+                                    <th >Tipo De Mídia</th>
+                                    <th >Material</th>
+                                    <th >Formato</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="product-row"
+                                    *ngFor="let peca of activeBean.pecalist  " >
+                                    <td>
+                                        {{peca.id}}
+                                    </td>
+
+                                    <td>
+                                        {{peca.peca}}
+                                    </td>
+                                    <td>
+                                        {{peca.titulo}}
+                                    </td>
+                                    <td>
+                                        {{peca.produto_id?.descricao}}
+                                    </td>
+
+                                    <td>
+                                        {{peca.produto_id?.tipomidia_id?.nome}}
+                                    </td>
+
+                                    <td>
+                                        {{peca.produto_id?.material_id?.descricao}}
+                                    </td>
+
+                                    <td>
+                                        {{peca.produto_id?.formato_id?.nome}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="grades">
+
+                        <div class="products tab-content p-24" fusePerfectScrollbar>
+
+                            <button class="mr-4" mat-raised-button color="primary"  (click)="openGradeDialog(entity.id)" >Adicionar Grade Rádio</button>
+                            <button mat-raised-button color="primary"  (click)="DialogGradeSiteForm(entity.id)" >Adicionar Grade Site</button>
+                            <table class="simple">
+                                <thead>
+                                <tr>
+                                    <th class="w-80">ID</th>
+                                    <th>Data</th>
+                                    <th>Veículo</th>
+                                    <th>Programa</th>
+                                    <th>Inserções</th>
+                                    <th>Valor Unit.</th>
+                                    <th>Valor Total</th>
+                                    <th class="w-100">Status</th>
+                                    <th >Opções</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="product-row"
+                                    *ngFor="let pedidoInsercaoItem of activeBean.pedidoDeInsercaoItemlist ">
+                                    <td>
+                                        {{pedidoInsercaoItem.id}}
+                                    </td>
+
+                                    <td>
+                                        {{pedidoInsercaoItem.mes}}/{{pedidoInsercaoItem.ano}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.veiculo_id?.nomefantasia}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.programa_id?.descricao}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.qtd}}
+                                    </td>
+                                    <td>
+                                        R$ {{pedidoInsercaoItem.valorUnit}}
+                                    </td>
+
+                                    <td>
+                                        R$ {{pedidoInsercaoItem.valor}}
+                                    </td>
+                                    <td >
+                                        <p class="status text-truncate h6 p-4 green-800"> Em Aberto </p>
+                                    </td>
+
+                                    <td>
+
+                                        <button (click)="openGradeDialogEdit(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                            <mat-icon aria-label="Example icon-button with a heart icon">home</mat-icon>
+                                        </button>
+                                        <button (click)="duplicarGrade(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                            <mat-icon aria-label="Example icon-button with a heart icon">add_to_photos</mat-icon>
+                                        </button>
+                                        <button (click)="openDeletDialog(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                            <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="Visualizar">
+
+                        <div class="invoice tab-content p-24" fusePerfectScrollbar>
+
+                            <div id="invoice" class="compact page-layout blank" fxLayout="row" fusePerfectScrollbar>
+
+                                <div class="invoice-container">
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

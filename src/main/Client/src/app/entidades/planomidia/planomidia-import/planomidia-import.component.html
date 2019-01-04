@@ -1,0 +1,144 @@
+<div id="media-plan-view" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent"
+             fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-16" (click)="backClicked()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2">
+                        Plano de Mídia: {{entity?.id}}
+                    </div>
+                    <div class="subtitle secondary-text">
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/cliente/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <mat-icon>description</mat-icon>
+                <span> Gerar Pedidos De Inserção</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/cliente/new'"
+                    class="fuse-white mt-24 mt-md-0">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button color="primary"
+                    (click)="printReport('PlanoDeMidiaRadios', entity.id )"
+                    class="  mt-24 mt-md-0">
+                <mat-icon>print</mat-icon>
+                <span>   Imprimir</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
+            </div>
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <mat-tab-group fxLayout="column" fxFlex>
+
+                    <mat-tab label="GERAR PEDIDOS DE INSERÇÃO">
+
+                        <div class="products tab-content p-24" fusePerfectScrollbar>
+
+                            <button mat-raised-button color="primary"  (click)="openGradeDialog(entity.id)" >Adicionar Grade</button>
+
+                            <table class="simple">
+                                <thead>
+                                <tr>
+                                    <th class="w-80">ID</th>
+                                    <th>Período</th>
+                                    <th>Veículo</th>
+                                    <th>Programa</th>
+                                    <th>Inserções</th>
+                                    <th>Valor Unit.</th>
+                                    <th>Valor Total</th>
+                                    <th class="w-100">Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="product-row"
+                                    *ngFor="let pedidoInsercaoItem of activeBean.pedidoDeInsercaoItemlist ">
+                                    <td>
+                                        {{pedidoInsercaoItem.id}}
+                                    </td>
+
+                                    <td>
+                                        {{pedidoInsercaoItem.mes}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.veiculo_id?.nomefantasia}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.programa_id?.descricao}}
+                                    </td>
+                                    <td>
+                                        {{pedidoInsercaoItem.qtd}}
+                                    </td>
+                                    <td>
+                                        R$ {{pedidoInsercaoItem.valorUnit}}
+                                    </td>
+
+                                    <td>
+                                        R$ {{pedidoInsercaoItem.valor}}
+                                    </td>
+                                    <td >
+                                        <button mat-raised-button
+                                                (click)="update(pedidoInsercaoItem)"
+                                                class="add-product-button fuse-white mt-24 mt-md-0">
+                                            <mat-icon>description</mat-icon>
+                                            <span> Gerar Pedido De Inserção</span>
+                                        </button>
+                                    </td>
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

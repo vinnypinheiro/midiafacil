@@ -1,0 +1,281 @@
+<div id="client" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+             fxLayoutAlign.gt-sm="start center">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                {{entity.nomefantasia}}
+            </div>
+        </div>
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+
+            <button mat-raised-button color="primary" [routerLink]="'/cliente/edit/'+entity.id+'/'" aria-label="Follow">Editar Cliente</button>
+            <mat-chip (click)="printAccount('client')" color="primary"><i class="material-icons">
+                print
+            </i></mat-chip>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <mat-tab-group dynamicHeight="true">
+
+            <mat-tab label="Informações Cadastrais">
+                <div id="client-info" class="p-24" fxLayout="row wrap">
+
+                    <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+
+                        <div class="profile-box info-box general" fxLayout="column">
+
+                            <header class="accent">
+                                <div class="title">Dados Cadastrais</div>
+                            </header>
+
+                            <div class="content">
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        person
+                                    </i>
+                                        Nome Fantasia</div>
+                                    <div class="info">{{entity.nomefantasia}}</div>
+                                </div>
+
+                                <div class="info-line">
+
+                                    <div class="title"><i class="material-icons">
+                                        work
+                                    </i> Razão Social</div>
+                                    <div class="info">{{entity.razaosocial}}</div>
+                                </div>
+
+                                <div class="info-line">
+
+                                    <div class="title"><i class="material-icons">
+                                        chevron_right
+                                    </i> CNPJ</div>
+                                    <div class="info">{{entity.cnpj}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        chevron_right
+                                    </i>Incrição Estadual</div>
+                                    <div class="info">{{entity.cnpj}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        chevron_right
+                                    </i>Inscrição Municipal</div>
+                                    <div class="info">{{entity.cnpj}}</div>
+                                </div>
+
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        map
+                                    </i>Endereços</div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let endereco of entity.enderecoList">
+                                        <div class="title"><i class="material-icons">
+                                            pin_drop
+                                        </i></div>
+                                        <div class="info">
+                                            {{endereco.endereco}}, {{endereco.bairro}}, {{endereco.cidade}} - {{endereco.estado}}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="info-line">
+                                    <div class="title">Obs.</div>
+                                    <div class="info">{{entity.obs}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="profile-box info-box work" fxLayout="column">
+
+                            <header class="accent">
+                                <div class="title">Contatos</div>
+                            </header>
+
+                            <div class="content">
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        contacts
+                                    </i>Contatos</div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let contato of entity.contatoList">
+                                        <div class="info">
+                                            {{contato.contato}} - {{contato.telefone}} - {{contato.email}}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        contact_phone
+                                    </i>Telefones</div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let telefone of entity.telefoneList">
+                                        <div class="info">
+                                            {{telefone.tipotelefone}} - {{telefone.numero}}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        contact_mail
+                                    </i>E-mails </div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let email of entity.emailList">
+                                        <div class="info">
+                                            {{email.tipoemail}} - {{email.email}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        language
+                                    </i>Sites e Links</div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let site of entity.siteList">
+                                        <div class="info">
+                                            {{site.tiposite}} -  <a href="'site.site'">{{site.site}}</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-box info-box contact" fxLayout="column">
+
+                            <header class="accent">
+                                <div class="title">Contas Bancarias</div>
+                            </header>
+
+                            <div class="content">
+                                <div class="info-line">
+                                    <div class="title"></div>
+                                    <div class="info location" fxLayout="row" fxLayoutAlign="start center"
+                                         *ngFor="let conta of entity.contaBancariaList">
+
+
+                                        <!-- PREVIEW -->
+                                        <div id="{{conta.id}}" class="card-preview">
+
+                                            <div class="account-entity-card">
+
+                                                <div  class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                                                    <div class="h1 pr-16">{{conta.banco}}</div>
+
+                                                    <mat-chip (click)="printAccount(conta.id)" color="primary"><i class="material-icons">
+                                                        print
+                                                    </i></mat-chip>
+
+                                                </div>
+
+                                                <table class="simple clickable">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th class="text-left">Agência</th>
+                                                        <th class="text-left">Tipo</th>
+                                                        <th class="text-left">Conta</th>
+                                                        <th class="text-left">OP</th>
+                                                        <th class="text-left">Favorecido</th>
+                                                        <th class="text-left">CPF /CNPJ</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="text-left">{{conta.agencia}}</td>
+                                                        <td class="text-left">{{conta.tipoconta}}</td>
+                                                        <td class="text-left">{{conta.conta}}</td>
+                                                        <td class="text-left">{{conta.operacao}}</td>
+                                                        <td class="text-left">{{conta.favorecido}}</td>
+                                                        <td class="text-left">{{conta.cnpjcpf}}</td>
+
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+
+                                        </div>
+                                        <!-- / PREVIEW -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="about-sidebar" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="35">
+
+                        <div class="profile-box friends" fxLayout="column">
+
+                            <header class="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                                <div class="title">Documentos</div>
+                                <div class="more secondary-text">
+                                    <span>See 454 more...</span>
+                                </div>
+                            </header>
+
+                            <div class="content" fxLayout="row wrap">
+
+                            </div>
+
+                        </div>
+
+                        <div class="profile-box groups" fxLayout="column">
+
+                            <header class="accent" fxLayout="row" fxLayoutAlign="space-between center">
+                                <div class="title">Ultimos Lançamentos</div>
+                                <div class="more secondary-text">
+                                    <span>Ver todos</span>
+                                </div>
+                            </header>
+
+                            <div class="content">
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Lançamentos">
+
+            </mat-tab>
+
+        </mat-tab-group>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
