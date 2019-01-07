@@ -1,4 +1,4 @@
-# Desafio Solutis
+# Midia Fácil 
 
 ### Requisitos
 
@@ -44,7 +44,7 @@ http://localhost:4200
 ```
 ## Autor
 
-Fabricio Correia Batista
+Vinicio G. Pinheiro
 
 
 ## Licença
