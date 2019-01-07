@@ -30,6 +30,6 @@ export interface Veiculo extends DomainBase {
      telefoneList: Telefone[];
      emailList: Email[];
     programalist: Programa [];
-     enderecolist: Endereco[];
+    enderecoList: Endereco[];
 
 }

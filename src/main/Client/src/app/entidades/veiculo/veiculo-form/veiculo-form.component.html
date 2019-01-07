@@ -175,6 +175,54 @@
                                 </div>
                             </div>
 
+                            <div class="p-24" fxLayout="row wrap">
+
+                                <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+
+                                    <div class="profile-box info-box general" fxLayout="column">
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+
+                                <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Programa</button>
+
+
+
+                                <table class="simple">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Endereço</th>
+                                        <th >Cidade</th>
+                                        <th >UF</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="product-row"
+                                        *ngFor="let x of activeBean.enderecoList " >
+                                        <td>
+                                            {{x.id}}
+                                        </td>
+
+                                        <td>
+                                            {{x.endereco}}
+                                        </td>
+                                        <td>
+                                            {{x.cidade}}
+                                        </td>
+                                        <td>
+                                            {{x.UF}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
                         </mat-tab>
 
                         <mat-tab label="Contatos" formArrayName="contatoList">
@@ -234,6 +282,56 @@
                                 </div>
                             </div>
 
+                            <div class="p-24" fxLayout="row wrap">
+
+                                <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+
+                                    <div class="profile-box info-box general" fxLayout="column">
+
+                                        <div class="content">
+
+                                            <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Contato</button>
+
+
+
+                                            <table class="simple">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Tipo</th>
+                                                    <th >Nome</th>
+                                                    <th >Telefone</th>
+                                                    <th >E-mail</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="product-row"
+                                                    *ngFor="let x of activeBean.contatoList " >
+                                                    <td>
+                                                        {{x.id}}
+                                                    </td>
+
+                                                    <td>
+                                                        {{x.tipocontato}}
+                                                    </td>
+                                                    <td>
+                                                        {{x.contato}}
+                                                    </td>
+                                                    <td>
+                                                        {{x.telefone}}
+                                                    </td>
+                                                    <td>
+                                                        {{x.email}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </mat-tab>
 
                         <mat-tab label="Telefones" formArrayName="telefoneList">
@@ -262,8 +360,8 @@
                                         <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
                                             <mat-label>Telefone</mat-label>
                                             <input matInput placeholder=""
-                                                   name="telefone"
-                                                   formControlName="telefone">
+                                                   name="numero"
+                                                   formControlName="numero">
                                         </mat-form-field>
 
                                     </div>

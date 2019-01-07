@@ -61,7 +61,12 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
                   });
 
                   this.setEnderecosArray();
-                  this.setEmailArray()
+                  this.setEmailArray();
+                  this.setTelefoneListArray();
+                  this.setContatoListArray();
+                  this.setSiteListArray();
+                  this.setcontaBancariaArray();
+
                 
               });
             }
@@ -71,11 +76,27 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
 
 
        
-     } 
+     }
+
+    setcontaBancariaArray(){
+        let control = <FormArray>this.activeForm.controls.contabancariaList;
+        this.activeBean.contaBancariaList.forEach(x => {
+            control.push(this.fb.group({
+                agencia: x.agencia,
+                banco: x.banco,
+                cnpjcpf: x.cnpjcpf,
+                conta: x.conta,
+                favorecido: x.favorecido,
+                operacao: x.operacao,
+                tipoconta: x.tipoconta
+            }))
+        })
+
+    }
 
      setEnderecosArray(){
-        let control = <FormArray>this.activeForm.controls.enderecolist;
-        this.activeBean.enderecolist.forEach(x => {
+        let control = <FormArray>this.activeForm.controls.enderecoList;
+        this.activeBean.enderecoList.forEach(x => {
           control.push(this.fb.group({
               endereco: x.endereco,
               cidade: x.cidade,
@@ -85,7 +106,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
       }
 
       setEmailArray(){
-        let control = <FormArray>this.activeForm.controls.email;
+        let control = <FormArray>this.activeForm.controls.emailList;
         this.activeBean.emailList.forEach(e => {
           control.push(this.fb.group({
               tipoemail: e.tipoemail,
@@ -93,6 +114,39 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         }))
         })
       }
+
+    setTelefoneListArray(){
+        let control = <FormArray>this.activeForm.controls.telefoneList;
+        this.activeBean.telefoneList.forEach(t => {
+            control.push(this.fb.group({
+                tipotelefone: t.tipotelefone,
+                numero: t.numero
+
+            }))
+        })
+    }
+
+    setContatoListArray(){
+        let control = <FormArray>this.activeForm.controls.contatoList;
+        this.activeBean.contatoList.forEach(c => {
+            control.push(this.fb.group({
+                contato: c.contato,
+                email: c.email,
+                telefone: c.telefone,
+                tipocontato: c.tipocontato,
+            }))
+        })
+    }
+
+    setSiteListArray(){
+        let control = <FormArray>this.activeForm.controls.siteList;
+        this.activeBean.siteList.forEach(s => {
+            control.push(this.fb.group({
+                tiposite: s.tiposite,
+                site: s.site
+            }))
+        })
+    }
 
        //Cliente reactive form
      activeForm = this.fb.group({
@@ -111,9 +165,8 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         contatoList: this.fb.array([this.addContatoGroup()]),
         siteList: this.fb.array([this.addSiteGroup()]),
         telefoneList: this.fb.array([this.addTelefoneGroup()]),
-        emailList: this.fb.array([this.addEmailGroup()]), 
-      
-       enderecolist: this.fb.array([this.addAddressGroup()]),
+        emailList: this.fb.array([this.addEmailGroup()]),
+        enderecoList: this.fb.array([this.addAddressGroup()]),
       
     });
 
@@ -177,7 +230,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
        this.addressArray.removeAt(index);
      }
      get addressArray() {
-       return <FormArray>this.activeForm.get('enderecolist');
+       return <FormArray>this.activeForm.get('enderecoList');
      }
 
      ////// Endereço List fim /////////////////////////////////////////////////////////////////////

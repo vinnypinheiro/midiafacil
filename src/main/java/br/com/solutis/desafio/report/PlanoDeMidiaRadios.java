@@ -78,7 +78,7 @@ public class PlanoDeMidiaRadios extends Report {
     public HashMap<String,Object> getParametros(){
         HashMap<String,Object> parametros = new HashMap<String,Object>();
 
-        String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
+        String LOGO = "/home/link3/IdeaProjects/midiafacil3/midiafacil/resources/logo.png";
         parametros.put("LOGO", LOGO);
 
 
