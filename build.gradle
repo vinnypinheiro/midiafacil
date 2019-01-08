@@ -37,6 +37,10 @@ jasperreports {
 
 bootRun.dependsOn(compileAllReports)
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-rest')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
