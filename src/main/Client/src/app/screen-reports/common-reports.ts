@@ -1,7 +1,7 @@
 import {Router} from "@angular/router";
 import {SharedService} from "../shared/shared.service";
 import {HostListener, OnInit, ViewChild} from "@angular/core";
-import {ReportFilterComponent} from "../report-filter/report-filter.component";
+import {ReportFilterComponent} from "../components/report-filter/report-filter.component";
 import {Report} from "../shared/report";
 import {StateButons} from "../components/componentsClass";
 
@@ -11,11 +11,11 @@ export abstract class CommonReports implements OnInit{
 
   @ViewChild(ReportFilterComponent) modalFilter;
 
-  protected stickyMenu: boolean = false;
-  protected reports: Report[];
-  protected report: Report;
-  protected reportName: string;
-  protected stateButons: StateButons;
+  public stickyMenu: boolean = false;
+    public reports: Report[];
+    public report: Report;
+    public reportName: string;
+    public stateButons: StateButons;
 
 
   protected constructor(protected router?: Router, public sharedService?: SharedService){}

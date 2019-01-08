@@ -22,9 +22,9 @@ import {Formato} from "../../formato/formato";
 })
 export class ProdutoFormComponent extends CommonsForm<Produto> implements OnInit {
 
-    tipomidia: TipoMidia;
-    material: Material;
-    formatoList: Formato[];
+   public tipomidia: TipoMidia;
+    public material: Material;
+    public formatoList: Formato[];
 
     constructor(private fb: FormBuilder,
                 private materialService: MaterialService,

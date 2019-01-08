@@ -649,7 +649,7 @@ export class DialogGradeSiteForm implements OnInit {
 
     qtdTotal: number;
 
-    setTotalPrice(): void {
+    setTotalPrice(event): void {
 
         this.qtdTotal =
             parseInt(this.gradeForm.controls.dia01.value) +
@@ -927,7 +927,7 @@ export class DialogGradeForm implements OnInit {
 
     qtdTotal: number;
 
-    setTotalPrice(): void {
+    setTotalPrice(event): void {
 
         this.qtdTotal =
             parseInt(this.gradeForm.controls.dia01.value) +

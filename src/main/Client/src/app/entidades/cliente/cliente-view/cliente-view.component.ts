@@ -5,7 +5,6 @@ import {CommonsService} from "../../../commons-service";
 import {Cliente} from "../cliente";
 import {CommonsForm} from "../../../commons-form";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UfService} from "../../uf/uf.service";
 import {ClienteService} from "../cliente.service";
 import {FormBuilder} from "@angular/forms";
 import {FilterData} from "../../../components/interfaces";
@@ -18,11 +17,10 @@ import {FilterData} from "../../../components/interfaces";
 })
 export class ClienteViewComponent extends CommonsForm<Cliente> implements OnInit {
 
-    entity: object = {};
+    entity: any;
 
     constructor(
                 apiService: ClienteService,
-                private ufService: UfService,
                 route: ActivatedRoute,
                 router: Router ) {
 
@@ -67,7 +65,6 @@ export class ClienteViewComponent extends CommonsForm<Cliente> implements OnInit
     getLookupService(lookupName: string): CommonsService<any> {
         switch (lookupName) {
             case 'uf': {
-                return this.ufService;
             }
 
             default: {

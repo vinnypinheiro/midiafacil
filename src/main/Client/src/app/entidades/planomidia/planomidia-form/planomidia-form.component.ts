@@ -50,6 +50,10 @@ export class PlanoMidiaFormComponent extends CommonsForm<PlanoMidia> implements 
   peca: Peca = <Peca>{};
   pedidoinsercaoitem: PedidoInsercaoItem = <PedidoInsercaoItem>{};
 
+    public verticalStepperStep1: any;
+    public verticalStepperStep2: any;
+    public verticalStepperStep3: any;
+
 
   planoMidia: PlanoMidia[] = [];
   tipoMidia: TipoMidia[] = [];

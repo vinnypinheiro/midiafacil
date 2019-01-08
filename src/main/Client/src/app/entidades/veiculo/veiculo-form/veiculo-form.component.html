@@ -20,10 +20,10 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start"
                      [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    <div class="h2" *ngIf="pageType ==='edit'">
+                    <div class="h2" >
                         {{  activeBean.nomefantasia }}
                     </div>
-                    <div class="h2" *ngIf="pageType ==='new'">
+                    <div class="h2" >
                         New Product
                     </div>
                     <div class="subtitle secondary-text">
@@ -41,7 +41,7 @@
 
             <button mat-raised-button
                     class="save-product-button"
-                    *ngIf="pageType ==='edit'" (click)="saveVeiculo()">
+                    (click)="saveVeiculo()">
                 <span>Salvar Veiculo</span>
             </button>
         </div>
@@ -188,8 +188,7 @@
 
                             <div class="content">
 
-                                <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Programa</button>
-
+                                <button mat-raised-button color="primary" >Adicionar Programa</button>
 
 
                                 <table class="simple">
@@ -290,7 +289,7 @@
 
                                         <div class="content">
 
-                                            <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Contato</button>
+                                            <button mat-raised-button color="primary" >Adicionar Contato</button>
 
 
 

@@ -2,7 +2,6 @@ import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {CommonsForm} from "../../../commons-form";
 import {Veiculo} from "../../veiculo/veiculo";
 import {VeiculoService} from "../../veiculo/veiculo.service";
-import {UfService} from "../../uf/uf.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Operation} from "../../../utils/utils";
 import {FilterData} from "../../../components/interfaces";
@@ -24,12 +23,11 @@ import {ProgramaService} from "../../programa/programa.service";
 })
 export class VeiculoViewComponent  extends CommonsForm<Veiculo> implements OnInit {
 
-    entity: object = {};
+    entity: any;
 
     constructor(
         public dialog: MatDialog,
         apiService: VeiculoService,
-        private ufService: UfService,
         route: ActivatedRoute,
         router: Router ) {
 
@@ -92,7 +90,6 @@ export class VeiculoViewComponent  extends CommonsForm<Veiculo> implements OnIni
     getLookupService(lookupName: string): CommonsService<any> {
         switch (lookupName) {
             case 'uf': {
-                return this.ufService;
             }
 
             default: {

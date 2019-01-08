@@ -45,7 +45,7 @@
                             <mat-label>Cliente</mat-label>
                             <mat-select formControlName="cliente_id" required>
 
-                                <mat-option [value]="clienteFor" *ngFor="let clienteFor of cliente; let i= index;">
+                                <mat-option [value]="clienteFor" *ngFor="let clienteFor of cliente">
                                     {{clienteFor.nomefantasia }}
                                 </mat-option>
 

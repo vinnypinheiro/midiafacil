@@ -57,7 +57,7 @@
                     <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
                         <mat-form-field appearance="outline" fxFlex="50">
                             <mat-label>Material</mat-label>
-                            <mat-select formControlName="material_id" required (selectionChange)="setFormatoList($event, material_id)">
+                            <mat-select formControlName="material_id" required (selectionChange)="setFormatoList($event)">
 
                                 <mat-option [value]="m" *ngFor="let m of material; let i= index;">
                                     {{m.descricao }}

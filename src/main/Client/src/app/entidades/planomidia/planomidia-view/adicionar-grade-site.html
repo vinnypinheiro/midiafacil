@@ -97,7 +97,7 @@
 
             <mat-form-field appearance="outline" fxFlex="30">
                 <mat-label>Veículo</mat-label>
-                <mat-select formControlName="veiculo_id" required (selectionChange)="setProgramaList($event, veiculo_id)">
+                <mat-select formControlName="veiculo_id" required (selectionChange)="setProgramaList($event)">
                     <input style="height: 57px; background: antiquewhite;" matInput type="text"  placeholder="Buscar..."  (keyup)="filterListCareUnit($event.target.value)">
                     <mat-option (blur)="attVeiculos()" [value]="veiculo" *ngFor="let veiculo of veiculoFilter">
                         {{veiculo.nomefantasia}}
@@ -127,7 +127,7 @@
                     <input matInput formControlName="qtd">
                 </mat-form-field>
 
-            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" (change)="setTotalPrice()">
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" (change)="setTotalPrice($event)">
                 <mat-label>Valor Unit.</mat-label>
                 <input matInput
                        name="valorUnit"

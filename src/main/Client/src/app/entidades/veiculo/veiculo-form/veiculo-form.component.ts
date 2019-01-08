@@ -10,9 +10,8 @@ import {CommonsForm} from '../../../commons-form';
 import {FilterData} from '../../../components/interfaces'; 
 import {CommonsService} from '../../../commons-service'; 
 import {Veiculo} from '../veiculo'; 
-import {VeiculoService} from '../veiculo.service'; 
-import {UfService} from '../../uf/uf.service'; 
-import {TipoMidiaService} from '../../tipomidia/tipomidia.service'; 
+import {VeiculoService} from '../veiculo.service';
+import {TipoMidiaService} from '../../tipomidia/tipomidia.service';
 
 @Component({
  selector: 'gov-veiculo-form', 
@@ -22,12 +21,11 @@ import {TipoMidiaService} from '../../tipomidia/tipomidia.service';
 }) 
 export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit { 
 
-   
+   entity: any;
 
     constructor(
                           private fb: FormBuilder,
-                            apiService: VeiculoService, 
-                            private ufService: UfService, 
+                            apiService: VeiculoService,
                             private tipomidiaService: TipoMidiaService, 
                              route: ActivatedRoute, 
  router: Router ) { 
@@ -222,6 +220,8 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         });
       }
 
+
+
       addEmailGroup() {
         return this.fb.group({
           tipoemail: [null],
@@ -318,8 +318,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
 
      getLookupService(lookupName: string): CommonsService<any> {
          switch (lookupName) { 
-             case 'uf': { 
-                 return this.ufService; 
+             case 'uf': {
              } 
 
              case 'tipomidia': { 

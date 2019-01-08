@@ -10,8 +10,7 @@ import {CommonsForm} from '../../../commons-form';
 import {FilterData} from '../../../components/interfaces'; 
 import {CommonsService} from '../../../commons-service'; 
 import {Cliente} from '../cliente'; 
-import {ClienteService} from '../cliente.service'; 
-import {UfService} from '../../uf/uf.service'; 
+import {ClienteService} from '../cliente.service';
 
 @Component({
  selector: 'gov-cliente-form', 
@@ -24,8 +23,7 @@ export class ClienteFormComponent extends CommonsForm<Cliente>  implements OnIni
   
 
     constructor(private fb: FormBuilder,
-                apiService: ClienteService, 
-                private ufService: UfService, 
+                apiService: ClienteService,
                 route: ActivatedRoute, 
                 router: Router ) { 
      
@@ -246,8 +244,7 @@ export class ClienteFormComponent extends CommonsForm<Cliente>  implements OnIni
 
      getLookupService(lookupName: string): CommonsService<any> {
          switch (lookupName) { 
-             case 'uf': { 
-                 return this.ufService; 
+             case 'uf': {
              } 
 
              default: { 

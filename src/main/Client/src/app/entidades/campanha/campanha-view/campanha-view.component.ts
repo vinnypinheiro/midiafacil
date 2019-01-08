@@ -5,10 +5,10 @@ import {CommonsService} from "../../../commons-service";
 import {Campanha} from "../campanha";
 import {CommonsForm} from "../../../commons-form";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UfService} from "../../uf/uf.service";
 import {CampanhaService} from "../campanha.service";
 import {FormBuilder} from "@angular/forms";
 import {FilterData} from "../../../components/interfaces";
+import {Cliente} from "../../cliente/cliente";
 
 
 @Component({
@@ -19,11 +19,11 @@ import {FilterData} from "../../../components/interfaces";
 })
 export class CampanhaViewComponent extends CommonsForm<Campanha> implements OnInit {
 
-    entity: object = {};
+    entity: any;
+    cliente: Cliente;
 
     constructor(private fb: FormBuilder,
                 apiService: CampanhaService,
-                private ufService: UfService,
                 route: ActivatedRoute,
                 router: Router ) {
 
@@ -66,6 +66,14 @@ export class CampanhaViewComponent extends CommonsForm<Campanha> implements OnIn
 
     });
 
+    saveEntity() {
+        // TODO: Use EventEmitter with form value
+        console.warn(this.activeForm.value);
+        this.activeBean = this.activeForm.value;
+        this.save();
+        //this.apiService.save(this.clienteForm.value);
+    }
+
     getDeLookupFilter(lookupValue: any): FilterData {
         switch (lookupValue.name) {
             case 'uf': {
@@ -82,7 +90,6 @@ export class CampanhaViewComponent extends CommonsForm<Campanha> implements OnIn
     getLookupService(lookupName: string): CommonsService<any> {
         switch (lookupName) {
             case 'uf': {
-                return this.ufService;
             }
 
             default: {
