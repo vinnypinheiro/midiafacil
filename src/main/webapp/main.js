@@ -13220,7 +13220,7 @@ var LoginService = /** @class */ (function () {
     }
     LoginService.prototype.login = function (user) {
         //user.password = new SHA256().hash(user.password);
-        return this.http.post("https://midiafacil.herokuapp.com:8080/api/auth", user);
+        return this.http.post("https://midiafacil.herokuapp.com/api/auth", user);
     };
     LoginService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
