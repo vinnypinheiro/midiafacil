@@ -12,7 +12,7 @@ public class PlanoDeMidiaSites extends Report {
 
     public  void buildSqlWithId(Long id) {
         sql += " select         \n" ;
-        sql += " 'midia' as midia, \n" ;
+        sql += " 'SITES' as midia, \n" ;
         sql += " ag.nomefantasia as agencia, \n" ;
         sql += " cl.nomefantasia as cliente, \n" ;
         sql += " 'GIF PADRÃO' as formato, \n" ;
@@ -40,7 +40,7 @@ public class PlanoDeMidiaSites extends Report {
     public HashMap<String,Object> getParametros(){
         HashMap<String,Object> parametros = new HashMap<String,Object>();
 
-        String LOGO = "/home/link3/IdeaProjects/midiafacil3/midiafacil/resources/logo.png";
+        String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
 
         return  parametros;

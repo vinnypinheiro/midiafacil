@@ -82,6 +82,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         let control = <FormArray>this.activeForm.controls.contabancariaList;
         this.activeBean.contaBancariaList.forEach(x => {
             control.push(this.fb.group({
+                id: x.id,
                 agencia: x.agencia,
                 banco: x.banco,
                 cnpjcpf: x.cnpjcpf,
@@ -98,9 +99,12 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         let control = <FormArray>this.activeForm.controls.enderecoList;
         this.activeBean.enderecoList.forEach(x => {
           control.push(this.fb.group({
+              id: x.id,
               endereco: x.endereco,
               cidade: x.cidade,
-              bairro: x.bairro
+              bairro: x.bairro,
+              estado: x.estado,
+              cep: x.cep
         }))
         })
       }
@@ -109,6 +113,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         let control = <FormArray>this.activeForm.controls.emailList;
         this.activeBean.emailList.forEach(e => {
           control.push(this.fb.group({
+              id: e.id,
               tipoemail: e.tipoemail,
               email: e.email
         }))
@@ -119,6 +124,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         let control = <FormArray>this.activeForm.controls.telefoneList;
         this.activeBean.telefoneList.forEach(t => {
             control.push(this.fb.group({
+                id: t.id,
                 tipotelefone: t.tipotelefone,
                 numero: t.numero
 
@@ -142,6 +148,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         let control = <FormArray>this.activeForm.controls.siteList;
         this.activeBean.siteList.forEach(s => {
             control.push(this.fb.group({
+                id: s.id,
                 tiposite: s.tiposite,
                 site: s.site
             }))

@@ -46,6 +46,10 @@ public class VeiculoController {
         }
 
         for (Endereco e :bean.getEnderecoList() ){
+
+            if (e.getId() == null ){
+                e.setId(bean.getId());
+            }
             e.setVeiculo_id(bean);
             enderecoService.save(e);
         }

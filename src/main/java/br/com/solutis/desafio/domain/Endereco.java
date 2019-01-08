@@ -26,7 +26,7 @@ public class Endereco implements Serializable {
 
 
     @JsonBackReference(value="veiculo-endereco")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "veiculo_id", nullable = true, foreignKey = @ForeignKey(name = "fk_endereco_veiculo"))    private Veiculo veiculo_id;
 
 

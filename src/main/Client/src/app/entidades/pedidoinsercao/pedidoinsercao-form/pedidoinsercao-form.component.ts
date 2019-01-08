@@ -127,6 +127,14 @@ export class PedidoInsercaoFormComponent extends CommonsForm<PedidoInsercao> imp
 
     savePedidoInsercao(){
 
+        this.pedidoInsercaoForm.patchValue({
+            planomidia_id: this.planoMidia,
+            agencia_id: this.planoMidia.agencia_id,
+            cliente_id: this.planoMidia.cliente_id,
+            veiculo_id: this.pedidoinsercaoitem.veiculo_id
+
+        });
+
         console.log(this.pedidoInsercaoForm.value);
         this.activeBean = this.pedidoInsercaoForm.value;
         this.save();
