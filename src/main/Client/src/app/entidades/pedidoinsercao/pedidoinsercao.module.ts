@@ -18,12 +18,18 @@ import {
 import { FuseSharedModule } from '@fuse/shared.module';
 import {ReactiveFormsModule} from "@angular/forms";
 import {PedidoinsercaoViewComponent} from "./pedidoinsercao-view/pedidoinsercao-view.component";
+import {PedidoInsercaoLoteComponent} from "./pedidoinsercao-lote/pedidoinsercao-lote.component";
 
  
 const ROUTES  = [ 
         { 
             path: '', 
                     component: PedidoInsercaoGridComponent, 
+                canActivate: [AuthGuard] 
+        }, 
+        { 
+            path: 'lote', 
+                    component: PedidoInsercaoLoteComponent, 
                 canActivate: [AuthGuard] 
         }, 
         { 
@@ -64,7 +70,8 @@ const ROUTES  = [
                 declarations: [ 
                 PedidoInsercaoGridComponent, 
                 PedidoInsercaoFormComponent,
-                    PedidoinsercaoViewComponent
+                    PedidoinsercaoViewComponent,
+                    PedidoInsercaoLoteComponent,
                 ], 
                 entryComponents: [PedidoInsercaoGridComponent,PedidoInsercaoFormComponent,PedidoinsercaoViewComponent],
                 schemas: [], 

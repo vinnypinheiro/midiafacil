@@ -33,10 +33,10 @@
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/cliente/new'"
+            (click)="gerarLote()"
                     class="add-product-button fuse-white mt-24 mt-md-0">
                 <mat-icon>description</mat-icon>
-                <span> Gerar Pedidos De Inserção</span>
+                <span> Gerar Pedidos em Lote</span>
             </button>
             <!-- / ADD BUTTON -->
 

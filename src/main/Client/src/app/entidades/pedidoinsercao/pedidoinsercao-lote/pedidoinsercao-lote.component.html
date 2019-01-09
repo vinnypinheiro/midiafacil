@@ -1,0 +1,226 @@
+<div id="pedidoinsercao" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+             fxLayoutAlign.gt-sm="start center">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                GERAR LOTE 
+            </div>
+        </div>
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button mat-raised-button color="accent" (click)="savePedidoInsercao()" aria-label="Send Message">Enviar Mensagem</button>
+            <button mat-raised-button color="primary" [routerLink]="'/pedidoinsercao/edit/'+entity?.id+'/'" aria-label="Follow">Editar Pedido Insercao</button>
+            <mat-chip (click)="printAccount('client')" color="primary"><i class="material-icons">
+                print
+            </i></mat-chip>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <form [formGroup]="pedidoInsercaoForm" (ngSubmit)="savePedidoInsercao()"  class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+              fxFlex="1 0 auto" name="form">
+
+
+                    <!-- <div class="h2 mb-24">Reactive Form Example</div>-->
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    
+                        <div class="info-line" fxFlex="30" class="pl-4">
+                            <div class="title"><i class="material-icons">
+                                person
+                            </i>
+                                Agencia</div>
+                            <div class="info">{{activeBean.agencia_id?.nomefantasia}}</div>
+                        </div>
+
+                        <div class="info-line" fxFlex="30" class="pl-4">
+                            <div class="title"><i class="material-icons">
+                                person
+                            </i>
+                                Cliente</div>
+                            <div class="info">{{activeBean.cliente_id?.nomefantasia}}</div>
+                        </div>
+
+                    </div>
+
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+
+
+                        <mat-form-field appearance="outline" fxFlex="20" class="pl-4">
+                            <mat-label>OS Agência</mat-label>
+                            <input  formControlName="osagencia" matInput required>
+                            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                            <mat-error>Last Name is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                            <mat-label>Praça</mat-label>
+                            <input matInput  formControlName="praca"  required>
+                            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                        </mat-form-field>
+
+                    </div>
+
+         
+
+            <div class="p-24" >
+                <mat-card style=" border-left: #039be5 solid 9px;">
+                    <h2>Grades / Programas </h2>
+                    <button mat-raised-button color="primary"  >Adicionar Grade</button>
+
+                    <table class="simple">
+                        <thead>
+                        <tr>
+                            <th class="w-80">ID</th>
+                            <th>Data</th>
+                            <th>Veículo</th>
+                            <th>Programa</th>
+                            <th>Inserções</th>
+                            <th>Valor Unit.</th>
+                            <th>Valor Total</th>
+                            <th class="w-100">Status</th>
+                            <th >Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="product-row"
+                            *ngFor="let pedidoInsercaoItem of activeBean.pedidoDeInsercaoItemlist ">
+                            <td>
+                                {{pedidoInsercaoItem.id}}
+                            </td>
+
+                            <td>
+                                {{pedidoInsercaoItem.mes}}/{{pedidoInsercaoItem.ano}}
+                            </td>
+                            <td>
+                                {{pedidoInsercaoItem.veiculo_id?.nomefantasia}}
+                            </td>
+                            <td>
+                                {{pedidoInsercaoItem.programa_id?.descricao}}
+                            </td>
+                            <td>
+                                {{pedidoInsercaoItem.qtd}}
+                            </td>
+                            <td>
+                                R$ {{pedidoInsercaoItem.valorUnit}}
+                            </td>
+
+                            <td>
+                                R$ {{pedidoInsercaoItem.valor}}
+                            </td>
+                            <td >
+                                <p class="status text-truncate h6 p-4 green-800"> Em Aberto </p>
+                            </td>
+
+                            <td>
+
+                                <button (click)="openGradeDialogEdit(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                    <mat-icon aria-label="Example icon-button with a heart icon">home</mat-icon>
+                                </button>
+                                <button (click)="duplicarGrade(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                    <mat-icon aria-label="Example icon-button with a heart icon">add_to_photos</mat-icon>
+                                </button>
+                                <button (click)="openDeletDialog(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                    <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+                                </button>
+
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </mat-card>
+            </div>
+
+            <div class="p-24" >
+                <mat-card style=" border-left: #398014 solid 9px;">
+                    <h2>  Negociação</h2>
+
+                    <h3>Valor a Faturar </h3>
+                    <h3>R${{pedidoinsercaoitem.valor}}</h3>
+
+                    <h3>Desconto padrao Agência</h3>
+
+                </mat-card>
+            </div>
+
+            <div class="p-24" >
+
+                <mat-card style=" border-left: #398014 solid 9px;">
+
+                    <div class="w-100-p" >
+
+                        <h2> Vencimento</h2>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="vencimentotxt" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="w-100-p">
+
+                        <h2> Faturamento</h2>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="faturamentotxt" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="w-100-p" >
+
+                        <h2> Observações Importantes</h2>
+                        <br>
+
+                        <mat-form-field appearance="outline" class="w-100-p">
+                            <mat-label>Texto</mat-label>
+                            <textarea matInput formControlName="informacoesimportantes" required>
+
+                        </textarea>
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+
+
+
+
+                </mat-card>
+
+            </div>
+
+        </form>
+
+        <button mat-raised-button
+                class="save-product-button"
+                (click)="savePedidoInsercao()">
+            <span>Salvar</span>
+        </button>
+
+    </div>
+    <!-- / CONTENT -->
+
+
+</div>

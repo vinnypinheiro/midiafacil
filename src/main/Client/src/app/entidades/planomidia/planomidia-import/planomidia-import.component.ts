@@ -90,9 +90,15 @@ export class PlanomidiaImportComponent extends CommonsForm<PlanoMidia> implement
         this.nextComponent();
     }
 
+    gerarLote(){
+
+        this.importService.gerarLote(this.entity );
+        this.nextComponent();
+    }
+
 
     nextComponent(){
-        this.router.navigate(['/pedidoinsercao/new']);
+        this.router.navigate(['/pedidoinsercao/lote']);
     }
 
 

@@ -7,7 +7,7 @@ import {PlanoMidia} from "./entidades/planomidia/planomidia";
 export class ImportService {
 
 
-    data = [];
+    public data: any;
 
 
     titleSource = new BehaviorSubject<any>(this.data);
@@ -23,6 +23,14 @@ export class ImportService {
                 planomidia: planomidia
             }
         ]
+        this.titleSource.next(this.data)
+    }
+
+
+    gerarLote( planomidia: PlanoMidia ){
+        console.log(planomidia)
+        this.data =  planomidia;
+            
         this.titleSource.next(this.data)
     }
 }
