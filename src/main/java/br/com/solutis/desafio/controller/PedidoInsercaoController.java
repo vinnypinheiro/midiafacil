@@ -1,5 +1,6 @@
 package br.com.solutis.desafio.controller;
 import br.com.solutis.desafio.domain.PedidoInsercao;
+import br.com.solutis.desafio.domain.PlanoMidia;
 import br.com.solutis.desafio.helper.filter.FilterData;
 import br.com.solutis.desafio.service.PedidoInsercaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,39 @@ public class PedidoInsercaoController {
     @Autowired
     PedidoInsercaoService pedidoinsercaoService;
 
+    @RequestMapping(value = "/saveLote", method = RequestMethod.POST)
+    public ResponseEntity saveLote(@RequestBody PlanoMidia bean) {
+
+        bean.getPedidoDeInsercaoItemlist().forEach(pil -> {
+
+            PedidoInsercao pi = new PedidoInsercao();
+            pi.setPlanomidia_id(bean);
+            pi.setCliente_id(bean.getCliente_id());
+            pi.setAgencia_id(bean.getAgencia_id());
+            pi.setVeiculo_id(pil.getVeiculo_id());
+
+             pi.setStatus("GERADO");
+
+             pi.setPeriodo(pil.getMes()+"/"+pil.getAno());
+             pi.setTotalbruto(pil.getValor());
+             pi.setComissao(0.0);
+             pi.setTotalliquido(pil.getValor());
+
+            pedidoinsercaoService.save(pi);
+        });
+
+        return new ResponseEntity( HttpStatus.OK );
+
+            }
+
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody PedidoInsercao bean) {
+
+
+
         return this.buildResponse(pedidoinsercaoService.save(bean));
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
