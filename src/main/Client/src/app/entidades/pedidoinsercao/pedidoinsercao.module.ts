@@ -15,6 +15,9 @@ import {
     MatTableModule, MatTabsModule
 } from '@angular/material';
 
+import { FuseSidebarModule } from '@fuse/components';
+
+
 import { FuseSharedModule } from '@fuse/shared.module';
 import {ReactiveFormsModule} from "@angular/forms";
 import {PedidoinsercaoViewComponent} from "./pedidoinsercao-view/pedidoinsercao-view.component";
@@ -64,7 +67,7 @@ const ROUTES  = [
                     MatTabsModule,
                     MatDialogModule,
                     MatCardModule,
-
+                    FuseSidebarModule,
                     FuseSharedModule
                 ], 
                 declarations: [ 

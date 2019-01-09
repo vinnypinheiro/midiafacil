@@ -12,10 +12,8 @@ import br.com.solutis.desafio.domain.Produto;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class PedidoInsercaoItem implements Serializable {
+
     @Id
     @GeneratedValue
     private Long id;

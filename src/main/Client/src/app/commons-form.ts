@@ -52,6 +52,14 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
         });
     }
 
+    saveLote(): void {
+        this.apiService.saveLote(this.activeBean).subscribe(response => {
+            console.log(response);
+            this.openGrid();
+
+        });
+    }
+
     ngAfterViewInit(): void {
 
     }

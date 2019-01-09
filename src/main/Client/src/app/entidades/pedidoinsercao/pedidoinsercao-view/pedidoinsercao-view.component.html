@@ -1,66 +1,87 @@
-<div id="media-plan-view" class="page-layout carded fullwidth inner-scroll">
+<div id="media-plan-view" class="page-layout simple right-sidebar inner-sidebar">
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
+    <!-- HEADER -->
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
 
-    <!-- CENTER -->
-    <div class="center">
+        <button mat-icon-button class="sidebar-toggle mr-8" fxHide.gt-md
+                (click)="toggleSidebar('simple-right-sidebar-3')">
+            <mat-icon>menu</mat-icon>
+        </button>
 
-        <!-- HEADER -->
-        <div class="header accent"
-             fxLayout="row" fxLayoutAlign="space-between center">
-
-            <!-- APP TITLE -->
-            <div fxLayout="row" fxLayoutAlign="start center">
-
-                <button mat-icon-button class="mr-16" [routerLink]="'/apps/e-commerce/orders'">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-
-                <div fxLayout="column" fxLayoutAlign="start start"
-                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    <div class="h2">
-                        Pedido de Inserção: {{entity?.id}}
-                    </div>
-                    <div class="subtitle secondary-text">
-                    </div>
-                </div>
-            </div>
-            <!-- / APP TITLE -->
-
-
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <!-- ADD BUTTON -->
-
-            <!-- ADD BUTTON -->
-            <button mat-raised-button
-                    [routerLink]="'/cliente/new'"
-                    class="fuse-white mt-24 mt-md-0">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <!-- / ADD BUTTON -->
-
-            <!-- ADD BUTTON -->
-            <button mat-raised-button color="primary"
-                    (click)="printReport('PedidoDeInsercaoSites', entity.id )"
-                    class="  mt-24 mt-md-0">
-                <mat-icon>print</mat-icon>
-                <span>   Imprimir</span>
-            </button>
-            <!-- / ADD BUTTON -->
-
-            </div>
-
+        <div>
+            <h2> Pedido de Inserção: {{entity?.id}}</h2>
         </div>
-        <!-- / HEADER -->
 
-        <!-- CONTENT CARD -->
-        <div class="content-card">
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- SIDEBAR -->
+        <fuse-sidebar class="sidebar" name="simple-right-sidebar-3" position="left" lockedOpen="gt-md">
+
+            <!-- SIDEBAR CONTENT -->
+            <div class="periodo">
+                <h2>{{entity?.periodo}}</h2>
+
+            </div>
+
+            <div class="resumo">
+                <h3>
+                    Total Bruto
+                </h3>
+                <h2>
+                    R$ {{entity?.pedidoinsercaoitemList[0].valor}}
+                </h2>
+
+            </div>
+
+            <div class="resumo">
+                <h3>
+                    Comissão
+                </h3>
+                <h2>
+                    R$ {{entity?.pedidoinsercaoitemList[0].valor}}
+                </h2>
+
+            </div>
+
+            <div class="resumo">
+                <h3>
+                    Total Liquido
+                </h3>
+                <h2>
+                    R$ {{entity?.pedidoinsercaoitemList[0].valor}}
+                </h2>
+
+            </div>
+
+            <hr>
+            <div class="pagamento">
+                <h3>
+                    Pagamento
+                </h3>
+                <h4>Realizado</h4>
+                <h5>
+                    R$1750
+                </h5>
+                <h4>previsto</h4>
+                <h5>
+                    R$1750
+                </h5>
+            </div>
+
+            <!-- / SIDEBAR CONTENT -->
+
+        </fuse-sidebar>
+        <!-- / SIDEBAR -->
+
+        <!-- CENTER -->
+        <div class="center p-24" fusePerfectScrollbar>
 
             <!-- CONTENT -->
-            <div class="content">
-
+            <div class="content p-24">
                 <mat-tab-group fxLayout="column" fxFlex>
 
                     <mat-tab label="Resumo">
@@ -72,7 +93,7 @@
                                 <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
                                     <mat-icon class="m-0 mr-16 secondary-text">account_circle</mat-icon>
                                     <h2>Cliente:</h2>
-                                    <div class="h2 secondary-text">  {{entity.cliente_id?.nomefantasia}}</div>
+                                    <div class="h2 secondary-text">  {{entity?.cliente_id.nomefantasia}}</div>
 
 
                                 </div>
@@ -83,74 +104,90 @@
                                     <div class="h2 secondary-text">  Campanha teste </div>
                                 </div>
 
-
-                            <div class="section pb-48">
-
-                                <div class="pb-16" fxLayout="row" fxLayoutAlign="start center">
-                                    <mat-icon class="m-0 mr-16 secondary-text">access_time</mat-icon>
-                                    <div class="h2 secondary-text">Status Do Plano de Mídia</div>
-                                </div>
-
                                 <table class="simple">
                                     <thead>
                                     <tr>
-                                        <th>Status</th>
-                                        <th>Atualizado</th>
+                                        <th class="w-80">ID</th>
+                                        <th>Data</th>
+                                        <th>Veículo</th>
+                                        <th>Programa</th>
+                                        <th class="w-100">Status</th>
+                                        <th >Opções</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <tr>
-                                        <td>
-                                                <span class="status h6 p-4 purple-300">
-                                                  Em Aberto
-                                                </span>
+                                    <tr class="product-row"
+                                        *ngFor="let pedidoInsercaoItem of entity.pedidoinsercaoitemList ">
+                                        <td style="font-weight: 600;">
+                                            {{pedidoInsercaoItem.id}}
                                         </td>
 
                                         <td>
-                                                <span>
-                                                    3 de Dezembro de 2018
-                                                </span>
+                                            {{pedidoInsercaoItem.mes}}/{{pedidoInsercaoItem.ano}}
                                         </td>
+                                        <td>
+                                            {{pedidoInsercaoItem.veiculo_id?.nomefantasia}}
+                                        </td>
+                                        <td>
+                                            {{pedidoInsercaoItem.programa_id?.descricao}}
+                                        </td>
+
+                                        <td >
+                                            <p  class="status text-truncate h6 p-4 green-800">{{entity?.status}}</p>
+                                        </td>
+
+                                        <td>
+
+                                            <button (click)="openGradeDialogEdit(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                                <mat-icon aria-label="Example icon-button with a heart icon">home</mat-icon>
+                                            </button>
+                                            <button (click)="duplicarGrade(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                                <mat-icon aria-label="Example icon-button with a heart icon">add_to_photos</mat-icon>
+                                            </button>
+                                            <button (click)="openDeletDialog(pedidoInsercaoItem)" mat-icon-button color="primary">
+                                                <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+                                            </button>
+
+                                        </td>
+
+
                                     </tr>
                                     </tbody>
                                 </table>
 
-                                <form class="update-status p-24"
-                                      fxLayout="row" fxLayoutAlign="start center">
+                                <div class="totalizadores">
+                                    <div>
+                                        <h3>Quatidade: </h3>
+                                        <h2>{{entity?.pedidoinsercaoitemList[0].qtd}}</h2>
+                                    </div>
+                                    <div>
+                                        <h3>Custo Unitário: </h3>
+                                        <h2>{{entity?.pedidoinsercaoitemList[0].valorUnit}}</h2>
+                                    </div>
+                                    <div>
+                                        <h3>Desconto: </h3>
+                                        <h2>{{entity?.pedidoinsercaoitemList[0].desconto}}</h2>
+                                    </div>
+                                   <div>
+                                       <h3 class="custototal">Custo Total: </h3>
+                                       <h2>{{entity?.pedidoinsercaoitemList[0].valor}}</h2>
+                                   </div>
 
-                                    <mat-form-field appearance="outline" class="mr-16" fxFlex>
-                                        <mat-label>Atulizar Status</mat-label>
-                                        <mat-select
-                                                    required>
-                                            <mat-option>
-                                               Cancelado
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                    <button mat-raised-button class="mat-accent">
-
-                                       Atualizar Status
-                                    </button>
-                                </form>
+                                </div>
 
                             </div>
-
-
-                        </div>
 
                         </div>
                     </mat-tab>
 
                 </mat-tab-group>
-
             </div>
             <!-- / CONTENT -->
 
         </div>
-        <!-- / CONTENT CARD -->
+        <!-- / CENTER -->
 
     </div>
-    <!-- / CENTER -->
+    <!-- / CONTENT -->
+
 </div>

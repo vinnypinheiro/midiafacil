@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     getBaseURL: function () {
         // console.log('getBaseURL -> production', this.production);
-        return 'https://midiafacil.herokuapp.com';
+        return 'http://localhost:8080';
     }
 
 };

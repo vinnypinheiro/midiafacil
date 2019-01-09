@@ -4,14 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.solutis.desafio.domain.Agencia;
-import br.com.solutis.desafio.domain.Cliente;
-import br.com.solutis.desafio.domain.Cliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity

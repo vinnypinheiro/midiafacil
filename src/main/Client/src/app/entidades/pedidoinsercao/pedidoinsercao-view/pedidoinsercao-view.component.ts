@@ -16,6 +16,8 @@ import {Veiculo} from "../../veiculo/veiculo";
 import {VeiculoService} from "../../veiculo/veiculo.service";
 import {SharedService} from "../../../shared/shared.service";
 
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+
 
 @Component({
   selector: 'app-pedidoinsercao-view',
@@ -29,13 +31,15 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
     tipoMidia: TipoMidia[] = [];
     veiculoList: Veiculo [] = [];
 
-    constructor(private tipoMidiaService: TipoMidiaService,
-                private veiculoService: VeiculoService,
-                private fb: FormBuilder,
-        private sharedService: SharedService,
-        apiService: PedidoInsercaoService,
-        route: ActivatedRoute,
-        router: Router ) {
+
+    constructor( private _fuseSidebarService: FuseSidebarService,
+                 private tipoMidiaService: TipoMidiaService,
+                 private veiculoService: VeiculoService,
+                 private fb: FormBuilder,
+                 private sharedService: SharedService,
+                 apiService: PedidoInsercaoService,
+                 route: ActivatedRoute,
+                 router: Router ) {
 
         super(apiService, route, router);
     }
@@ -71,6 +75,11 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
       this.setPecaArray();
 
   }
+
+    toggleSidebar(name): void
+    {
+        this._fuseSidebarService.getSidebar(name).toggleOpen();
+    }
 
 
     //Plano Midia reactive form

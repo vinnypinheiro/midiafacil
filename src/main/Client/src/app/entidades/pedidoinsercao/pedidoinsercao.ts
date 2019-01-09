@@ -31,8 +31,8 @@ export interface PedidoInsercao extends DomainBase {
     campanha_id: Campanha;
     planomidia_id: PlanoMidia;
 
-    pecaList: Peca;
-    pedidoinsercaoitemList: PedidoInsercaoItem;
+    pecaList: Peca[];
+    pedidoinsercaoitemList: PedidoInsercaoItem [];
 
 
 }

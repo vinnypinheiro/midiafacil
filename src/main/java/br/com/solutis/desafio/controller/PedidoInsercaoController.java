@@ -2,11 +2,13 @@ package br.com.solutis.desafio.controller;
 import br.com.solutis.desafio.domain.PedidoInsercao;
 import br.com.solutis.desafio.domain.PlanoMidia;
 import br.com.solutis.desafio.helper.filter.FilterData;
+import br.com.solutis.desafio.service.PedidoInsercaoItemService;
 import br.com.solutis.desafio.service.PedidoInsercaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController("PedidoInsercaoController")
 @RequestMapping("/pedidoinsercao")
@@ -16,8 +18,13 @@ public class PedidoInsercaoController {
     @Autowired
     PedidoInsercaoService pedidoinsercaoService;
 
+    @Autowired
+    PedidoInsercaoItemService pedidoInsercaoItemService;
+
     @RequestMapping(value = "/saveLote", method = RequestMethod.POST)
     public ResponseEntity saveLote(@RequestBody PlanoMidia bean) {
+
+
 
         bean.getPedidoDeInsercaoItemlist().forEach(pil -> {
 
@@ -34,7 +41,10 @@ public class PedidoInsercaoController {
              pi.setComissao(0.0);
              pi.setTotalliquido(pil.getValor());
 
-            pedidoinsercaoService.save(pi);
+
+             pedidoinsercaoService.save(pi);
+             pil.setPedidoinsercao_id(pi);
+            pedidoInsercaoItemService.save(pil);
         });
 
         return new ResponseEntity( HttpStatus.OK );

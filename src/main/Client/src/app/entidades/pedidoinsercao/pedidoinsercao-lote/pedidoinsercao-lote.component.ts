@@ -143,7 +143,7 @@ export class PedidoInsercaoLoteComponent extends CommonsForm<PedidoInsercao> imp
     savePedidoInsercao(){
 
         console.log(this.activeBean);
-        this.save();
+        this.saveLote();
 
     }
 
