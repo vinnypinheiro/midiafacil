@@ -22,7 +22,7 @@ export class PedidoInsercaoGridComponent extends CommonsGrid<PedidoInsercao> imp
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     dataSource = new MatTableDataSource;
-    displayedColumns: string[] = ['ID','veiculo','mercado'];
+    displayedColumns: string[] = ['ID','veiculo','periodo','status'];
 
     @ViewChild(MatSort)
     sort: MatSort;

@@ -24,7 +24,7 @@
 
                     </div>
                     <div class="h2" >
-                        New Product
+                       Novo Plano de Mídia
                     </div>
                     <div class="subtitle secondary-text">
                         <span>Informações do Plano de Mídia</span>
@@ -161,19 +161,24 @@
                         <mat-step [stepControl]="verticalStepperStep3">
 
 
-                                <ng-template matStepLabel>Informações Adicionais</ng-template>
+                                <ng-template matStepLabel>Negociação</ng-template>
 
-                                <div fxFlex="1 0 auto" fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="space-between" class="w-100-p">
 
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Obs</mat-label>
-                                        <textarea matInput formControlName="obs"></textarea>
+                                    <mat-form-field appearance="outline" fxFlex="20">
+                                        <mat-label>Desconto Padrão Agência</mat-label>
+                                        <input matInput placeholder=""
+                                               name="desconto"
+                                               formControlName="desconto">
+                                        <h2 matSuffix>%</h2>
+
                                     </mat-form-field>
 
 
                                 </div>
 
                                 <div fxLayout="row" fxLayoutAlign="center center">
+
                                     <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
                                         Volta
                                     </button>
@@ -187,6 +192,13 @@
                         </mat-step>
 
                         <mat-step>
+
+                            <div fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Obs</mat-label>
+                                    <textarea matInput formControlName="obs"></textarea>
+                                </mat-form-field>
+                            </div>
 
                             <ng-template matStepLabel>Adicionar</ng-template>
 

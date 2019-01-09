@@ -12,7 +12,7 @@ import {MatCardModule, MatDatepickerModule, MatDialogModule} from '@angular/mate
 import {
     MatButtonModule, MatChipsModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatRippleModule, MatSelectModule, MatSnackBarModule,
     MatSortModule,
-    MatTableModule, MatTabsModule
+    MatTableModule, MatTabsModule,MatCheckboxModule
 } from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -69,7 +69,7 @@ const ROUTES  = [
                     FuseSharedModule,
                     MatDatepickerModule,
                     MatCardModule,
-
+                    MatCheckboxModule,
 
                 ], 
                 declarations: [ 

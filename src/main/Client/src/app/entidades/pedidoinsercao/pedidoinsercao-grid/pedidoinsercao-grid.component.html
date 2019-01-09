@@ -55,27 +55,35 @@
                        fusePerfectScrollbar>
 
                 <!-- ID Column -->
-                <ng-container matColumnDef="ID">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let pedidoinsercao">
+                <ng-container   matColumnDef="ID">
+                    <mat-header-cell [ngClass]="'idcolumm'" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-cell [ngClass]="'idcolumm'"  *matCellDef="let pedidoinsercao">
                         <p class="text-truncate">{{pedidoinsercao.id}}</p>
                     </mat-cell>
                 </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="mercado">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mercado</mat-header-cell>
-                    <mat-cell *matCellDef="let pedidoinsercao">
-                        <p class="text-truncate">{{pedidoinsercao.veiculo_id?.nomefantasia}}</p>
-                    </mat-cell>
-                </ng-container>
-
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="veiculo">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Veículo</mat-header-cell>
                     <mat-cell *matCellDef="let pedidoinsercao">
                         <p class="text-truncate">{{pedidoinsercao.veiculo_id?.nomefantasia}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="periodo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let pedidoinsercao">
+                        <p class="text-truncate">{{pedidoinsercao.periodo}}</p>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let pedidoinsercao">
+                        <p class="text-truncate status">{{pedidoinsercao.status}}</p>
                     </mat-cell>
                 </ng-container>
 

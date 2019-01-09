@@ -269,19 +269,19 @@
                                         R$ {{pedidoInsercaoItem.valor}}
                                     </td>
                                     <td >
-                                        <p class="status text-truncate h6 p-4 green-800"> Em Aberto </p>
+                                        <p class="status text-truncate h6 p-4 "> {{pedidoInsercaoItem.status}} </p>
                                     </td>
 
                                     <td>
 
                                         <button (click)="openGradeDialogEdit(pedidoInsercaoItem)" mat-icon-button color="primary">
-                                            <mat-icon aria-label="Example icon-button with a heart icon">home</mat-icon>
+                                            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
                                         </button>
                                         <button (click)="duplicarGrade(pedidoInsercaoItem)" mat-icon-button color="primary">
                                             <mat-icon aria-label="Example icon-button with a heart icon">add_to_photos</mat-icon>
                                         </button>
                                         <button (click)="openDeletDialog(pedidoInsercaoItem)" mat-icon-button color="primary">
-                                            <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+                                            <mat-icon aria-label="Example icon-button with a heart icon warn--fg">delete_forever</mat-icon>
                                         </button>
 
                                     </td>

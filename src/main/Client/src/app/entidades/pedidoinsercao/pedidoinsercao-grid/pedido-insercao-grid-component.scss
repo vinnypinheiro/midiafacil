@@ -3,6 +3,19 @@
 
 #pedido-insercao {
 
+    .status{
+        text-align: center;
+        background: #106CC8;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+
+    .idcolumm{
+        flex: 0 0 75px;
+    }
+
     .header .search-wrapper {
         background: #fff;
     }

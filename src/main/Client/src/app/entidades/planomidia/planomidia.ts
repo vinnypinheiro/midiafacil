@@ -12,6 +12,8 @@ export interface PlanoMidia extends DomainBase {
      hora: number;
      mercado: string;
      situação: string;
+     desconto: number;
+     osagencia: string;
      obs: string;
      tipo: string;
      data: Date;

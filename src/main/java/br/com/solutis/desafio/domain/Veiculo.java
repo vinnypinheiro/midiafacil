@@ -21,6 +21,7 @@ public class Veiculo implements Serializable {
 
     private String cnpj;
     private String cpf;
+    private String cep;
     private Instant data_cadastro;
     private String inscricaoestadual;
     private String inscricaomunicipal;
@@ -136,7 +137,13 @@ public class Veiculo implements Serializable {
         this.razaosocial = razaosocial;
     }
 
+    public String getCep() {
+        return cep;
+    }
 
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
     public List<Contato> getContatoList() {
         return contatoList;

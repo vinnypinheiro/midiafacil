@@ -11,6 +11,7 @@ export interface PedidoInsercaoItem extends DomainBase {
      data: Date;
      mes: string;
      ano: string;
+     status: string;
      desconto: number;
      dia01: number;
      dia02: number;

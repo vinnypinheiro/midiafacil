@@ -21,6 +21,7 @@ public class Cliente implements Serializable {
 
     private String cnpj;
     private String cpf;
+    private String cep;
     private Instant data_cadastro;
     private String inscricaoestadual;
     private String inscricaomunicipal;
@@ -166,5 +167,13 @@ public class Cliente implements Serializable {
 
     public void setContaBancariaList(List<ContaBancaria> contaBancariaList) {
         this.contaBancariaList = contaBancariaList;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }

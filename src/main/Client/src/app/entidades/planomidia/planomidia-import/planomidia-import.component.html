@@ -74,24 +74,26 @@
 
                         <div class="products tab-content p-24" fusePerfectScrollbar>
 
-                            <button mat-raised-button color="primary"   >Adicionar Grade</button>
-
                             <table class="simple">
                                 <thead>
                                 <tr>
-                                    <th class="w-80">ID</th>
+                                    <th></th>
+                                    <th>ID</th>
                                     <th>Período</th>
                                     <th>Veículo</th>
                                     <th>Programa</th>
                                     <th>Inserções</th>
                                     <th>Valor Unit.</th>
                                     <th>Valor Total</th>
-                                    <th class="w-100">Status</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="product-row"
+                                <tr  class="product-row"
                                     *ngFor="let pedidoInsercaoItem of activeBean.pedidoDeInsercaoItemlist ">
+                                    <td>
+                                        <mat-checkbox [checked]="pedidoInsercaoItem.status !== 'APROVADO'"> </mat-checkbox>
+                                    </td>
                                     <td>
                                         {{pedidoInsercaoItem.id}}
                                     </td>
@@ -116,12 +118,7 @@
                                         R$ {{pedidoInsercaoItem.valor}}
                                     </td>
                                     <td >
-                                        <button mat-raised-button
-                                                (click)="update(pedidoInsercaoItem)"
-                                                class="add-product-button fuse-white mt-24 mt-md-0">
-                                            <mat-icon>description</mat-icon>
-                                            <span> Gerar Pedido De Inserção</span>
-                                        </button>
+                                        <p class="status text-truncate h6 p-4 "> {{pedidoInsercaoItem.status}} </p>
                                     </td>
 
 

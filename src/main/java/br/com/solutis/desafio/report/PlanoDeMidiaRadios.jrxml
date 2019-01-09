@@ -2,6 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32b64e9a-326c-429b-bdab-99e20b350da9">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Midia facil"/>
 	<parameter name="LOGO" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select 
@@ -9,9 +10,9 @@
          'RÁDIOS' as midia, 
  c.nomefantasia as cliente,  
  '' as responsavel, 
-         '' as campanha, 
+         ca.nome as campanha, 
  v.cidade as mercado, 
- '' as formato, 
+ 'GIF PADRÃO' as formato, 
  '' as periodo, 
  '' as programa, 
  '' as hora, 
@@ -20,7 +21,7 @@ v.nomefantasia as veiculo,
   'ww.com.br' as site, 
  '' as responsavel, 
  pii.qtd as qtd, 
- p.valor as custo_unitario, 
+ pii.valor_unit as custo_unitario, 
  a.nomefantasia as agencia, 
   cast( pii.dia01 as int8) as d1, 
   cast( pii.dia02 as int8)  as d2, 
@@ -53,15 +54,18 @@ v.nomefantasia as veiculo,
   cast( pii.dia29 as int8)  as d29, 
   cast( pii.dia30 as int8)  as d30, 
   cast( pii.dia31 as int8)  as d31, 
- 'Janiero' as mes, 
- '2019' as ano, 
+ pii.mes as mes, 
+ pii.ano as ano, 
  '' as nome 
  from pedido_insercao_item pii 
  left join veiculo v on (v.id = pii.veiculo_id) 
- left join programa p on (p.veiculo_id = pii.veiculo_id) 
+ left join programa p on (p.veiculo_id = pii.programa_id) 
  left join plano_midia pm on (pm.id = 401) 
  left join agencia a on (a.id = pm.agencia_id) 
-  left join cliente c on (c.id = pm.cliente_id)]]>
+ left join cliente c on (c.id = pm.cliente_id) 
+ left join campanha ca on (ca.id = pm.campanha_id)  
+ where pii.planomidia_id = 401 
+ order by pii.id]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
 	<field name="midia" class="java.lang.String">
@@ -177,13 +181,15 @@ v.nomefantasia as veiculo,
 	<field name="d31" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="mes" class="java.lang.String"/>
+	<field name="ano" class="java.lang.String"/>
 	<variable name="total_produto" class="java.lang.Float">
 		<variableExpression><![CDATA[$F{qtd}*$F{custo_unitario}]]></variableExpression>
 	</variable>
 	<variable name="total_bruto" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$V{total_produto}]]></variableExpression>
 	</variable>
-	<variable name="qtd_total" class="java.lang.Integer">
+	<variable name="qtd_total" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtd}]]></variableExpression>
 	</variable>
 	<variable name="total_blogs" class="java.lang.Float" calculation="Sum">
@@ -206,7 +212,7 @@ v.nomefantasia as veiculo,
 			<staticText>
 				<reportElement x="290" y="20" width="490" height="30" uuid="16e06a41-11d7-4fc2-bdef-7eb9453f6566"/>
 				<textElement textAlignment="Center">
-					<font size="18"/>
+					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PLANO DE MÍDIA - PROPOSTA COMERCIAL]]></text>
 			</staticText>
@@ -219,16 +225,20 @@ v.nomefantasia as veiculo,
 				<reportElement x="10" y="0" width="210" height="63" uuid="69977c63-58a2-43c7-bc50-be99f948c13c"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="690" y="-10" width="131" height="20" uuid="c6616dc8-7782-4cd6-906f-6b74070ed486">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="86" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.equals( 1 )]]></printWhenExpression>
-			<rectangle>
-				<reportElement mode="Transparent" x="0" y="60" width="800" height="22" uuid="3642c85b-3da9-4b1f-af70-c50a1fd2b37e">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-			</rectangle>
 			<line>
 				<reportElement x="85" y="60" width="1" height="22" uuid="0e579058-de7d-4702-bbf4-253e3460a68a">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -289,18 +299,6 @@ v.nomefantasia as veiculo,
 			</staticText>
 			<frame>
 				<reportElement x="0" y="0" width="801" height="60" uuid="d7d13da1-bc3a-4e54-9f1e-7929b54a3c17"/>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="0" width="390" height="41" uuid="a66a1de5-85a9-44e3-b447-7b0ab7bcc0da"/>
-					<graphicElement>
-						<pen lineWidth="1.0"/>
-					</graphicElement>
-				</rectangle>
-				<rectangle>
-					<reportElement mode="Transparent" x="410" y="0" width="390" height="41" uuid="0e5384c9-39ce-434e-9daa-332a6e641e8c"/>
-					<graphicElement>
-						<pen lineWidth="1.0"/>
-					</graphicElement>
-				</rectangle>
 				<staticText>
 					<reportElement mode="Opaque" x="652" y="14" width="81" height="13" backcolor="#E2EFD9" uuid="87a5d8f0-9248-4c9e-8aa9-ee847b09c707"/>
 					<textElement verticalAlignment="Middle" markup="none">
@@ -415,7 +413,7 @@ v.nomefantasia as veiculo,
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="8"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{midia}]]></textFieldExpression>
 				</textField>
@@ -465,9 +463,9 @@ v.nomefantasia as veiculo,
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="8"/>
+						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{mes}.toUpperCase() + " / " + $F{ano}.toUpperCase()]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement mode="Transparent" x="738" y="15" width="58" height="12" backcolor="#FFFFFF" uuid="e0dba393-5f49-4c45-9061-3e93b18ee1d5"/>
@@ -485,6 +483,18 @@ v.nomefantasia as veiculo,
 					</textElement>
 					<text><![CDATA[ROTATIVO]]></text>
 				</staticText>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="390" height="41" uuid="a66a1de5-85a9-44e3-b447-7b0ab7bcc0da"/>
+					<graphicElement>
+						<pen lineWidth="1.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="410" y="0" width="390" height="41" uuid="0e5384c9-39ce-434e-9daa-332a6e641e8c"/>
+					<graphicElement>
+						<pen lineWidth="1.0"/>
+					</graphicElement>
+				</rectangle>
 			</frame>
 			<frame>
 				<reportElement x="175" y="60" width="465" height="11" uuid="5e7897c4-4f14-4713-a34c-694ce2d1ef33"/>
@@ -1162,6 +1172,11 @@ v.nomefantasia as veiculo,
 				</textElement>
 				<text><![CDATA[Q]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="60" width="800" height="22" uuid="3642c85b-3da9-4b1f-af70-c50a1fd2b37e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
 		</band>
 	</columnHeader>
 	<detail>
@@ -1207,19 +1222,19 @@ v.nomefantasia as veiculo,
 				</reportElement>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="86" height="12" uuid="3a623c69-a279-4115-bdc6-d6368eb327ca">
+				<reportElement x="5" y="0" width="81" height="12" uuid="3a623c69-a279-4115-bdc6-d6368eb327ca">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mercado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="99" y="0" width="72" height="12" uuid="a2e0b33c-84bd-4826-b10e-5bdcd9daeafe">
+				<reportElement x="88" y="0" width="83" height="12" uuid="a2e0b33c-84bd-4826-b10e-5bdcd9daeafe">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{veiculo}]]></textFieldExpression>
@@ -1240,7 +1255,7 @@ v.nomefantasia as veiculo,
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{custo_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($F{custo_unitario}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="737" y="-1" width="60" height="12" uuid="55430196-6bc0-46e3-b7d6-b543d3b46ffa">
@@ -1249,12 +1264,10 @@ v.nomefantasia as veiculo,
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total_produto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_produto}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="175" y="-1" width="15" height="13" uuid="22aeb9fe-a6b2-41e1-b6f0-08b74960aa1a">
-					<printWhenExpression><![CDATA[$F{d1} == 0 ? null : $F{d1}.intValue()]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="175" y="-1" width="15" height="13" uuid="22aeb9fe-a6b2-41e1-b6f0-08b74960aa1a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1264,9 +1277,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d1}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="190" y="-1" width="15" height="13" uuid="9fe9b346-1223-4598-9e0c-c99dc16d670d">
-					<printWhenExpression><![CDATA[$F{d2} == 0 ? null : $F{d2} == $F{d2}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="190" y="-1" width="15" height="13" uuid="9fe9b346-1223-4598-9e0c-c99dc16d670d"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1276,9 +1287,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d2}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="205" y="-1" width="15" height="13" uuid="2532f2bc-c884-46f4-bdef-bfb1e94f2e2b">
-					<printWhenExpression><![CDATA[$F{d3} == 0 ? null : $F{d3} == $F{d3}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="205" y="-1" width="15" height="13" uuid="2532f2bc-c884-46f4-bdef-bfb1e94f2e2b"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1288,9 +1297,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d3}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="220" y="-1" width="15" height="13" uuid="dbbf05f3-2eb5-4c6f-ac44-96e439054ca3">
-					<printWhenExpression><![CDATA[$F{d4} == 0 ? null : $F{d4} == $F{d4}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="220" y="-1" width="15" height="13" uuid="dbbf05f3-2eb5-4c6f-ac44-96e439054ca3"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1303,7 +1310,6 @@ v.nomefantasia as veiculo,
 				<reportElement x="235" y="-1" width="15" height="13" uuid="19264a07-cb67-406c-ac2e-daf7fd3d9317">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$F{d5} == 0 ? null : $F{d5} == $F{d5}]]></printWhenExpression>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
@@ -1314,9 +1320,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d5}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="250" y="-1" width="15" height="13" uuid="2de66543-94a5-4034-a476-c79dcebba848">
-					<printWhenExpression><![CDATA[$F{d6} == 0 ? null : $F{d6} == $F{d6}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="250" y="-1" width="15" height="13" uuid="2de66543-94a5-4034-a476-c79dcebba848"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1326,9 +1330,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d6}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="265" y="-1" width="15" height="13" uuid="7378c6bf-698f-4178-9dc5-d4b68674519a">
-					<printWhenExpression><![CDATA[$F{d7} == 0 ? null : $F{d7} == $F{d7}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="265" y="-1" width="15" height="13" uuid="7378c6bf-698f-4178-9dc5-d4b68674519a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1338,9 +1340,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d7}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="280" y="-1" width="15" height="13" uuid="5725ac63-d67c-45bf-ba28-7f38a12335ba">
-					<printWhenExpression><![CDATA[$F{d8} == 0 ? null : $F{d8} == $F{d8}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="280" y="-1" width="15" height="13" uuid="5725ac63-d67c-45bf-ba28-7f38a12335ba"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1350,9 +1350,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d8}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="295" y="-1" width="15" height="13" uuid="0d40808e-0c8c-4ce3-a09c-a7739dcd6ecb">
-					<printWhenExpression><![CDATA[$F{d9} == 0 ? null : $F{d9} == $F{d9}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="295" y="-1" width="15" height="13" uuid="0d40808e-0c8c-4ce3-a09c-a7739dcd6ecb"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1362,9 +1360,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d9}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="310" y="-1" width="15" height="13" uuid="1b6cc036-877d-4366-b3a4-c60bb542a9da">
-					<printWhenExpression><![CDATA[$F{d10} == 0 ? null : $F{d10} == $F{d10}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="310" y="-1" width="15" height="13" uuid="1b6cc036-877d-4366-b3a4-c60bb542a9da"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1374,9 +1370,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d10}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="325" y="-1" width="15" height="13" uuid="2c8fef01-1b35-4ac4-b139-33363d77aa4c">
-					<printWhenExpression><![CDATA[$F{d11} == 0 ? null : $F{d11} == $F{d11}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="325" y="-1" width="15" height="13" uuid="2c8fef01-1b35-4ac4-b139-33363d77aa4c"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1386,9 +1380,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d11}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="340" y="-1" width="15" height="13" uuid="8e38cd21-5d9b-432d-94ec-bf9b7ab02e4c">
-					<printWhenExpression><![CDATA[$F{d12} == 0 ? null : $F{d12} == $F{d12}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="340" y="-1" width="15" height="13" uuid="8e38cd21-5d9b-432d-94ec-bf9b7ab02e4c"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1398,9 +1390,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d12}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="355" y="-1" width="15" height="13" uuid="6ef9ccb3-d301-477f-bd03-26b620d14a9a">
-					<printWhenExpression><![CDATA[$F{d13} == 0 ? null : $F{d13} == $F{d13}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="355" y="-1" width="15" height="13" uuid="6ef9ccb3-d301-477f-bd03-26b620d14a9a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1410,9 +1400,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d13}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="370" y="-1" width="15" height="13" uuid="e867deb9-b44b-4768-a2cb-aca40228ada8">
-					<printWhenExpression><![CDATA[$F{d14} == 0 ? null : $F{d14} == $F{d14}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="370" y="-1" width="15" height="13" uuid="e867deb9-b44b-4768-a2cb-aca40228ada8"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1422,9 +1410,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d14}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="400" y="-1" width="15" height="13" uuid="a2e49859-d137-478f-977e-af5df614b798">
-					<printWhenExpression><![CDATA[$F{d16} == 0 ? null : $F{d16} == $F{d16}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="400" y="-1" width="15" height="13" uuid="a2e49859-d137-478f-977e-af5df614b798"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1434,9 +1420,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d16}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="385" y="-1" width="15" height="13" uuid="eaac6118-94dc-4b8d-aac8-a1058c65bc04">
-					<printWhenExpression><![CDATA[$F{d15} == 0 ? null : $F{d15} == $F{d15}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="385" y="-1" width="15" height="13" uuid="eaac6118-94dc-4b8d-aac8-a1058c65bc04"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1446,9 +1430,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d15}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="415" y="-1" width="15" height="13" uuid="27d543e3-cd44-4bdd-b98c-ef452484f9d5">
-					<printWhenExpression><![CDATA[$F{d17} == 0 ? null : $F{d17} == $F{d17}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="415" y="-1" width="15" height="13" uuid="27d543e3-cd44-4bdd-b98c-ef452484f9d5"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1458,9 +1440,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d17}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="430" y="-1" width="15" height="13" uuid="5c069aac-0a8a-41b4-a2de-c538a620bad1">
-					<printWhenExpression><![CDATA[$F{d18} == 0 ? null : $F{d18} == $F{d18}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="430" y="-1" width="15" height="13" uuid="5c069aac-0a8a-41b4-a2de-c538a620bad1"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1470,9 +1450,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d18}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="445" y="-1" width="15" height="13" uuid="b21fc5a2-05a6-4cf2-87f7-2f34ba38de3a">
-					<printWhenExpression><![CDATA[$F{d19} == 0 ? null : $F{d19} == $F{d19}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="445" y="-1" width="15" height="13" uuid="b21fc5a2-05a6-4cf2-87f7-2f34ba38de3a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1482,9 +1460,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d19}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="460" y="-1" width="15" height="13" uuid="c4178a77-b918-4ec7-a123-c54e63f10f0c">
-					<printWhenExpression><![CDATA[$F{d20} == 0 ? null : $F{d20} == $F{d20}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="460" y="-1" width="15" height="13" uuid="c4178a77-b918-4ec7-a123-c54e63f10f0c"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1494,9 +1470,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d20}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="475" y="-1" width="15" height="13" uuid="2f4eaa1b-44f6-447a-b89b-43edb569606c">
-					<printWhenExpression><![CDATA[$F{d21} == 0 ? null : $F{d21} == $F{d21}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="475" y="-1" width="15" height="13" uuid="2f4eaa1b-44f6-447a-b89b-43edb569606c"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1506,9 +1480,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d21}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="490" y="-1" width="15" height="13" uuid="81663863-8f14-4e3d-8728-b360c28ca6f7">
-					<printWhenExpression><![CDATA[$F{d22} == 0 ? null : $F{d22} == $F{d22}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="490" y="-1" width="15" height="13" uuid="81663863-8f14-4e3d-8728-b360c28ca6f7"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1518,9 +1490,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d22}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="505" y="-1" width="15" height="13" uuid="2020bb03-9a48-43e4-93f9-43eaf517b07e">
-					<printWhenExpression><![CDATA[$F{d23} == 0 ? null : $F{d23} == $F{d23}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="505" y="-1" width="15" height="13" uuid="2020bb03-9a48-43e4-93f9-43eaf517b07e"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1530,9 +1500,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d23}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="520" y="-1" width="15" height="13" uuid="ad00e0cf-2154-41a3-b53d-60d28498cc6a">
-					<printWhenExpression><![CDATA[$F{d24} == 0 ? null : $F{d24} == $F{d24}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="520" y="-1" width="15" height="13" uuid="ad00e0cf-2154-41a3-b53d-60d28498cc6a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1542,9 +1510,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d24}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="535" y="-1" width="15" height="13" uuid="7e18bca9-8bb5-4583-b771-af160fc1e0db">
-					<printWhenExpression><![CDATA[$F{d25} == 0 ? null : $F{d25} == $F{d25}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="535" y="-1" width="15" height="13" uuid="7e18bca9-8bb5-4583-b771-af160fc1e0db"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1554,9 +1520,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d25}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="550" y="-1" width="15" height="13" uuid="f93d24a9-514c-4cf1-8f07-90c65095d510">
-					<printWhenExpression><![CDATA[$F{d26} == 0 ? null : $F{d26} == $F{d26}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="550" y="-1" width="15" height="13" uuid="f93d24a9-514c-4cf1-8f07-90c65095d510"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1566,9 +1530,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d26}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="565" y="-1" width="15" height="13" uuid="ca69abe0-84da-4d19-a591-3bf0ef506f3b">
-					<printWhenExpression><![CDATA[$F{d27} == 0 ? null : $F{d27} == $F{d27}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="565" y="-1" width="15" height="13" uuid="ca69abe0-84da-4d19-a591-3bf0ef506f3b"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1578,9 +1540,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d27}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="580" y="-1" width="15" height="13" uuid="b9e3c95e-6da9-4bc0-b9a2-1352df42f032">
-					<printWhenExpression><![CDATA[$F{d28} == 0 ? null : $F{d28} == $F{d28}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="580" y="-1" width="15" height="13" uuid="b9e3c95e-6da9-4bc0-b9a2-1352df42f032"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1590,9 +1550,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d28}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="595" y="-1" width="15" height="13" uuid="09074e43-a034-41f5-b555-3e5afbf803ad">
-					<printWhenExpression><![CDATA[$F{d29} == 0 ? null : $F{d29} == $F{d29}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="595" y="-1" width="15" height="13" uuid="09074e43-a034-41f5-b555-3e5afbf803ad"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1602,9 +1560,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d29}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="610" y="-1" width="15" height="13" uuid="49a32ba8-e70c-44f4-a96b-cf2429dec846">
-					<printWhenExpression><![CDATA[$F{d30} == 0 ? null : $F{d30} == $F{d30}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="610" y="-1" width="15" height="13" uuid="49a32ba8-e70c-44f4-a96b-cf2429dec846"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1614,9 +1570,7 @@ v.nomefantasia as veiculo,
 				<textFieldExpression><![CDATA[$F{d30}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="625" y="-1" width="15" height="13" uuid="1944024a-461f-4359-aa92-d74fa1245f57">
-					<printWhenExpression><![CDATA[$F{d31} == 0 ? null : $F{d31} == $F{d31}]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="625" y="-1" width="15" height="13" uuid="1944024a-461f-4359-aa92-d74fa1245f57"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -1745,12 +1699,11 @@ v.nomefantasia as veiculo,
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="120" width="740" height="24" backcolor="#E2EFD9" uuid="9c7d90f3-ae7a-4f2b-b30a-81ce0ac6f1d6"/>
+				<reportElement mode="Transparent" x="5" y="130" width="742" height="14" backcolor="#E2EFD9" uuid="9c7d90f3-ae7a-4f2b-b30a-81ce0ac6f1d6"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[XYZ - COMUNICAÇÃO & MARKETING EIRELI - CNPJ: 27.511.558/0001-98
-Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 223, São Cristóvão, Salvador - Bahia, CEP: 41.500-300 - Tel.: (71) 98284-2211]]></text>
+				<text><![CDATA[Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 223, São Cristóvão, Salvador - Bahia, CEP: 41.500-300 - Tel.: (71) 98284-2211]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="712" y="49" width="86" height="12" uuid="d0809c3e-b4be-4b00-b368-fc16830b6ace">
@@ -1780,7 +1733,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="780" y="77" width="20" height="14" uuid="0c9addc0-ddc2-4e83-880d-179d5f4e691d"/>
+				<reportElement x="757" y="77" width="20" height="14" uuid="0c9addc0-ddc2-4e83-880d-179d5f4e691d"/>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<rectangle>
@@ -2064,6 +2017,13 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="5" y="119" width="729" height="13" backcolor="#E2EFD9" uuid="997a3871-2b28-4ef9-901d-cef22c5f4c17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[XYZ - COMUNICAÇÃO & MARKETING EIRELI - CNPJ: 27.511.558/0001-98]]></text>
+			</staticText>
 		</band>
 	</lastPageFooter>
 </jasperReport>

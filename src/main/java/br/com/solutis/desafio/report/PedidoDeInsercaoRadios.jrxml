@@ -6,252 +6,405 @@
 	<parameter name="LOGO" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select
- v.nomefantasia as veiculo,
- v.razaosocial as razao_social,
- v.cidade as cidade,
- 'contato' as contato,
- 'BA' as uf,
- 'midia' as midia,
- '42850000' as cep,
- '71991758749' as fax,
- '36480271' as tel,
- '36480271222' as tel2,
- c.nomefantasia as veiculo2,
- c.razaosocial as razao_social2,
- 'representante2' as representante2,
- c.cnpj as cnpj2,
- 'praca2' as praca2,
- c.inscricaomunicipal as inscricao_municipal2,
- c.inscricaoestadual as inscricao_estadual2,
- 'emails2' as email2,
- 'DIAS DAVILA' as cidade2,
- 'contato2' as contato2,
- 'BA2' as uf2,
- 'agencia' as agencia,
- 'cliente' as cliente,
- 'camps' as campanha,
- 'MP3' as formato,
-pi.periodo as periodo,
- 'program' as programa,
- 'ROTATIVO' as hora,
- '428500002' as cep2,
- '719917587492' as fax2,
- 'DIAS DAVILA2' as cidade2,
- a.nomefantasia as representante,
- a.endereco as endereco,
- a.cnpj as cnpj,
- 'praca' as praca,
- a.inscricaoestadual as incricao_estadual,
- a.inscricaomunicipal as inscricao_municipal,
- a.email as email,
- 'pruduto' as produto,
- p.peca as peca,
- 'nomeXXX' as nome,
- v.cidade as mercado,
-  v.cidade as endereco2,
- v.nomefantasia as veiculo,
- p.titulo as titulo_peca,
- pii.dia01 as d1,
- pii.dia02 as d2,
- pii.dia03 as d3,
- pii.dia04 as d4,
- pii.dia05 as d5,
- pii.dia06 as d6,
- pii.dia07 as d7,
- pii.dia08 as d8,
- pii.dia09 as d9,
- pii.dia10 as d10,
- pii.dia11 as d11,
- pii.dia12 as d12,
- pii.dia13 as d13,
- pii.dia14 as d14,
- pii.dia15 as d15,
- pii.dia16 as d16,
- pii.dia17 as d17,
- pii.dia18 as d18,
- pii.dia19 as d19,
- pii.dia20 as d20,
- pii.dia21 as d21,
- pii.dia22 as d22,
- pii.dia23 as d23,
- pii.dia24 as d24,
- pii.dia25 as d25,
- pii.dia26 as d26,
- pii.dia27 as d27,
- pii.dia28 as d28,
- pii.dia29 as d29,
- pii.dia30 as d30,
- pii.dia31 as d31,
- pii.qtd as qtd,
- pii.valor_unit as custo_unitario,
- pii.valor as total_produto,
- pii.mes as mes,
- pi.osagencia as os_agencia,
- pi.vencimentotxt as vencimentotxt,
- pi.faturamentotxt as faturamentotxt,
- pi.obs as observacao,
- pii.ano as ano
- from pedido_insercao pi
-left join pedido_insercao_item pii on (pii.pedidoinsercao_id = pi.id)
-left join veiculo v on (v.id = pi.veiculo_id)
-left join cliente c on (c.id = pi.cliente_id)
-left join agencia a on (a.id = pi.agencia_id)
-left join peca p on (p.id = pii.peca_id)
- where pi.id = 857]]>
+	v.nomefantasia as veiculo,
+	v.razaosocial as razao_social,
+	 upper(v.cidade) as cidade,
+	v.contato as contato,
+	'BA' as uf,
+	'midia' as midia,
+	v.cep as cep,
+	v.fax as fax,
+	v.telefone as tel,
+	c.telefone as tel2,
+	c.nomefantasia as veiculo2,
+	c.razaosocial as razao_social2,
+	c.razaosocial as representante2,
+	c.cnpj as cnpj2,
+	'SSA' as praca2,
+	c.inscricaomunicipal as inscricao_municipal2,
+	c.inscricaoestadual as inscricao_estadual2,
+	c.email as email2,
+	c.cidade as cidade2,
+	a.nomefantasia as contato2,
+	'BA' as uf2,
+	'MP3' as formato,
+	pi.periodo as periodo,
+	'program' as programa,
+	'ROTATIVO' as hora,
+	c.cep as cep2,
+	'' as fax2,
+	'DIAS DAVILA2' as cidade2,
+	a.nomefantasia as representante,
+	a.endereco as endereco,
+	a.cnpj as cnpj,
+	'STJ' as praca,
+	a.bairro as bairro,
+	a.inscricaoestadual as incricao_estadual,
+	a.inscricaomunicipal as inscricao_municipal,
+	v.email as email,
+	'pruduto' as produto,
+	p.peca as peca,
+	'nomeXXX' as nome,
+	v.cidade as mercado,
+	c.endereco as endereco2,
+	v.nomefantasia as veiculo,
+	p.titulo as titulo_peca,
+	cast( pii.dia01 as int8) as d1,
+	cast( pii.dia02 as int8) as d2,
+	cast( pii.dia03 as int8) as d3,
+	cast( pii.dia04 as int8) as d4,
+	cast( pii.dia05 as int8) as d5,
+	cast( pii.dia06 as int8) as d6,
+	cast( pii.dia07 as int8) as d7,
+	cast( pii.dia08 as int8) as d8,
+	cast( pii.dia09 as int8) as d9,
+	cast( pii.dia10 as int8) as d10,
+	cast( pii.dia11 as int8) as d11,
+	cast( pii.dia12 as int8) as d12,
+	cast( pii.dia13 as int8) as d13,
+	cast( pii.dia14 as int8) as d14,
+	cast( pii.dia15 as int8) as d15,
+	cast( pii.dia16 as int8) as d16,
+	cast( pii.dia17 as int8) as d17,
+	cast( pii.dia18 as int8) as d18,
+	cast( pii.dia19 as int8) as d19,
+	cast( pii.dia20 as int8) as d20,
+	cast( pii.dia21 as int8) as d21,
+	cast( pii.dia22 as int8) as d22,
+	cast( pii.dia23 as int8) as d23,
+	cast( pii.dia24 as int8) as d24,
+	cast( pii.dia25 as int8) as d25,
+	cast( pii.dia26 as int8) as d26,
+	cast( pii.dia27 as int8) as d27,
+	cast( pii.dia28 as int8) as d28,
+	cast( pii.dia29 as int8) as d29,
+	cast( pii.dia30 as int8) as d30,
+	cast( pii.dia31 as int8) as d31,
+	pii.qtd as qtd,
+	pii.valor_unit as custo_unitario,
+	pii.valor as total_produto,
+	pii.mes as mes,
+	pi.osagencia as os_agencia,
+	pi.vencimentotxt as vencimentotxt,
+	pi.faturamentotxt as faturamentotxt,
+	pi.obs as observacao,
+	pii.ano as ano,
+	pii.planomidia_id as planomidia,
+	pm.desconto as desconto,
+	cp.nome as campanha
+from
+	pedido_insercao pi
+left join plano_midia pm on
+	(pm.id = pi.planomidia_id)
+	left join campanha cp on
+	(cp.id = pm.campanha_id)
+left join pedido_insercao_item pii on
+	(pii.pedidoinsercao_id = pi.id)
+left join veiculo v on
+	(v.id = pi.veiculo_id)
+left join cliente c on
+	(c.id = pi.cliente_id)
+left join agencia a on
+	(a.id =4)
+left join peca p on
+	(p.id = pii.peca_id)
+where
+	pi.id = 868
+]]>
 	</queryString>
-	<field name="nome" class="java.lang.String"/>
+	<field name="veiculo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="veiculo"/>
+	</field>
+	<field name="razao_social" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="razao_social"/>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cidade"/>
+	</field>
+	<field name="contato" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contato"/>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uf"/>
+	</field>
 	<field name="midia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="midia"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="agencia" class="java.lang.String"/>
-	<field name="cliente" class="java.lang.String"/>
-	<field name="campanha" class="java.lang.String"/>
-	<field name="formato" class="java.lang.String"/>
-	<field name="periodo" class="java.lang.String"/>
-	<field name="programa" class="java.lang.String"/>
-	<field name="hora" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cep"/>
+	</field>
+	<field name="fax" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fax"/>
+	</field>
+	<field name="tel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tel"/>
+	</field>
+	<field name="tel2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tel2"/>
+	</field>
+	<field name="veiculo2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="veiculo2"/>
+	</field>
+	<field name="razao_social2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="razao_social2"/>
+	</field>
+	<field name="representante2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="representante2"/>
+	</field>
+	<field name="cnpj2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cnpj2"/>
+	</field>
+	<field name="praca2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="praca2"/>
+	</field>
+	<field name="inscricao_municipal2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inscricao_municipal2"/>
+	</field>
+	<field name="inscricao_estadual2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inscricao_estadual2"/>
+	</field>
+	<field name="email2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email2"/>
+	</field>
+	<field name="cidade2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cidade2"/>
+	</field>
+	<field name="contato2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contato2"/>
+	</field>
+	<field name="uf2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uf2"/>
+	</field>
+	<field name="formato" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="formato"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+	</field>
+	<field name="programa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="programa"/>
+	</field>
+	<field name="hora" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hora"/>
+	</field>
+	<field name="cep2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cep2"/>
+	</field>
+	<field name="fax2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fax2"/>
+	</field>
+	<field name="COLUMN_29" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cidade2"/>
+	</field>
+	<field name="representante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="representante"/>
+	</field>
+	<field name="endereco" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="endereco"/>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cnpj"/>
+	</field>
+	<field name="praca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="praca"/>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bairro"/>
+	</field>
+	<field name="incricao_estadual" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="incricao_estadual"/>
+	</field>
+	<field name="inscricao_municipal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inscricao_municipal"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+	</field>
+	<field name="produto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="produto"/>
+	</field>
+	<field name="peca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="peca"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
 	<field name="mercado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mercado"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="veiculo" class="java.lang.String"/>
+	<field name="endereco2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="endereco2"/>
+	</field>
+	<field name="COLUMN_43" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="veiculo"/>
+	</field>
+	<field name="titulo_peca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="titulo_peca"/>
+	</field>
+	<field name="d1" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d1"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d2" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d2"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d3" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d3"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d4" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d4"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d5" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d5"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d6" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d6"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d7" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d7"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d8" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d8"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d9" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d9"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d10" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d10"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d11" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d11"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d12" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d12"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d13" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d13"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d14" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d14"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d15" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d15"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d16" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d16"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d17" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d17"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d18" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d18"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d19" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d19"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d20" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d20"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d21" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d21"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d22" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d22"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d23" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d23"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d24" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d24"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d25" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d25"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d26" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d26"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d27" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d27"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d28" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d28"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d29" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d29"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d30" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d30"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d31" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="d31"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="qtd" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="qtd"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="custo_unitario" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="custo_unitario"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="d1" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d2" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d3" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d4" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d5" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d6" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d7" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d8" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d9" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d10" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d11" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d12" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d13" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d14" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d15" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d16" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d17" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d18" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d19" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d20" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d21" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d22" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d23" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d24" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d25" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d26" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d27" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d28" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d29" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d30" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="d31" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="total_produto" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_produto"/>
 	</field>
 	<field name="mes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mes"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="os_agencia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="os_agencia"/>
+	</field>
+	<field name="vencimentotxt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vencimentotxt"/>
+	</field>
+	<field name="faturamentotxt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="faturamentotxt"/>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="observacao"/>
 	</field>
 	<field name="ano" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ano"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="razao_social" class="java.lang.String"/>
-	<field name="cidade" class="java.lang.String"/>
-	<field name="tel" class="java.lang.String"/>
-	<field name="contato" class="java.lang.String"/>
-	<field name="uf" class="java.lang.String"/>
-	<field name="fax" class="java.lang.String"/>
-	<field name="cep" class="java.lang.String"/>
-	<field name="representante" class="java.lang.String"/>
-	<field name="endereco" class="java.lang.String"/>
-	<field name="cnpj" class="java.lang.String"/>
-	<field name="email" class="java.lang.String"/>
-	<field name="inscricao_municipal" class="java.lang.String"/>
-	<field name="incricao_estadual" class="java.lang.String"/>
-	<field name="praca" class="java.lang.String"/>
-	<field name="veiculo2" class="java.lang.String"/>
-	<field name="razao_social2" class="java.lang.String"/>
-	<field name="cidade2" class="java.lang.String"/>
-	<field name="tel2" class="java.lang.String"/>
-	<field name="contato2" class="java.lang.String"/>
-	<field name="uf2" class="java.lang.String"/>
-	<field name="fax2" class="java.lang.String"/>
-	<field name="cep2" class="java.lang.String"/>
-	<field name="representante2" class="java.lang.String"/>
-	<field name="endereco2" class="java.lang.String"/>
-	<field name="cnpj2" class="java.lang.String"/>
-	<field name="email2" class="java.lang.String"/>
-	<field name="inscricao_municipal2" class="java.lang.String"/>
-	<field name="inscricao_estadual2" class="java.lang.String"/>
-	<field name="praca2" class="java.lang.String"/>
-	<field name="os_agencia" class="java.lang.String"/>
-	<field name="vencimentotxt" class="java.lang.String"/>
-	<field name="faturamentotxt" class="java.lang.String"/>
-	<field name="observacao" class="java.lang.String"/>
+	<field name="planomidia" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="planomidia"/>
+	</field>
+	<field name="campanha" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="campanha"/>
+	</field>
+	<field name="desconto" class="java.lang.Integer"/>
 	<variable name="total_produto" class="java.lang.Float">
 		<variableExpression><![CDATA[$F{qtd}*$F{custo_unitario}]]></variableExpression>
 	</variable>
@@ -269,13 +422,14 @@ left join peca p on (p.id = pii.peca_id)
 		<variableExpression><![CDATA[0]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
+	<variable name="desconto" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="273" splitType="Stretch">
 			<staticText>
-				<reportElement x="217" y="29" width="364" height="30" uuid="16e06a41-11d7-4fc2-bdef-7eb9453f6566"/>
+				<reportElement x="217" y="15" width="364" height="30" uuid="16e06a41-11d7-4fc2-bdef-7eb9453f6566"/>
 				<textElement textAlignment="Center">
 					<font size="18"/>
 				</textElement>
@@ -329,7 +483,7 @@ left join peca p on (p.id = pii.peca_id)
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PI.:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{planomidia}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="720" y="17" width="78" height="12" uuid="abb8f1c7-58eb-447a-8153-0298b3bed8f4">
@@ -344,8 +498,8 @@ left join peca p on (p.id = pii.peca_id)
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="9" width="86" height="14" backcolor="#E2EFD9" uuid="056c8f2e-d9a1-44c1-b12b-0d6fd26153a0"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="0" y="8" width="86" height="15" backcolor="#E2EFD9" uuid="056c8f2e-d9a1-44c1-b12b-0d6fd26153a0"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -353,7 +507,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="24" width="86" height="13" backcolor="#E2EFD9" uuid="153e8e7f-ad81-4b35-b688-67853540fce2"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -361,15 +515,15 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="37" width="86" height="13" backcolor="#E2EFD9" uuid="8d1dea23-7074-418a-adcd-e07f9c120e4b"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CIDADE:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="51" width="86" height="14" backcolor="#E2EFD9" uuid="70599c32-4911-4429-86f6-f43ed4726111"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="0" y="51" width="86" height="13" backcolor="#E2EFD9" uuid="70599c32-4911-4429-86f6-f43ed4726111"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -377,23 +531,23 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="217" y="37" width="48" height="14" backcolor="#E2EFD9" uuid="0f0b84d1-f8db-43de-a3a8-c585683f7407"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[UF:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="217" y="9" width="48" height="14" backcolor="#E2EFD9" uuid="a0b16eaa-3c24-47e8-9171-4cadbbf9422e"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="217" y="8" width="48" height="15" backcolor="#E2EFD9" uuid="a0b16eaa-3c24-47e8-9171-4cadbbf9422e"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CONTATO:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="217" y="51" width="48" height="14" backcolor="#E2EFD9" uuid="01265165-c024-40eb-9278-614f30efa175"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="217" y="51" width="48" height="13" backcolor="#E2EFD9" uuid="01265165-c024-40eb-9278-614f30efa175"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -401,7 +555,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="301" y="37" width="41" height="14" backcolor="#E2EFD9" uuid="5d7059a6-1190-44d4-89b6-36966b55b7f1"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -409,7 +563,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="399" y="9" width="99" height="14" backcolor="#E2EFD9" uuid="d01bb04f-f075-498f-95a9-9d1249272c0a"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -417,7 +571,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="399" y="24" width="99" height="14" backcolor="#E2EFD9" uuid="926ce549-1794-418f-8fed-0355fe46496f"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -425,23 +579,23 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="399" y="37" width="99" height="13" backcolor="#E2EFD9" uuid="50e91050-00b2-499f-b7ea-dfd7872510c3"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CNPJ:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="399" y="51" width="99" height="14" backcolor="#E2EFD9" uuid="cbe2dbef-5adb-40b8-8bf4-d97b22fcaba5"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="399" y="51" width="99" height="13" backcolor="#E2EFD9" uuid="cbe2dbef-5adb-40b8-8bf4-d97b22fcaba5"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[EMAIL:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="677" y="9" width="48" height="14" backcolor="#E2EFD9" uuid="dd5c66f2-f1be-4118-a789-526578600f07"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="677" y="8" width="48" height="15" backcolor="#E2EFD9" uuid="dd5c66f2-f1be-4118-a789-526578600f07"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -449,7 +603,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="580" y="37" width="47" height="13" backcolor="#E2EFD9" uuid="6eacaec0-4466-45ed-960b-25404f3ec87f"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -457,7 +611,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="678" y="38" width="47" height="13" backcolor="#E2EFD9" uuid="e1ed34f7-08e3-4d2f-b040-b819151ffb8b"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -506,7 +660,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="678" y="10" width="1" height="40" uuid="3aca4284-1556-43b8-a9ef-3e183c4f6329">
+					<reportElement x="677" y="8" width="1" height="42" uuid="3aca4284-1556-43b8-a9ef-3e183c4f6329">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -569,7 +723,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="265" y="38" width="1" height="27" uuid="4239cfd7-60ce-47a3-9df3-9bda83adb390">
+					<reportElement x="265" y="38" width="1" height="26" uuid="4239cfd7-60ce-47a3-9df3-9bda83adb390">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -628,15 +782,9 @@ left join peca p on (p.id = pii.peca_id)
 						<pen lineWidth="0.5" lineStyle="Solid"/>
 					</graphicElement>
 				</line>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="62ae750e-2f14-45c6-bf0c-cf4261bfaf9f"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineStyle="Solid"/>
-					</graphicElement>
-				</rectangle>
 				<textField>
-					<reportElement x="89" y="10" width="130" height="13" uuid="3d5f06e7-ad4d-4196-ade9-cec2ff7a3be4"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="89" y="10" width="127" height="13" uuid="3d5f06e7-ad4d-4196-ade9-cec2ff7a3be4"/>
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -644,7 +792,7 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="89" y="24" width="310" height="13" uuid="fa5f13be-728b-4a79-91eb-14b91bb24c84"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -652,7 +800,7 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="89" y="37" width="130" height="13" uuid="273201a9-437e-4f7b-9a3d-29f6dc75362f"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -660,7 +808,7 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="89" y="51" width="130" height="13" uuid="0a246385-4c02-4e6e-b3cd-468d0f8245ad"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -668,23 +816,23 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="268" y="11" width="130" height="13" uuid="c2ca0b19-d216-4d85-816a-b78b46abaa82"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{contato}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="269" y="50" width="130" height="13" uuid="7d84aaeb-9c40-4df2-baa3-d9fe44075b28"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="268" y="52" width="130" height="13" uuid="7d84aaeb-9c40-4df2-baa3-d9fe44075b28"/>
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fax}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="269" y="37" width="37" height="13" uuid="024b1e72-dfab-43e2-b327-359eac38ee3a"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="269" y="37" width="32" height="13" uuid="024b1e72-dfab-43e2-b327-359eac38ee3a"/>
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -692,7 +840,7 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="345" y="37" width="54" height="13" uuid="78436569-b7a3-44e0-bab2-d0d9678c2ce3"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -700,15 +848,15 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="502" y="52" width="298" height="13" uuid="e5d06e69-052b-49bc-9245-0ae1d439b331"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="502" y="11" width="177" height="13" uuid="53aa5e8b-8caf-4a0a-bfb4-a82b2508ef81"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="502" y="11" width="172" height="13" uuid="53aa5e8b-8caf-4a0a-bfb4-a82b2508ef81"/>
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -716,23 +864,23 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="501" y="37" width="82" height="13" uuid="79aa325f-f15a-42fe-829c-56694261b9b4"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="629" y="37" width="49" height="13" uuid="1df4586b-78c1-455b-ab93-6b767c9daf98"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{incricao_estadual}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="729" y="38" width="65" height="13" uuid="2177c0e0-c386-49a7-8e83-6827cf2ccef7"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -740,7 +888,7 @@ left join peca p on (p.id = pii.peca_id)
 				</textField>
 				<textField>
 					<reportElement x="729" y="11" width="64" height="13" uuid="d682a996-b44f-4096-b37a-208d0f6d901c"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
@@ -750,12 +898,18 @@ left join peca p on (p.id = pii.peca_id)
 					<reportElement mode="Opaque" x="502" y="24" width="298" height="13" uuid="383cc0a5-9c57-4b66-b524-0be8fa46fc6f">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
 				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="62ae750e-2f14-45c6-bf0c-cf4261bfaf9f"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
 			</frame>
 			<frame>
 				<reportElement x="1" y="206" width="799" height="13" uuid="dd4139be-71df-40d5-af61-05cb454aa127">
@@ -763,21 +917,15 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="0" width="86" height="13" backcolor="#E2EFD9" uuid="0877e8cd-83f3-4874-9544-7ff0ea46301d"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[PRODUTO:]]></text>
 				</staticText>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="0" width="799" height="13" uuid="54e590ad-0924-4f9c-b9e5-1188d1a56a00"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineStyle="Solid"/>
-					</graphicElement>
-				</rectangle>
 				<staticText>
 					<reportElement mode="Opaque" x="400" y="1" width="97" height="12" backcolor="#E2EFD9" uuid="0b3bd3e1-31a2-4863-b94a-a8b0b62aebf4"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -811,25 +959,31 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<textField>
-					<reportElement x="500" y="0" width="296" height="13" uuid="9e57a91f-9915-4ebd-8a89-04150fa705f4"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="505" y="0" width="291" height="13" uuid="8b91eac1-de4b-4b76-8487-525df76ff39c"/>
+					<textElement>
 						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{campanha}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="90" y="1" width="160" height="13" uuid="1a6b522a-c848-4cda-9612-0524527a09b5"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[PATROCÍNIO RÁDIOS]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="799" height="13" uuid="54e590ad-0924-4f9c-b9e5-1188d1a56a00"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
 			</frame>
 			<frame>
 				<reportElement x="0" y="229" width="799" height="44" uuid="dec1963b-4791-44d1-a8bd-88e493b001de">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="0" width="799" height="43" uuid="500d0607-bedd-4cf9-9e93-bbbdf9eb0ab2"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineStyle="Solid"/>
-					</graphicElement>
-				</rectangle>
 				<line>
 					<reportElement x="400" y="1" width="1" height="43" uuid="d47ec81e-2593-4f66-89b6-1705f266727d">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -840,68 +994,68 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<staticText>
-					<reportElement mode="Opaque" x="1" y="1" width="84" height="13" backcolor="#E2EFD9" uuid="83ee5c42-f593-4246-8134-5419603d6af0"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="1" y="0" width="84" height="14" backcolor="#E2EFD9" uuid="83ee5c42-f593-4246-8134-5419603d6af0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[PEÇA]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="401" y="1" width="94" height="13" backcolor="#E2EFD9" uuid="3978950c-be79-4f4b-8712-3c4365307775"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[PEÇA]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="327" y="1" width="73" height="13" backcolor="#E2EFD9" uuid="154d0fa5-f64d-4191-bb98-a889233abcb5"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[MATERIAL]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="255" y="1" width="72" height="13" backcolor="#E2EFD9" uuid="757a7655-e2f6-479e-b6e6-9cdb6092b961"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[FORMATO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="85" y="1" width="170" height="13" backcolor="#E2EFD9" uuid="50def306-4004-4337-92a9-68ba0958fe5b"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[TÍTULO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="495" y="1" width="158" height="13" backcolor="#E2EFD9" uuid="91ccb0de-a1df-4c0d-96ca-0246a2630cd3"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[TÍTULO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="654" y="1" width="72" height="13" backcolor="#E2EFD9" uuid="b1a9d09a-e64a-4e38-8c25-352aeba8dcb3"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[FORMATO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="724" y="1" width="75" height="13" backcolor="#E2EFD9" uuid="1b2af102-65b6-4ba7-9706-89eee913a430"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[PRODUTO:]]></text>
+					<text><![CDATA[MATERIAL]]></text>
 				</staticText>
 				<line>
 					<reportElement x="327" y="1" width="1" height="43" uuid="d9973b9d-5ee8-4baf-8321-25007ec6ee64">
@@ -976,134 +1130,62 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<textField>
-					<reportElement x="5" y="29" width="82" height="13" uuid="dab6b2b0-06fc-4875-abba-4b6846cbfc68"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="5" y="14" width="54" height="14" uuid="9dd23ac2-7b0b-4978-b8e3-341064b8ad4f"/>
+					<textElement verticalAlignment="Middle">
 						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{peca}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="86" y="29" width="170" height="13" uuid="58fc8fc6-10b5-46ae-913c-1290f6fc3995"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="91" y="15" width="168" height="14" uuid="5763e7a5-57b5-41dc-9db1-119ce5f1210e"/>
+					<textElement verticalAlignment="Middle">
 						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{titulo_peca}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="259" y="15" width="66" height="13" uuid="ba9234ef-12d2-497d-b2d4-7be4822bbd58"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+				<staticText>
+					<reportElement x="259" y="15" width="54" height="14" uuid="49f581fb-f795-4c1c-9bf0-ee2fbcc4c4a0"/>
+					<textElement verticalAlignment="Middle">
 						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="258" y="29" width="66" height="13" uuid="845e0b8b-9f6a-47e1-9362-3da9892e4d3e"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<text><![CDATA[MP3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="333" y="15" width="56" height="14" uuid="88767254-81f8-4b7d-ba42-ccd0776de037"/>
+					<textElement verticalAlignment="Middle">
 						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="332" y="15" width="66" height="13" uuid="e635d6e6-c13d-471e-92ef-937dd11509c1"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="332" y="29" width="66" height="13" uuid="24e611c5-c3de-47aa-9c2c-c0d238d62244"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="403" y="16" width="86" height="13" uuid="ffd46358-5cb9-4128-b41d-97dfaa2af972"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="403" y="29" width="86" height="13" uuid="0382c706-5ae1-436d-bddc-c8b721eef79d"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="499" y="16" width="154" height="13" uuid="7125687b-a88a-466e-86c3-db6d6637c382"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="499" y="29" width="154" height="13" uuid="303e7c94-55b5-4799-a210-14f2eed07810"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="656" y="16" width="66" height="13" uuid="fd49fdd7-899f-4d3e-b446-bf25b08d7c66"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="657" y="29" width="66" height="13" uuid="73ff45a5-baca-4088-9e40-2e73ae525b53"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="728" y="16" width="66" height="13" uuid="9e149f7c-9d75-4dad-acc7-d8c1045c21bc"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="727" y="29" width="66" height="13" uuid="36d8874c-bab9-40a0-82c2-4f715e770975"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
+					<text><![CDATA[AUDIO]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="799" height="43" uuid="500d0607-bedd-4cf9-9e93-bbbdf9eb0ab2"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
 			</frame>
 			<frame>
 				<reportElement x="0" y="131" width="800" height="64" forecolor="#FFFFFF" uuid="5d068b8e-e474-42de-bb48-c7a03b2179ab">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="6fcfc44d-647a-4da1-858a-a548a0b331cd"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="9" width="86" height="14" backcolor="#E2EFD9" uuid="be85adac-7454-4c86-9f34-8d9b14c5c0a6"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="0" y="8" width="86" height="15" backcolor="#E2EFD9" uuid="be85adac-7454-4c86-9f34-8d9b14c5c0a6"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[VEÍCULO:]]></text>
+					<text><![CDATA[CLIENTE:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="24" width="86" height="13" backcolor="#E2EFD9" uuid="1cef0c7f-68d2-4897-9c8b-f241c9f843e1"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1111,15 +1193,15 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="37" width="86" height="13" backcolor="#E2EFD9" uuid="2d8c5b63-7276-42c1-9d3f-6dcb37efaaa1"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CIDADE:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="51" width="86" height="14" backcolor="#E2EFD9" uuid="2446426c-76ab-472c-b180-33764cdc451c"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="0" y="51" width="86" height="13" backcolor="#E2EFD9" uuid="2446426c-76ab-472c-b180-33764cdc451c"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1127,23 +1209,23 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="217" y="37" width="48" height="14" backcolor="#E2EFD9" uuid="d292fb17-e5e0-4a7b-8bb7-667fa739bb27"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[UF:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="217" y="9" width="48" height="14" backcolor="#E2EFD9" uuid="c1559463-1b7c-4f50-8a0c-69cee652197f"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="217" y="8" width="48" height="15" backcolor="#E2EFD9" uuid="c1559463-1b7c-4f50-8a0c-69cee652197f"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CONTATO:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="217" y="51" width="48" height="14" backcolor="#E2EFD9" uuid="0221ca66-091e-4573-b858-c7d44abe2384"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="217" y="51" width="48" height="13" backcolor="#E2EFD9" uuid="0221ca66-091e-4573-b858-c7d44abe2384"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1151,23 +1233,23 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="301" y="37" width="41" height="14" backcolor="#E2EFD9" uuid="8b8349d0-4b58-4f99-abbf-411d6790b425"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CEP:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="399" y="9" width="99" height="14" backcolor="#E2EFD9" uuid="8f38ec12-f8a9-4534-a596-c834a90002ef"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="399" y="8" width="99" height="15" backcolor="#E2EFD9" uuid="8f38ec12-f8a9-4534-a596-c834a90002ef"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[REPRESENTANTE:]]></text>
+					<text><![CDATA[FATURAR PARA:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="399" y="24" width="99" height="14" backcolor="#E2EFD9" uuid="808f427b-ed65-453e-aec3-9383fa3c0bac"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="399" y="23" width="99" height="15" backcolor="#E2EFD9" uuid="808f427b-ed65-453e-aec3-9383fa3c0bac"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1175,23 +1257,23 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="399" y="37" width="99" height="13" backcolor="#E2EFD9" uuid="5d65675c-27e3-4909-9efc-b0bcfd2e3e6e"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CNPJ:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="399" y="51" width="99" height="14" backcolor="#E2EFD9" uuid="fb12c647-c663-4bfb-9f3e-58a918795a89"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="399" y="51" width="99" height="13" backcolor="#E2EFD9" uuid="fb12c647-c663-4bfb-9f3e-58a918795a89"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[EMAIL:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="677" y="9" width="48" height="14" backcolor="#E2EFD9" uuid="4b0ad2f8-e343-4ef3-adbe-0f7ddf1e6ccb"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<reportElement mode="Opaque" x="677" y="8" width="48" height="15" backcolor="#E2EFD9" uuid="4b0ad2f8-e343-4ef3-adbe-0f7ddf1e6ccb"/>
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1199,7 +1281,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="580" y="37" width="47" height="13" backcolor="#E2EFD9" uuid="58d8a139-2a7a-4c36-b800-bcf25ff4f1ff"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1207,7 +1289,7 @@ left join peca p on (p.id = pii.peca_id)
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="678" y="38" width="47" height="13" backcolor="#E2EFD9" uuid="1c5264c2-5244-4783-b159-fc69f11831b5"/>
-					<textElement verticalAlignment="Bottom" markup="none">
+					<textElement verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
@@ -1256,7 +1338,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="678" y="10" width="1" height="40" uuid="4201fc48-5f55-4235-8194-fd58ce58bf08">
+					<reportElement x="677" y="8" width="1" height="42" uuid="4201fc48-5f55-4235-8194-fd58ce58bf08">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1265,7 +1347,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="725" y="10" width="1" height="40" uuid="1ffe326f-2f9b-498f-b6e6-85b3c19e5fe1">
+					<reportElement x="725" y="8" width="1" height="42" uuid="1ffe326f-2f9b-498f-b6e6-85b3c19e5fe1">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1274,7 +1356,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="498" y="9" width="1" height="56" uuid="4a545fd9-415d-4252-bcd1-dbed02401689">
+					<reportElement x="498" y="8" width="1" height="56" uuid="4a545fd9-415d-4252-bcd1-dbed02401689">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1283,7 +1365,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="399" y="9" width="1" height="56" uuid="68a6f8f4-22ca-4f9f-87e8-97bb38c7574d">
+					<reportElement x="399" y="8" width="1" height="56" uuid="68a6f8f4-22ca-4f9f-87e8-97bb38c7574d">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1310,7 +1392,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="265" y="9" width="1" height="13" uuid="7a48e27e-e995-41fe-918d-2316c44fcb3d">
+					<reportElement x="265" y="8" width="1" height="15" uuid="7a48e27e-e995-41fe-918d-2316c44fcb3d">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1319,7 +1401,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="265" y="38" width="1" height="27" uuid="68e4cac2-e75c-446d-9aeb-b3f6c21098df">
+					<reportElement x="265" y="38" width="1" height="26" uuid="68e4cac2-e75c-446d-9aeb-b3f6c21098df">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1328,7 +1410,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="216" y="9" width="1" height="13" uuid="eb88dca4-ba49-4295-842f-1a0d10093c83">
+					<reportElement x="216" y="8" width="1" height="15" uuid="eb88dca4-ba49-4295-842f-1a0d10093c83">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1337,7 +1419,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="216" y="38" width="1" height="27" uuid="a9a43f62-9f30-4b52-84e9-db1c6a365799">
+					<reportElement x="216" y="37" width="1" height="27" uuid="a9a43f62-9f30-4b52-84e9-db1c6a365799">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1370,7 +1452,7 @@ left join peca p on (p.id = pii.peca_id)
 					</graphicElement>
 				</line>
 				<line>
-					<reportElement x="86" y="9" width="1" height="56" uuid="3f4722e6-0787-4771-8d18-aa13770a4909">
+					<reportElement x="86" y="8" width="1" height="56" uuid="3f4722e6-0787-4771-8d18-aa13770a4909">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
@@ -1378,14 +1460,8 @@ left join peca p on (p.id = pii.peca_id)
 						<pen lineWidth="0.5" lineStyle="Solid"/>
 					</graphicElement>
 				</line>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="6fcfc44d-647a-4da1-858a-a548a0b331cd"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineStyle="Solid"/>
-					</graphicElement>
-				</rectangle>
 				<textField>
-					<reportElement x="89" y="10" width="130" height="13" uuid="71bde33a-d10c-4a59-aa78-113821dc04d1"/>
+					<reportElement x="89" y="10" width="116" height="13" uuid="71bde33a-d10c-4a59-aa78-113821dc04d1"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1401,7 +1477,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{razao_social2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="89" y="37" width="130" height="13" uuid="8d0c3afe-5267-43fb-be52-0aafe2a6b192"/>
+					<reportElement x="89" y="37" width="116" height="13" uuid="8d0c3afe-5267-43fb-be52-0aafe2a6b192"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1409,7 +1485,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{cidade2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="89" y="51" width="130" height="13" uuid="c5fe3c11-b85a-4a92-829d-b316f894abfc"/>
+					<reportElement x="89" y="51" width="116" height="13" uuid="c5fe3c11-b85a-4a92-829d-b316f894abfc"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1425,7 +1501,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{contato2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="269" y="50" width="130" height="13" uuid="8e0236de-2488-4974-948a-891bec32ed70"/>
+					<reportElement x="269" y="50" width="128" height="13" uuid="8e0236de-2488-4974-948a-891bec32ed70"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1433,7 +1509,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{fax2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="269" y="37" width="37" height="13" uuid="727f40c6-a906-4ca0-92b5-e34e10aa8d5b"/>
+					<reportElement x="269" y="37" width="32" height="13" uuid="727f40c6-a906-4ca0-92b5-e34e10aa8d5b"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1448,7 +1524,7 @@ left join peca p on (p.id = pii.peca_id)
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cep2}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="501" y="52" width="298" height="13" uuid="ceb337e0-47bf-4683-b67f-5a35c9a10f3d"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
@@ -1457,7 +1533,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{email2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="501" y="11" width="177" height="13" uuid="21437695-fc77-4d97-a625-a4bf9368b8bf"/>
+					<reportElement x="501" y="11" width="173" height="13" uuid="21437695-fc77-4d97-a625-a4bf9368b8bf"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1465,15 +1541,7 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{representante2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="502" y="37" width="82" height="13" uuid="289cc927-91ce-4bae-b999-029912d35d6d"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="7"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{cep2}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="631" y="37" width="49" height="13" uuid="5037def4-dc99-4dd4-bee5-d0a43857d7cd"/>
+					<reportElement x="631" y="37" width="47" height="13" uuid="5037def4-dc99-4dd4-bee5-d0a43857d7cd"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
@@ -1497,14 +1565,28 @@ left join peca p on (p.id = pii.peca_id)
 					<textFieldExpression><![CDATA[$F{praca2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement mode="Opaque" x="502" y="24" width="298" height="13" uuid="eda598de-0c52-4eea-8c23-4c7203d8f674">
+					<reportElement mode="Opaque" x="502" y="24" width="297" height="13" uuid="eda598de-0c52-4eea-8c23-4c7203d8f674">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{endereco2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="501" y="37" width="78" height="13" uuid="6a9dba31-a741-4f70-8821-d02caa2e9e38"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cnpj2}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<textField>
@@ -1536,49 +1618,49 @@ left join peca p on (p.id = pii.peca_id)
 					</reportElement>
 				</rectangle>
 				<line>
-					<reportElement positionType="FixRelativeToBottom" x="85" y="0" width="1" height="22" uuid="8136441d-0e41-4225-89d5-a64583b7c813">
+					<reportElement positionType="FixRelativeToBottom" x="70" y="0" width="1" height="22" uuid="8136441d-0e41-4225-89d5-a64583b7c813">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 				</line>
 				<line>
-					<reportElement positionType="FixRelativeToBottom" x="677" y="0" width="1" height="22" uuid="67e7baa6-88dc-4f32-be9b-4b2196619406">
+					<reportElement positionType="FixRelativeToBottom" x="660" y="1" width="1" height="22" uuid="67e7baa6-88dc-4f32-be9b-4b2196619406">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 				</line>
 				<line>
-					<reportElement positionType="FixRelativeToBottom" x="739" y="0" width="1" height="22" uuid="f001c6d6-5848-46e4-8ea2-68fd2efecbb5">
+					<reportElement positionType="FixRelativeToBottom" x="746" y="0" width="1" height="22" uuid="f001c6d6-5848-46e4-8ea2-68fd2efecbb5">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 				</line>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="0" y="1" width="86" height="22" backcolor="#E2EFD9" uuid="263b4927-24f8-4186-b866-f871b4c2fae8"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="0" y="1" width="70" height="22" backcolor="#E2EFD9" uuid="263b4927-24f8-4186-b866-f871b4c2fae8"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[MERCADO]]></text>
+					<text><![CDATA[POSIÇÃO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="87" y="1" width="88" height="22" backcolor="#E2EFD9" uuid="28a1bc18-f3ce-4025-aa61-d5a09311dc52"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="70" y="1" width="74" height="22" backcolor="#E2EFD9" uuid="28a1bc18-f3ce-4025-aa61-d5a09311dc52"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[VEÍCULO:  BLOG/SITE]]></text>
+					<text><![CDATA[HORÁRIO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="640" y="0" width="37" height="22" backcolor="#E2EFD9" uuid="ed00c300-117f-4feb-9b94-7cfe1c931252"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="7"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="640" y="5" width="20" height="10" backcolor="#E2EFD9" uuid="ed00c300-117f-4feb-9b94-7cfe1c931252"/>
+					<textElement markup="none">
+						<font size="6"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[QTD.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="740" y="0" width="60" height="22" backcolor="#E2EFD9" uuid="cd9831ca-de42-4eee-90da-5fbd84d58a34"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="750" y="0" width="50" height="22" backcolor="#E2EFD9" uuid="cd9831ca-de42-4eee-90da-5fbd84d58a34"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
@@ -1586,238 +1668,13 @@ left join peca p on (p.id = pii.peca_id)
 					<text><![CDATA[CUSTO TOTAL]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="678" y="0" width="61" height="22" backcolor="#E2EFD9" uuid="20cf3ccc-e3e2-4e08-b742-d3f8f6851ef2"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="666" y="0" width="39" height="22" backcolor="#E2EFD9" uuid="20cf3ccc-e3e2-4e08-b742-d3f8f6851ef2"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
 					<text><![CDATA[CUSTO UNIT.]]></text>
 				</staticText>
-				<frame>
-					<reportElement positionType="FixRelativeToBottom" x="175" y="0" width="465" height="11" uuid="8aff4820-b82b-427a-a76d-02200c20ebf1"/>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="0" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="7b4431e0-05b9-400d-86fe-9b3c3e079d26">
-							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						</reportElement>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[01]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="15" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="718545c1-4d70-4cd2-bb95-876c1236e996"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[02]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="30" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="e4ee2b57-9770-48fa-89cf-326ddac5f1cb"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[03]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="450" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="b05bded8-5849-43a1-90fa-0293758a5776"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[31]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="435" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="48ff00ae-8757-4ea7-813b-45cae40b9587"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[30]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="420" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="7fe63d9c-b671-465a-ada5-7e17a354ca31"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[29]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="405" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="ae6f0f2b-b725-42f4-9c4c-5f3c0eb82638"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[28]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="390" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="bc140285-30e3-4c3d-8b89-14a3ef6e7448"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[27]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="375" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="e80f197b-3089-4fd1-b08e-71fd4cf1f6b5"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[26]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="360" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="73b5aa81-db05-45e6-8467-744531dab3b1"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[25]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="345" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="ef18a703-c253-4ad6-ba11-aa4391a45f2e"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[24]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="330" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="4e67791f-dcd1-4343-b911-50fe8a72259a"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[23]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="315" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="94908765-1a49-4ab3-932c-c8f884bc1fdb"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[22]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="300" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="ea5b919c-f81f-42db-8ac1-ff6ca6fe61b4"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[21]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="285" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="41e445b9-4d69-4f85-8a40-29bede033d8e"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[20]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="270" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="48c78d93-e330-4947-9003-8334d0a7e0bf"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[19]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="255" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="5fc054a1-5cbb-4660-bd70-e218179d30a4"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[18]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="240" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="a93fc978-6853-48eb-b56e-9e78fcf49e34"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[17]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="225" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="735c66f7-9831-433f-8aef-011c72462388"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[16]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="210" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="f46d9ad9-864d-4231-ac8d-d53b4c3ffbd0"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[15]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="195" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="6555da92-2efc-46cf-879b-a073759554cd"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[14]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="180" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="13c514b1-44ff-479b-a8ab-c6560f8843d3"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[13]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="165" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="23af02a5-1bf2-4737-baa7-3ed336848cc2"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[12]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="150" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="7600aaf8-5e6c-4180-ae04-337fbd5a8216"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[11]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="135" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="484a96e6-ccc9-45de-a742-55df8f433665"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[10]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="120" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="b6acea98-1d41-4f14-9c7c-2b3cbd2f860e"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[09]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="105" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="36e954f7-5436-4a72-ab40-2c040f4c6348"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[08]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="90" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="f8a971f7-9f98-452f-bafe-477758c7d275"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[07]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="75" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="715ac944-f0fd-4df1-ab2f-ff886d176a03"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[06]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="45" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="65b81868-9002-4e9d-909c-6f24e7c0f517"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[04]]></text>
-					</staticText>
-					<staticText>
-						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="60" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="a3c41deb-afc2-4466-b13a-2e283532c31a">
-							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						</reportElement>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font size="7"/>
-						</textElement>
-						<text><![CDATA[05]]></text>
-					</staticText>
-				</frame>
 				<line>
 					<reportElement positionType="FixRelativeToBottom" x="175" y="0" width="1" height="22" uuid="3d1f6081-7b82-4844-9054-b2b19d59f32f">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -1830,11 +1687,699 @@ left join peca p on (p.id = pii.peca_id)
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 				</line>
+				<frame>
+					<reportElement x="174" y="0" width="465" height="23" uuid="819b330b-b10a-44e3-8d08-4c17545c91f1"/>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="81696e21-432e-4231-9a51-9cd8d12678e1">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[01]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="15" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="e402b0a7-ab6f-491f-9052-662f506fe083"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[02]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="30" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="e25b8d3f-00bd-4576-ab44-cbe0a4b5344a"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[03]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="450" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="80ef2f64-0025-4ea6-844a-bb0d7b1847dd"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[31]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="435" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="6f409a3c-32c2-4907-8950-976388ea9395"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[30]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="420" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="6881eca1-684e-4d26-8c01-f6a1520d40cb"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[29]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="405" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="8e222622-2717-4f21-804c-407e007b43ca"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[28]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="390" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="52b7ca59-55c1-47b5-820e-d0fd951bc706"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[27]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="375" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="256b53d6-ed01-4c90-a1a2-42d7a7826773"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[26]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="360" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="ac5e593e-65b3-4254-a6f8-f05bc50e0cac"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[25]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="345" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="61be9dc7-ae48-43b7-82a4-976cd493c9b7"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[24]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="330" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="9920a785-fa45-4748-8c8e-12220c552efd"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[23]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="315" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="11d22cd9-66bb-49da-8708-b2f1435fe4b6"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[22]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="300" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="659466ac-389f-4765-8d38-dafb48b16333"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[21]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="285" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="c0ba2819-b670-4882-a198-580054b31864"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[20]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="270" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="f5d4a0ce-6011-490f-9fa5-019b995e10e4"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[19]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="255" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="7bf391f4-30fb-475f-a11b-88221aa5e6fa"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[18]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="240" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="72a2fdb2-362b-43b4-8b40-d06cee8b5297"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[17]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="225" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="bfee9503-a035-4969-b29f-13cd48d51cf7"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[16]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="210" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="3a57fdb9-ff76-4281-b6da-6d0dcb3878b4"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[15]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="195" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="9fa15aad-7acb-421f-823f-141914d5a83a"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[14]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="180" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="ed453f41-a33a-45ee-a20b-a94fc024f133"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[13]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="165" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="0824f92d-05f7-4fd9-88db-888b90582a60"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[12]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="150" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="974dd108-956f-4171-b9a3-c758dcd9bdbe"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[11]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="135" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="44b04c4c-992b-48a3-9c42-4edd4f74481f"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[10]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="120" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="2b7c0b82-3500-4eed-ba32-e724149235d4"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[09]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="105" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="fd7eb179-74f8-4bcf-82a8-928868a26c24"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[08]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="90" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="d12449d0-ff68-4b55-85d5-2ac5fa0b0b28"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[07]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="75" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="83eac371-8691-41c5-960e-bf1c04228ba9"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[06]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="45" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="5e18f732-9155-4067-9873-adb5698f128b"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[04]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="60" y="0" width="15" height="11" backcolor="#E2EFD9" uuid="45689e36-b715-4875-87b2-9c6cd6fbedc7">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[05]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="eedfb8c0-206c-4589-a25c-ebff9465399e">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="45" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="7ea93a1e-548e-4e02-b4e3-84a3985da3df"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="60" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="f3d2bd5d-b3af-4047-b607-c1fa8082aade">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="75" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="772e8873-5ac2-4b81-b092-24d0aee6b6b7"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[D]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="90" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="fb8ddc09-cc73-48af-8d99-f7c98ca0ad86"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="105" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="b6597023-f1d3-460f-990f-805b677df44e">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="150" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="5618e8b2-d97b-480a-bc66-dd12c7024995"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="165" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="aac26aeb-5ac0-4c1b-a4df-5a7fcbd9e9d5">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="180" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="2f591339-e6c7-49bf-a2e5-951fe90ad45d"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[D]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="195" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="981c5b61-d69e-4474-83a0-af0e891989e9"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="120" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="27e59523-68f4-463a-9e60-703c84b1fc2e">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="135" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="d3bd067c-e94e-491f-8276-2cee8292639b">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="210" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="788a351f-9c1a-486a-978c-6aeb0a9913b7">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="255" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="cbd9fdb1-7417-4994-b91e-8bc8e51892aa"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="270" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="39254d2c-8326-472d-9683-de9954ad0043">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="285" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="c6ec469e-0e1c-4fac-b727-969b60dea489"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[D]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="300" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="741a4c82-7867-4ba1-9a51-333b4f39086c"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="315" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="b301002a-fa64-4d2b-91eb-dad031f79bfb">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="360" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="ddfe7361-3010-443e-b414-3d7c928b97d1"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="375" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="44a397ab-7d4b-44c5-87f4-8ffc14c7990c">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="390" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="e1e77b0c-0770-4e83-9a56-e7082b0b7e99"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[D]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="405" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="da36772b-f907-4f1b-9eb3-99e501d4a10c"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[S]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="330" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="fa50950d-fa21-414c-941d-ee2a64733bfb">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="345" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="137a444c-996f-48e8-82bd-a0f17cb1b27b">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="225" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="09aa6c54-d3a1-4a2b-8e18-2119ec6d9825"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="240" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="b9058a5d-cf51-4cad-ace4-bcc9acfbf05b"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="420" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="2188c4e6-8df8-455d-9bf6-541cf57adbf5"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="435" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="53ea4ac4-c81f-469f-a630-257ca81e5e22"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="450" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="b3f4aec6-9d3e-4be1-9e99-a15949eb60ef"/>
+						<box>
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="15" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="a8371f23-8797-40a1-8892-b0398f3f59c7">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="30" y="11" width="15" height="11" backcolor="#E2EFD9" uuid="6ffd4c05-1200-49ba-8075-188159056062">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+							<pen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="7"/>
+						</textElement>
+						<text><![CDATA[Q]]></text>
+					</staticText>
+				</frame>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="144" y="0" width="1" height="22" uuid="3c10b4c6-b248-4b97-8771-e6d1d58f671e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="145" y="1" width="29" height="20" backcolor="#E2EFD9" uuid="6f60d604-96f4-4498-ad05-0a914abb2a44"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="7"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[PEÇA]]></text>
+				</staticText>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="705" y="0" width="1" height="22" uuid="4f05f3d1-f1bd-4bc8-9ae3-10a6657c1534">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="706" y="0" width="41" height="22" backcolor="#E2EFD9" uuid="c9917141-99ea-4e95-b7a4-677c6cc5ad22"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="6"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[% DESCONTO]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="12" splitType="Stretch">
+		<band height="13" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<rectangle>
 				<reportElement x="0" y="-1" width="800" height="13" uuid="8a69abaa-582a-4c65-a1cf-6a603ec70dc3">
@@ -1843,7 +2388,7 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</rectangle>
 			<line>
-				<reportElement x="85" y="-1" width="1" height="13" uuid="6f78e1ab-6a56-47c7-ae1d-2e0cbcecd396">
+				<reportElement x="144" y="-1" width="1" height="13" uuid="6f78e1ab-6a56-47c7-ae1d-2e0cbcecd396">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -1856,7 +2401,7 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="677" y="-1" width="1" height="13" uuid="8ed6e048-5579-4023-b26a-fbd1c8df2f49">
+				<reportElement x="660" y="-1" width="1" height="13" uuid="8ed6e048-5579-4023-b26a-fbd1c8df2f49">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -1870,31 +2415,13 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="739" y="-1" width="1" height="13" uuid="f03cd70d-b673-486d-9f72-6c67c72f66d5">
+				<reportElement x="746" y="-1" width="1" height="13" uuid="f03cd70d-b673-486d-9f72-6c67c72f66d5">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="86" height="12" uuid="4c59d08e-5834-4777-a351-c75b76328330">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{mercado}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="99" y="0" width="72" height="12" uuid="0eed7e6b-8d45-4381-8b52-d50e836f2585">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{veiculo}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="638" y="-1" width="36" height="12" uuid="f4d9de41-ca26-43e7-a247-1ca258069e9b">
+				<reportElement x="640" y="-1" width="14" height="12" uuid="f4d9de41-ca26-43e7-a247-1ca258069e9b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1903,247 +2430,369 @@ left join peca p on (p.id = pii.peca_id)
 				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="677" y="-1" width="59" height="12" uuid="a7beb1ee-76db-435e-933d-b5e37d315eee">
+				<reportElement x="661" y="-1" width="45" height="12" uuid="a7beb1ee-76db-435e-933d-b5e37d315eee">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{custo_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($F{custo_unitario}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="737" y="-1" width="60" height="12" uuid="581ac242-94c9-43ac-9396-c6b3a4a7c2a7">
+				<reportElement x="750" y="-1" width="47" height="12" uuid="581ac242-94c9-43ac-9396-c6b3a4a7c2a7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total_produto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($F{total_produto}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="175" y="-1" width="15" height="13" uuid="75659f0b-250e-44b9-9f88-3f424fdfb074"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d1}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="190" y="-1" width="15" height="13" uuid="98d9da55-6de6-42bd-bb55-8260062dcbd0"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d2}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="205" y="-1" width="15" height="13" uuid="a11ced32-f624-4521-aef2-9f79dc5c1b59"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d3}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="220" y="-1" width="15" height="13" uuid="7981c4d9-25e9-42bc-b98c-9abd39c63738"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d4}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d4}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="235" y="-1" width="15" height="13" uuid="4b0b5a6e-c5f8-4ecf-b316-11c065e42986">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d5}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d5}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="250" y="-1" width="15" height="13" uuid="80baa974-db23-46cb-94d1-bb7410b48c4f"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d6}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d6}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="265" y="-1" width="15" height="13" uuid="027819bf-44bd-4d56-a13e-6bfb1ffb9f8e"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d7}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d7}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="280" y="-1" width="15" height="13" uuid="b87b0c83-9c87-453c-9df7-a10d87b68093"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d8}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d8}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="295" y="-1" width="15" height="13" uuid="606eeedc-ee8e-49c7-adbe-49b8d0c4336e"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d9}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d9}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="310" y="-1" width="15" height="13" uuid="98051f66-beff-4086-8a94-6a019aeb8de3"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d10}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d10}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="325" y="-1" width="15" height="13" uuid="d599d027-b742-419d-b3b1-67214f92a747"/>
+				<reportElement x="326" y="-1" width="15" height="13" uuid="d599d027-b742-419d-b3b1-67214f92a747"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d11}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d11}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="340" y="-1" width="15" height="13" uuid="f9e18bfd-36d2-4dc0-8e2e-00113111f37b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d12}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d12}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="355" y="-1" width="15" height="13" uuid="81a15850-4db6-4dea-99b9-9695553dcd07"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d13}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d13}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="370" y="-1" width="15" height="13" uuid="6c3fdfca-e089-4105-8418-afc55a01382b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d14}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d14}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="400" y="-1" width="15" height="13" uuid="728681bb-4b64-46f3-aa91-e5d7dfbc5837"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d16}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d16}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="385" y="-1" width="15" height="13" uuid="91b00af8-f187-42d2-9c89-e628e833eeb3"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d15}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d15}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="415" y="-1" width="15" height="13" uuid="a4b1a3fd-724a-4d1a-9d64-6d3144191726"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d17}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d17}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="430" y="-1" width="15" height="13" uuid="447e7043-1874-408a-96f1-389d50a42a84"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d18}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d18}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="445" y="-1" width="15" height="13" uuid="ae6d33c2-fdce-4ca8-99b6-9b337a12386c"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d19}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d19}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="460" y="-1" width="15" height="13" uuid="27328821-d1da-4176-a757-353178d8c684"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d20}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d20}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="475" y="-1" width="15" height="13" uuid="c1ae96c0-abf7-47ed-bd91-bfc1a13f3851"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d21}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d21}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="490" y="-1" width="15" height="13" uuid="d53e604f-08d7-4764-b9fe-b46771809364"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d22}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d22}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="505" y="-1" width="15" height="13" uuid="002737e8-fb9b-45db-802f-b24e99e63312"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d23}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d23}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="520" y="-1" width="15" height="13" uuid="9ddb89f5-9f7d-4c4c-8e42-4446285e583c"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d24}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d24}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="535" y="-1" width="15" height="13" uuid="0ca7b66a-84d3-421c-b707-060b4b420fd7"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d25}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d25}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="550" y="-1" width="15" height="13" uuid="4960ef70-05b6-4277-92cb-03711fd54c09"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d26}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d26}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="565" y="-1" width="15" height="13" uuid="d3141c18-3339-41c2-b5b8-50dd67bf7e31"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d27}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d27}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="580" y="-1" width="15" height="13" uuid="af9c5638-f767-41f9-ac56-4cc9b0964581"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d28}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d28}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="595" y="-1" width="15" height="13" uuid="212c6114-24df-4898-b149-2c2a764377fe"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d29}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d29}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="610" y="-1" width="15" height="13" uuid="036936db-fff1-4e25-9227-054aafeeb213"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d30}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d30}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="625" y="-1" width="15" height="13" uuid="d5bfe9b2-fadd-44a5-96e7-9ba38dcd92b0"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{d31}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{d31}.intValue()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="70" y="-1" width="1" height="14" uuid="5d1f1f6c-3af6-411d-afe2-8722b82ef8ef">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="149" y="-1" width="25" height="12" uuid="0a4323bc-68e1-4510-8513-e62a33dd746a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peca}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="705" y="-1" width="1" height="13" uuid="987756e2-f3ad-423f-8d5e-b0c18738fdb3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="711" y="0" width="30" height="12" uuid="8f147c5d-db31-4436-993a-4e6a387f0ab4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19834980-622d-4b04-8438-36f61242d027"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desconto} +" %"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="16" splitType="Stretch">
+		<band height="13" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<rectangle>
 				<reportElement x="0" y="-1" width="800" height="13" uuid="ec548bf8-30f8-4c1d-8581-c13198cf4df2">
@@ -2151,7 +2800,7 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</rectangle>
 			<line>
-				<reportElement x="85" y="-1" width="1" height="13" uuid="cc9cc6c9-c340-4cb8-a309-7a5083bea231">
+				<reportElement x="70" y="-1" width="1" height="13" uuid="cc9cc6c9-c340-4cb8-a309-7a5083bea231">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2164,7 +2813,7 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="677" y="-1" width="1" height="13" uuid="cd07211b-6ad9-4085-b4ad-00abb3b5489d">
+				<reportElement x="666" y="-1" width="1" height="13" uuid="cd07211b-6ad9-4085-b4ad-00abb3b5489d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -2176,13 +2825,13 @@ left join peca p on (p.id = pii.peca_id)
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="739" y="-1" width="1" height="13" uuid="9c596ebc-0491-41f7-97fe-7b4b9f22cb7c">
+				<reportElement x="746" y="-1" width="1" height="13" uuid="9c596ebc-0491-41f7-97fe-7b4b9f22cb7c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="-1" width="86" height="13" backcolor="#E2EFD9" uuid="c766fd95-29d6-42de-ad85-92308cf66b6b"/>
+				<reportElement mode="Transparent" x="1" y="0" width="68" height="11" backcolor="#E2EFD9" uuid="c766fd95-29d6-42de-ad85-92308cf66b6b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
 					<font size="7"/>
 					<paragraph leftIndent="3" rightIndent="3"/>
@@ -2409,7 +3058,7 @@ left join peca p on (p.id = pii.peca_id)
 				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="638" y="-1" width="36" height="12" uuid="50c05ba1-aca9-4c10-9e79-9e648ccb6a4f">
+				<reportElement x="640" y="-1" width="25" height="12" uuid="50c05ba1-aca9-4c10-9e79-9e648ccb6a4f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
@@ -2418,14 +3067,27 @@ left join peca p on (p.id = pii.peca_id)
 				<textFieldExpression><![CDATA[$V{qtd_total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="740" y="-1" width="58" height="12" uuid="fdac8e29-1dc4-449a-936a-d5495999f6ee">
+				<reportElement x="750" y="-1" width="48" height="12" uuid="fdac8e29-1dc4-449a-936a-d5495999f6ee">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total_bruto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="144" y="-1" width="1" height="13" uuid="4196297e-835d-429d-9f99-304ce2c94843">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="705" y="-1" width="1" height="13" uuid="0576fa1b-149c-4963-ae2a-ae193cb0c4f9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
 		</band>
 	</columnFooter>
 	<lastPageFooter>
@@ -2545,7 +3207,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{total_blogs}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_blogs}))]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="716" y="28" width="82" height="13" uuid="9c703d12-2dfd-4c39-b9f1-729a3dd913be"/>
@@ -2553,7 +3215,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{total_bruto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="716" y="41" width="82" height="13" uuid="ea26a66d-f9d1-4f0b-9a06-9096a6ad92cf"/>

@@ -33,6 +33,7 @@ export class PlanomidiaImportComponent extends CommonsForm<PlanoMidia> implement
     entity: any;
     tipoMidia: TipoMidia[] = [];
     veiculoList: Veiculo [] = [];
+    checked = true;
 
     constructor(private _location: Location,
                 public dialog: MatDialog,

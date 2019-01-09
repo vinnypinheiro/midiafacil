@@ -34,12 +34,14 @@ public class PedidoInsercaoController {
             pi.setAgencia_id(bean.getAgencia_id());
             pi.setVeiculo_id(pil.getVeiculo_id());
 
-             pi.setStatus("GERADO");
+             pi.setStatus("APROVADO");
 
              pi.setPeriodo(pil.getMes()+"/"+pil.getAno());
              pi.setTotalbruto(pil.getValor());
              pi.setComissao(0.0);
              pi.setTotalliquido(pil.getValor());
+
+             pil.setStatus("APROVADO");
 
 
              pedidoinsercaoService.save(pi);

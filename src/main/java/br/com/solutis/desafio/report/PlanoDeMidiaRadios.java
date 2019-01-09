@@ -59,8 +59,8 @@ public class PlanoDeMidiaRadios extends Report {
         sql += "  cast( pii.dia29 as int8)  as d29, \n";
         sql += "  cast( pii.dia30 as int8)  as d30, \n";
         sql += "  cast( pii.dia31 as int8)  as d31, \n";
-        sql += " 'Janiero' as mes, \n";
-        sql += " '2019' as ano, \n";
+        sql += "  pii.mes as mes, \n";
+        sql += "  pii.ano as ano, \n";
         sql += " '' as nome \n";
         sql += " from pedido_insercao_item pii \n";
         sql += " left join veiculo v on (v.id = pii.veiculo_id) \n";

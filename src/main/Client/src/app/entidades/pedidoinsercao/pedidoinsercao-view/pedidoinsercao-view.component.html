@@ -12,6 +12,13 @@
             <h2> Pedido de Inserção: {{entity?.id}}</h2>
         </div>
 
+        <button mat-raised-button color="primary"
+                (click)="printReport( entity.id )"
+                class="  mt-24 mt-md-0">
+            <mat-icon>print</mat-icon>
+            <span>   Imprimir</span>
+        </button>
+
     </div>
     <!-- / HEADER -->
 
@@ -117,7 +124,7 @@
                                     </thead>
                                     <tbody>
                                     <tr class="product-row"
-                                        *ngFor="let pedidoInsercaoItem of entity.pedidoinsercaoitemList ">
+                                        *ngFor="let pedidoInsercaoItem of entity?.pedidoinsercaoitemList ">
                                         <td style="font-weight: 600;">
                                             {{pedidoInsercaoItem.id}}
                                         </td>
@@ -170,7 +177,7 @@
                                     </div>
                                    <div>
                                        <h3 class="custototal">Custo Total: </h3>
-                                       <h2>{{entity?.pedidoinsercaoitemList[0].valor}}</h2>
+                                       <h2>{{entity?.pedidoinsercaoitemList[0]?.valor}}</h2>
                                    </div>
 
                                 </div>

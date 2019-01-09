@@ -31,6 +31,8 @@ public class PlanoMidia implements Serializable {
     private String programa;
     private  String situacao;
     private String tipo;
+    private Integer desconto;
+    private String osagencia;
 
     @ManyToOne
     @JoinColumn(name = "agencia_id", nullable = true, foreignKey = @ForeignKey(name = "fk_planomidia_agencia"))    private Agencia agencia_id;
@@ -153,6 +155,22 @@ public class PlanoMidia implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Integer getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Integer desconto) {
+        this.desconto = desconto;
+    }
+
+    public String getOsagencia() {
+        return osagencia;
+    }
+
+    public void setOsagencia(String osagencia) {
+        this.osagencia = osagencia;
     }
 }
 

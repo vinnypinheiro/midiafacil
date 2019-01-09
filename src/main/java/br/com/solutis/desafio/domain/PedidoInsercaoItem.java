@@ -20,6 +20,7 @@ public class PedidoInsercaoItem implements Serializable {
 
     private Date data;
     private String mes;
+    private String status;
     private String ano;
     private Double desconto;
     private Double dia01;
@@ -55,7 +56,7 @@ public class PedidoInsercaoItem implements Serializable {
     private Double dia31;
     private Date faturamento;
     private String obs;
-    private Double qtd;
+    private Integer qtd;
     private Double valor;
     private Date vencimento;
     private Double valorUnit;
@@ -338,13 +339,15 @@ public class PedidoInsercaoItem implements Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
-    public Double getQtd() {
+
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(Double qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
+
     public Double getValor() {
         return valor;
     }
@@ -372,12 +375,9 @@ public class PedidoInsercaoItem implements Serializable {
         return produto_id;
     }
 
-
-
     public void setProduto_id(Produto produto_id) {
         this.produto_id = produto_id;
     }
-
 
     public String getMes() {
         return mes;
@@ -443,5 +443,13 @@ public class PedidoInsercaoItem implements Serializable {
 
     public void setCliente_id(Cliente cliente_id) {
         this.cliente_id = cliente_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -130,11 +130,6 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
 
     }
 
-    printReport(reportname: string, id: number) {
-        this.sharedService.printReport(reportname, id)
-    }
-
-
 
     addpedidoDeInsercaoItemlistGroup() {
         return this.fb.group({
@@ -206,6 +201,12 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
                 return this.apiService;
             }
         }
+    }
+
+    reportname: string;
+    printReport( id: number) {
+        this.reportname = "PedidoDeInsercaoRadios"
+        this.sharedService.printReport( this.reportname, id)
     }
 
 

@@ -81,10 +81,10 @@
                 </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="emissao">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
+                <ng-container matColumnDef="campanha">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Campanha</mat-header-cell>
                     <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate">{{planomidia.cliente_id.obs}}</p>
+                        <p class="text-truncate">{{planomidia.campanha_id.nome}}</p>
                     </mat-cell>
                 </ng-container>
 
@@ -92,17 +92,11 @@
                 <ng-container matColumnDef="situacao">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Situação</mat-header-cell>
                     <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate">{{planomidia.cliente_id.nomefantasia}}</p>
+                        <p class="text-truncate status">{{planomidia.situacao}}</p>
                     </mat-cell>
                 </ng-container>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="valor">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Situação</mat-header-cell>
-                    <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate">{{planomidia.cliente_id.nomefantasia}}</p>
-                    </mat-cell>
-                </ng-container>
+
 
 
 

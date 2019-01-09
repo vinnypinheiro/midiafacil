@@ -152,6 +152,8 @@ export class PlanoMidiaFormComponent extends CommonsForm<PlanoMidia> implements 
         id:  null,
         obs:   null,
         data:  null,
+        osagencia: null,
+        desconto: 20,
         tipo: null,
         agencia_id:   null,
         cliente_id:   null,
