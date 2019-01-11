@@ -109,8 +109,7 @@ left join agencia a on
 left join peca p on
 	(p.id = pii.peca_id)
 where
-	pi.id = 868
-]]>
+	pi.id = 940]]>
 	</queryString>
 	<field name="veiculo" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="veiculo"/>
@@ -422,7 +421,19 @@ where
 		<variableExpression><![CDATA[0]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
-	<variable name="desconto" class="java.lang.Double"/>
+	<variable name="desconto" class="java.lang.String"/>
+	<variable name="total_com_desconto" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{total_produto}/100*$F{desconto}]]></variableExpression>
+	</variable>
+	<variable name="valor_desconto" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{total_bruto}-$V{total_com_desconto}]]></variableExpression>
+	</variable>
+	<variable name="comissao" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{valor_desconto}*20/100]]></variableExpression>
+	</variable>
+	<variable name="total_liquido" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{valor_desconto}-$V{comissao}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -1169,12 +1180,6 @@ where
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
-				<rectangle>
-					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="6fcfc44d-647a-4da1-858a-a548a0b331cd"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineStyle="Solid"/>
-					</graphicElement>
-				</rectangle>
 				<staticText>
 					<reportElement mode="Opaque" x="0" y="8" width="86" height="15" backcolor="#E2EFD9" uuid="be85adac-7454-4c86-9f34-8d9b14c5c0a6"/>
 					<textElement verticalAlignment="Middle" markup="none">
@@ -1588,6 +1593,12 @@ where
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cnpj2}]]></textFieldExpression>
 				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="8" width="799" height="56" uuid="6fcfc44d-647a-4da1-858a-a548a0b331cd"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
 			</frame>
 			<textField>
 				<reportElement x="719" y="50" width="85" height="17" uuid="09d0298f-19aa-42e2-8509-606cb7e53301"/>
@@ -1668,7 +1679,7 @@ where
 					<text><![CDATA[CUSTO TOTAL]]></text>
 				</staticText>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="666" y="0" width="39" height="22" backcolor="#E2EFD9" uuid="20cf3ccc-e3e2-4e08-b742-d3f8f6851ef2"/>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="665" y="0" width="40" height="22" backcolor="#E2EFD9" uuid="20cf3ccc-e3e2-4e08-b742-d3f8f6851ef2"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
@@ -2395,7 +2406,7 @@ where
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="175" y="-1" width="1" height="13" uuid="0145cad8-41f2-4a00-af10-10db22449be2">
+				<reportElement x="174" y="-1" width="1" height="13" uuid="0145cad8-41f2-4a00-af10-10db22449be2">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -2433,22 +2444,22 @@ where
 				<reportElement x="661" y="-1" width="45" height="12" uuid="a7beb1ee-76db-435e-933d-b5e37d315eee">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($F{custo_unitario}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="750" y="-1" width="47" height="12" uuid="581ac242-94c9-43ac-9396-c6b3a4a7c2a7">
+				<reportElement x="747" y="-1" width="53" height="12" uuid="581ac242-94c9-43ac-9396-c6b3a4a7c2a7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($F{total_produto}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{valor_desconto}))]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="175" y="-1" width="15" height="13" uuid="75659f0b-250e-44b9-9f88-3f424fdfb074"/>
+				<reportElement x="189" y="-1" width="15" height="13" uuid="75659f0b-250e-44b9-9f88-3f424fdfb074"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -2458,7 +2469,7 @@ where
 				<textFieldExpression><![CDATA[$F{d1}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="190" y="-1" width="15" height="13" uuid="98d9da55-6de6-42bd-bb55-8260062dcbd0"/>
+				<reportElement x="174" y="-1" width="15" height="13" uuid="98d9da55-6de6-42bd-bb55-8260062dcbd0"/>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
@@ -2768,7 +2779,7 @@ where
 				</reportElement>
 			</line>
 			<textField>
-				<reportElement x="149" y="-1" width="25" height="12" uuid="0a4323bc-68e1-4510-8513-e62a33dd746a"/>
+				<reportElement x="149" y="-1" width="21" height="12" uuid="0a4323bc-68e1-4510-8513-e62a33dd746a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -2807,13 +2818,13 @@ where
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="175" y="-1" width="1" height="13" uuid="40a031f5-b259-4f46-bf35-e899e4b8d831">
+				<reportElement x="174" y="-1" width="1" height="13" uuid="40a031f5-b259-4f46-bf35-e899e4b8d831">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="666" y="-1" width="1" height="13" uuid="cd07211b-6ad9-4085-b4ad-00abb3b5489d">
+				<reportElement x="661" y="-1" width="1" height="13" uuid="cd07211b-6ad9-4085-b4ad-00abb3b5489d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -3058,22 +3069,22 @@ where
 				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="640" y="-1" width="25" height="12" uuid="50c05ba1-aca9-4c10-9e79-9e648ccb6a4f">
+				<reportElement x="640" y="-1" width="20" height="12" uuid="50c05ba1-aca9-4c10-9e79-9e648ccb6a4f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{qtd_total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="750" y="-1" width="48" height="12" uuid="fdac8e29-1dc4-449a-936a-d5495999f6ee">
+				<reportElement x="747" y="-1" width="51" height="12" uuid="fdac8e29-1dc4-449a-936a-d5495999f6ee">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{valor_desconto}))]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="144" y="-1" width="1" height="13" uuid="4196297e-835d-429d-9f99-304ce2c94843">
@@ -3102,7 +3113,7 @@ where
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[HONORÁRIOS]]></text>
+					<text><![CDATA[TOTAL LIQUIDO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="610" y="28" width="102" height="13" backcolor="#E2EFD9" uuid="8772af7f-31bb-4b65-bbb0-b2068993e00d"/>
@@ -3110,7 +3121,7 @@ where
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[TOTAL BRUTO]]></text>
+					<text><![CDATA[COMISSÃO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="610" y="14" width="102" height="14" backcolor="#E2EFD9" uuid="801be1d9-712b-4ec4-b882-79fb3cf7969c"/>
@@ -3118,7 +3129,7 @@ where
 						<font size="7"/>
 						<paragraph leftIndent="3" rightIndent="3"/>
 					</textElement>
-					<text><![CDATA[TOTAL BLOGS]]></text>
+					<text><![CDATA[TOTAL BRUTO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement mode="Opaque" x="341" y="15" width="239" height="12" backcolor="#E2EFD9" uuid="2ea292d3-c1f6-401a-93a4-76693059e140"/>
@@ -3164,11 +3175,6 @@ where
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 				</line>
-				<rectangle>
-					<reportElement mode="Transparent" x="610" y="14" width="190" height="40" uuid="6bb7553b-175e-4101-9d84-94b13a02361b">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-				</rectangle>
 				<line>
 					<reportElement x="0" y="27" width="580" height="1" uuid="4fb0afc1-a711-40e6-8d88-136654379571">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -3207,7 +3213,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_blogs}))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{valor_desconto}))]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="716" y="28" width="82" height="13" uuid="9c703d12-2dfd-4c39-b9f1-729a3dd913be"/>
@@ -3215,7 +3221,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{comissao}))]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="716" y="41" width="82" height="13" uuid="ea26a66d-f9d1-4f0b-9a06-9096a6ad92cf"/>
@@ -3223,7 +3229,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 						<font size="7"/>
 						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{honorarios}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_liquido}))]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="5" y="29" width="170" height="24" uuid="8d995501-5e00-43cd-bb61-828f96e61aeb"/>
@@ -3246,6 +3252,11 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 					</textElement>
 					<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
 				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="610" y="14" width="190" height="40" uuid="6bb7553b-175e-4101-9d84-94b13a02361b">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</rectangle>
 			</frame>
 		</band>
 	</lastPageFooter>

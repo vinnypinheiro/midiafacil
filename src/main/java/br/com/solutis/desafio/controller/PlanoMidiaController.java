@@ -43,6 +43,16 @@ public class PlanoMidiaController {
         return this.buildResponse(planomidiaService.save(bean));
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity update(@RequestBody PlanoMidia bean) {
+
+        PlanoMidia planoMidia = planomidiaService.getById(bean.getId());
+        planoMidia.setSituacao(bean.getSituacao());
+        planoMidia.setOsagencia(bean.getOsagencia());
+
+        return this.buildResponse(planomidiaService.save(planoMidia));
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity query(@RequestBody FilterData filterData) {
 

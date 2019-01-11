@@ -100,7 +100,7 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         this.openGradeDialogDuplicado(pedidoInsercaoItem);
     }
 
-    openDialog(entity): void {
+  openDialog(entity): void {
         const dialogRef = this.dialog.open(DialogPecaForm, {
 
             data:{
@@ -118,7 +118,7 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
 
     }
 
-    openGradeDialogDuplicado(pedidoInsercaoItem): void {
+   openGradeDialogDuplicado(pedidoInsercaoItem): void {
         const dialogRef = this.dialog.open(DialogGradeForm, {
 
             data:{
@@ -170,7 +170,6 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         });
 
     }
-
 
     openGradeDialogEdit(pedidoInsercaoItem): void {
         const dialogRef = this.dialog.open(DialogGradeForm, {
@@ -273,9 +272,6 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         });
     }
 
-
-
-
     //Plano Midia reactive form
     activeForm = this.fb.group({
         id: null,
@@ -284,6 +280,7 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         agencia_id: null,
         cliente_id:  null,
         situacao: null,
+        osagencia: null,
 
         pecalist: this.fb.array([this.addPecaListGroup()]),
         pedidoDeInsercaoItemlist: this.fb.array([this.addpedidoDeInsercaoItemlistGroup()])
@@ -321,9 +318,9 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
 
         });
 
-
-
     }
+
+
     reportname: string;
     printReport( id: number) {
 
@@ -335,8 +332,6 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
 
         this.sharedService.printReport( this.reportname, id)
     }
-
-
 
     addpedidoDeInsercaoItemlistGroup() {
         return this.fb.group({
@@ -410,7 +405,18 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         }
     }
 
+    updateEntity() {
 
+        this.activeForm.patchValue(
+            {
+                id: this.activeBean.id,
+            }
+        );
+
+        this.activeBean = this.activeForm.value;
+        this.update();
+        //this.apiService.save(this.clienteForm.value);
+    }
 }
 
 @Component({

@@ -24,10 +24,17 @@
                         Plano de Mídia: {{entity?.id}}
                     </div>
                     <div class="subtitle secondary-text">
+
                     </div>
                 </div>
+
+
             </div>
             <!-- / APP TITLE -->
+
+            <div fxLayout="column" fxLayoutAlign="start start">
+                <h4>OS Agência: {{entity?.osagencia}}</h4>
+            </div>
 
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -40,13 +47,6 @@
                 </button>
                 <!-- / ADD BUTTON -->
 
-                <!-- ADD BUTTON -->
-                <button mat-raised-button
-                        [routerLink]="'/cliente/new'"
-                        class="fuse-white mt-24 mt-md-0">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <!-- / ADD BUTTON -->
 
                 <!-- PRINT BUTTON -->
                 <button mat-raised-button color="primary"
@@ -126,7 +126,7 @@
                                                 <tr>
                                                     <td>
                                                 <span class="status h6 p-4 purple-300">
-                                                  Em Aberto
+                                                  {{entity?.situacao}}
                                                 </span>
                                                     </td>
 
@@ -139,23 +139,41 @@
                                                 </tbody>
                                             </table>
 
-                                            <form class="update-status p-24"
-                                                  fxLayout="row" fxLayoutAlign="start center">
+                                            <form [formGroup]="activeForm" (ngSubmit)="this.updateEntity()" class="update-status p-24"
+                                                  fxLayoutAlign="start center">
 
-                                                <mat-form-field appearance="outline" class="mr-16" fxFlex>
-                                                    <mat-label>Atulizar Status</mat-label>
-                                                    <mat-select
-                                                        required>
-                                                        <mat-option>
-                                                            Cancelado
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
+                                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                                                    <mat-form-field appearance="outline" class="w-100-p" >
+                                                        <mat-label>Status</mat-label>
+                                                        <mat-select formControlName="situacao" required>
+                                                            <mat-option [value]="'EM ABERTO'">
+                                                                Em Aberto
+                                                            </mat-option>
+                                                            <mat-option [value]="'APROVADO'">
+                                                                Aprovado
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
 
-                                                <button mat-raised-button class="mat-accent">
 
-                                                    Atualizar Status
-                                                </button>
+                                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                                                    <mat-form-field appearance="outline" fxFlex="20" class="pl-4">
+                                                        <mat-label>OS Agência</mat-label>
+                                                        <input  formControlName="osagencia" matInput required>
+                                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                                                    </mat-form-field>
+
+                                                </div>
+
+                                                <div >
+                                                    <button class="w-100-p" mat-raised-button class="mat-accent">
+                                                        Atualizar Plano de Mídia
+                                                    </button>
+                                                </div>
+
+
                                             </form>
 
                                         </div>
@@ -222,7 +240,7 @@
                         </div>
                     </mat-tab>
 
-                    <mat-tab label="grades">
+                    <mat-tab label="Grades">
 
                         <div class="products tab-content p-24" fusePerfectScrollbar>
 

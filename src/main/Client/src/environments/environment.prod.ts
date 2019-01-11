@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     getBaseURL: function () {
             // console.log('getBaseURL -> production', this.production);
-            return 'http://localhost:8080';
+            return 'http://192.168.0.32:8080';
 
     }
 };

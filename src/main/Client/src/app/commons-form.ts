@@ -46,9 +46,16 @@ export abstract class CommonsForm<T extends DomainBase> implements OnInit, After
 
     save(): void {
         this.apiService.save(this.activeBean).subscribe(response => {
-          console.log(response);
-          this.openGrid();
+            console.log(response);
+            this.openGrid();
 
+        });
+    }
+
+    update(): void {
+        this.apiService.update(this.activeBean).subscribe(response => {
+            console.log(response);
+            this.openGrid();
         });
     }
 

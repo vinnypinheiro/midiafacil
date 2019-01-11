@@ -1581,11 +1581,6 @@ v.nomefantasia as veiculo,
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="17" splitType="Prevent">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-		</band>
-	</columnFooter>
 	<lastPageFooter>
 		<band height="175">
 			<rectangle>

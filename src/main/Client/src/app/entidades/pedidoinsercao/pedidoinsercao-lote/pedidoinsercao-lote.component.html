@@ -12,7 +12,7 @@
         </div>
 
         <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
-            <button mat-raised-button color="accent" (click)="savePedidoInsercao()" aria-label="Send Message">Enviar Mensagem</button>
+            <button mat-raised-button color="accent" (click)="savePedidoInsercao()" aria-label="Gerar">Gerar Pedidos</button>
             <button mat-raised-button color="primary" [routerLink]="'/pedidoinsercao/edit/'+entity?.id+'/'" aria-label="Follow">Editar Pedido Insercao</button>
             <mat-chip (click)="printAccount('client')" color="primary"><i class="material-icons">
                 print

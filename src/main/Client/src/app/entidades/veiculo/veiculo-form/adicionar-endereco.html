@@ -1,0 +1,53 @@
+
+<form [formGroup]="enderecoForm" (ngSubmit)="saveGrade()"  class="  mr-24" fxLayout="column" fxLayoutAlign="start"
+      name="form">
+
+    <div class="tab-content p-24" fusePerfectScrollbar >
+
+        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+            <mat-label>Endereço</mat-label>
+            <input matInput placeholder=""
+                   name="endereco"
+                   formControlName="endereco"
+                   required>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Bairro</mat-label>
+                <input matInput placeholder=""
+                       name="bairro"
+                       formControlName="bairro">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>CEP</mat-label>
+                <input matInput placeholder=""
+                       name="cep"
+                       formControlName="cep">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Cidade</mat-label>
+                <input matInput placeholder=""
+                       name="cidade"
+                       formControlName="cidade">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>UF</mat-label>
+                <input matInput placeholder=""
+                       name="estado"
+                       formControlName="estado">
+            </mat-form-field>
+
+        </div>
+
+
+
+    </div>
+
+</form>
+
+

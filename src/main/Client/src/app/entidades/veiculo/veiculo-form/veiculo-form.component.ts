@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'; 
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'; 
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
@@ -12,6 +12,12 @@ import {CommonsService} from '../../../commons-service';
 import {Veiculo} from '../veiculo'; 
 import {VeiculoService} from '../veiculo.service';
 import {TipoMidiaService} from '../../tipomidia/tipomidia.service';
+import {DialogPecaForm} from "../../planomidia/planomidia-view/planomidia-view.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
+import {Peca} from "../../peca/peca";
+import {PecaService} from "../../peca/peca.service";
+import {Endereco} from "../../endereco/endereco";
+import {EnderecoService} from "../../endereco/endereco.service";
 
 @Component({
  selector: 'gov-veiculo-form', 
@@ -23,7 +29,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
 
    entity: any;
 
-    constructor(
+    constructor( public dialog: MatDialog,
                           private fb: FormBuilder,
                             apiService: VeiculoService,
                             private tipomidiaService: TipoMidiaService, 
@@ -220,8 +226,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         });
       }
 
-
-
       addEmailGroup() {
         return this.fb.group({
           tipoemail: [null],
@@ -229,7 +233,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         });
       }
 
-      ////// Endereço List //////////
      addAddress() {
        this.addressArray.push(this.addAddressGroup());
      }
@@ -239,9 +242,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
      get addressArray() {
        return <FormArray>this.activeForm.get('enderecoList');
      }
-
-     ////// Endereço List fim /////////////////////////////////////////////////////////////////////
-
        ////// Contas Bancarias List //////////
        addContasBancarias() {
         this.contasBancariasArray.push(this.addContasBancariasGroup());
@@ -252,33 +252,30 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
       get contasBancariasArray() {
         return <FormArray>this.activeForm.get('contaBancariaList');
       }
-      ////// Contas Bancarias List fim /////////////////////////////////////////////////////////////
 
-        ////// Contato List //////////
      addContato() {
         this.contatoArray.push(this.addContasBancariasGroup());
       }
+
       removeContato(index) {
         this.contatoArray.removeAt(index);
       }
+
       get contatoArray() {
         return <FormArray>this.activeForm.get('contatoList');
       }
-      ////// Contato List fim ///////////////////////////////////////////////////////////////////////////////
 
-        ////// Site List //////////
      addSite() {
         this.siteArray.push(this.addSiteGroup());
       }
+
       removeSite(index) {
         this.siteArray.removeAt(index);
       }
       get siteArray() {
         return <FormArray>this.activeForm.get('siteList');
       }
-      ////// Site List fim /////////////////////////
 
-        ////// Telefone List //////////
      addTelefone() {
         this.telefoneArray.push(this.addTelefoneGroup());
       }
@@ -288,9 +285,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
       get telefoneArray() {
         return <FormArray>this.activeForm.get('telefoneList');
       }
-      ////// Telefone List fim /////////////////////////
 
-        ////// Email List //////////
      addEmail() {
         this.emailArray.push(this.addEmailGroup());
       }
@@ -300,8 +295,47 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
       get emailArray() {
         return <FormArray>this.activeForm.get('emailList');
       }
- 
-      ////// Email List fim /////////////////////////
+
+
+
+      ////////////////////////
+
+    openEditDialog(entity, dialog): void {
+        const dialogRef = this.dialog.open(DialogPecaForm, {
+
+            data:{
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.setEnderecoArray();
+        });
+
+    }
+
+    setEnderecoArray(){
+
+        this.operation = Operation.SELECT;
+        this.apiService.findById(this.beanId).subscribe(response => {
+            this.activeBean = (<any>response);
+            this.entity = this.activeBean;
+            console.log(this.activeBean);
+
+            let control = <FormArray>this.activeForm.controls.enderecoList;
+            this.entity.pecalist.forEach(x => {
+                control.push(this.fb.group({
+                    peca: x.peca,
+                    titulo: x.titulo,
+                    duracao: x.duracao
+                }))
+            });
+
+
+        });
+
+    }
+
 
 
 
@@ -352,5 +386,50 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
      onButtonActionClick(): void { 
          //console.log(this.activeBean.veiculo.id); 
      } 
-} 
+}
+
+@Component({
+    selector: 'dialog-content-example-dialog',
+    templateUrl: './adicionar-endereco.html',
+})
+export class DialogEnderecoForm {
+
+    endereco: Endereco;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogPecaForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private enderecoService: EnderecoService
+    ) {
+
+    }
+
+    saveEndereco(){
+        this.enderecoForm.patchValue(
+            {
+                planomidia_id: this.data.entidade,
+            }
+        );
+
+        this.enderecoService.save(this.enderecoForm.value).subscribe(response => {
+            console.log(response);
+        });
+    }
+
+    //Cliente reactive form
+    enderecoForm = this.fb.group({
+        endereco: [null],
+        bairro: [null],
+        cidade: [null],
+        cep: [null],
+        estado: [null]
+    });
+
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
 

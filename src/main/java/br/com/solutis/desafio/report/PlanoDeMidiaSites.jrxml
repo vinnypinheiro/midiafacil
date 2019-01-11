@@ -5,7 +5,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="LOGO" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[ select         
+		<![CDATA[select         
  'SITES' as midia, 
  ag.nomefantasia as agencia, 
  cl.nomefantasia as cliente, 
@@ -28,7 +28,7 @@
  left join cliente cl on (cl.id = pm.cliente_id) 
  left join campanha cp on (cp.id = pm.campanha_id) 
  left join veiculo v on (v.id = pii.veiculo_id) 
- where pii.planomidia_id = 653 ]]>
+ where pii.planomidia_id = 653]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
 	<field name="midia" class="java.lang.String">
@@ -102,6 +102,7 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="76" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.equals( 1 )]]></printWhenExpression>
 			<staticText>
 				<reportElement x="733" y="61" width="67" height="15" backcolor="#E2EFD9" uuid="05848804-dda4-4f35-b142-53b95f6affc1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -1220,78 +1221,6 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="12" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-			<rectangle>
-				<reportElement x="0" y="-1" width="800" height="13" uuid="33a36d10-d8b4-4ddd-b89d-829bc3c0c1cc">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-			</rectangle>
-			<line>
-				<reportElement x="85" y="-1" width="1" height="13" uuid="0275e64d-884a-4db6-b724-478b914edb67">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="241" y="-1" width="1" height="13" uuid="fe4939ad-2d8b-4ba7-a571-b138559774dc">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="652" y="-1" width="1" height="13" uuid="5527b9ce-1310-4be6-90e4-889bdf129489">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="610" y="-1" width="1" height="13" uuid="f8d4aa1e-1bf8-47d2-86be-82b93fc54efe">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="434" y="-1" width="1" height="13" uuid="44d04c60-7b44-4050-bfc0-8943fe291067">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="733" y="-1" width="1" height="13" uuid="177f5a25-230c-4d74-9329-03ba0c59ea20">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-			</line>
-			<staticText>
-				<reportElement mode="Transparent" x="0" y="-1" width="73" height="13" backcolor="#E2EFD9" uuid="a8bd784a-29cb-4be6-815e-fb0d5c693c0c"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
-					<font size="7"/>
-					<paragraph leftIndent="3" rightIndent="3"/>
-				</textElement>
-				<text><![CDATA[TOTAL]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="612" y="0" width="40" height="12" uuid="71aa6ad2-22fb-4b87-aec0-9a54bd574d5b">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{qtd_total}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="735" y="-1" width="66" height="12" uuid="0d48a3be-ce08-4cb8-bbcd-2fcedf118df6">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_produto}))]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
 	<lastPageFooter>
 		<band height="150">
 			<staticText>
@@ -1439,9 +1368,73 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 			</textField>
+			<rectangle>
+				<reportElement x="0" y="-1" width="800" height="13" uuid="b6199371-eed8-460d-866a-d5465528b316">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<line>
+				<reportElement x="85" y="-1" width="1" height="13" uuid="744087df-0732-4369-8e15-e03756ac265a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="241" y="-1" width="1" height="13" uuid="9545cc74-43c5-4014-b2f2-cac8053b5850">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="652" y="-1" width="1" height="13" uuid="30d6da6c-2d3d-4e87-812b-7988f7bfd78b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="610" y="-1" width="1" height="13" uuid="4f69e6f4-0f3f-40e8-b2be-f8ce287f269d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="434" y="-1" width="1" height="13" uuid="81a6d9f0-2b87-4fe5-a476-2c2406c7d874">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="733" y="-1" width="1" height="13" uuid="22535781-b142-4ef8-bad4-e110fae4199a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="-1" width="73" height="13" backcolor="#E2EFD9" uuid="92c5cf63-1eb9-4c77-9459-0f63e4312e51"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="7"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="735" y="-1" width="66" height="12" uuid="69918903-d547-42e7-8a70-d8fa62c71bef">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_produto}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="615" y="-1" width="36" height="12" uuid="a9642402-a2ec-440a-8692-3ae4e4767d1c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qtd_total}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

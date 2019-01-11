@@ -30,9 +30,12 @@ export abstract class CommonsService<T extends DomainBase> {
   }
 
   public save(bean: DomainBase): Observable<ServerResponse<T>> {
-    console.log(bean);
     return this.http.post<ServerResponse<T>>(`${this.API_ROOT_URL}/${this.getPathModule()}/save`, JSON.parse(stringifyCustom(bean)));
   }
+
+    public update(bean: DomainBase): Observable<ServerResponse<T>> {
+        return this.http.post<ServerResponse<T>>(`${this.API_ROOT_URL}/${this.getPathModule()}/update`, JSON.parse(stringifyCustom(bean)));
+    }
 
     public saveLote(bean: DomainBase): Observable<ServerResponse<T>> {
         console.log(bean);

@@ -92,7 +92,7 @@
                 <ng-container matColumnDef="situacao">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Situação</mat-header-cell>
                     <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate status">{{planomidia.situacao}}</p>
+                        <p class="text-truncate" [ngClass]="planomidia.situacao == 'EM ABERTO' ? 'status' : 'status2'" >{{planomidia.situacao}}</p>
                     </mat-cell>
                 </ng-container>
 

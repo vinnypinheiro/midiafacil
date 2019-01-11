@@ -44,7 +44,7 @@ public class PedidoInsercaoService {
     }
 
     public Page<PedidoInsercao> getList(Integer pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, 20, Sort.Direction.ASC, "id");
+        PageRequest pageRequest = new PageRequest(pageNumber - 1, 800, Sort.Direction.ASC, "id");
         return pedidoinsercaoRepository.findAll(pageRequest);
     }
 

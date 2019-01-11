@@ -30,11 +30,12 @@ public class PlanoDeMidiaSites extends Report {
         sql += " from pedido_insercao_item pii \n" ;
         sql += " left join plano_midia pm on (pm.id =  "+id+") \n" ;
         sql += " left join agencia ag on (ag.id = pm.agencia_id) \n" ;
-        sql += " left join programa p on (p.veiculo_id = pii.veiculo_id) \n" ;
+        sql += " left join programa p on (p.id = pii.programa_id) \n" ;
         sql += " left join cliente cl on (cl.id = pm.cliente_id) \n" ;
         sql += " left join campanha cp on (cp.id = pm.campanha_id) \n" ;
         sql += " left join veiculo v on (v.id = pii.veiculo_id) \n" ;
         sql += " where pii.planomidia_id = "+id+" \n" ;
+        sql += " order by veiculo \n" ;
     }
 
     public HashMap<String,Object> getParametros(){
