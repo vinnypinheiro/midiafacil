@@ -11,7 +11,7 @@ export class LoginService {
 
   login(user: LoginRequest){
     //user.password = new SHA256().hash(user.password);
-    return this.http.post(`https://midiafacil.herokuapp.com:8085/api/auth`,user);
+    return this.http.post(`/api/auth`,user);
   }
 
 }
