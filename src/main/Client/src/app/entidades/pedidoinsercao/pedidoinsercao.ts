@@ -32,7 +32,7 @@ export interface PedidoInsercao extends DomainBase {
     planomidia_id: PlanoMidia;
 
     pecaList: Peca[];
-    pedidoinsercaoitemList: PedidoInsercaoItem [];
+    pedidoDeInsercaoItemlist: PedidoInsercaoItem [];
 
 
 }
