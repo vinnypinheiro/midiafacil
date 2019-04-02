@@ -47,10 +47,7 @@ public class VeiculoController {
 
         for (Endereco e :bean.getEnderecoList() ){
 
-            if (e.getId() == null ){
-                e.setId(bean.getId());
-            }
-            e.setVeiculo_id(bean);
+             e.setVeiculo_id(bean);
             enderecoService.save(e);
         }
 
@@ -80,6 +77,14 @@ public class VeiculoController {
         }
 
         return this.buildResponse(veiculoService.save(bean));
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity update(@RequestBody Veiculo bean) {
+
+        Veiculo veiculo = veiculoService.getById(bean.getId());
+
+        return this.buildResponse(veiculoService.save(veiculo));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

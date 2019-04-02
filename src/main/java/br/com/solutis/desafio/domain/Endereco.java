@@ -13,7 +13,6 @@ public class Endereco implements Serializable {
     @GeneratedValue
     private Long id;
 
-
     private String endereco;
     private String bairro;
     private String cidade;
@@ -21,7 +20,7 @@ public class Endereco implements Serializable {
     private String cep;
 
     @JsonBackReference(value="cliente-endereco")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = true, foreignKey = @ForeignKey(name = "fk_endereco_cliente"))    private Cliente cliente_id;
 
 

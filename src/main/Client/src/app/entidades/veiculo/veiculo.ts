@@ -22,6 +22,7 @@ export interface Veiculo extends DomainBase {
      obs: string;
      email: string;
      telefone: string;
+     praca: string;
     
     
      contaBancariaList: ContaBancaria[];

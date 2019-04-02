@@ -15,6 +15,9 @@ import { MatDialogModule } from '@angular/material';
 
 import { fuseConfig } from 'app/fuse-config';
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FakeDbService } from 'app/fake-db/fake-db.service';
+
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
@@ -33,7 +36,11 @@ import {ImportService } from "./import.service";
 const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'sample' 
+        redirectTo: './main/apps/apps.module#AppsModule' ,
+
+    }, {
+        path        : 'apps',
+        loadChildren: './main/apps/apps.module#AppsModule'
     }
 ];
 
@@ -51,6 +58,11 @@ const appRoutes: Routes = [
         SharedModule,
         MatDialogModule,
         TranslateModule.forRoot(),
+
+        InMemoryWebApiModule.forRoot(FakeDbService, {
+            delay             : 0,
+            passThruUnknownUrl: true
+        }),
 
         // Material moment date module
         MatMomentDateModule,

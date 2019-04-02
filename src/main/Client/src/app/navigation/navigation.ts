@@ -13,6 +13,15 @@ export const navigation: FuseNavigation[] = [
                 type     : 'item',
                 icon     : 'home',
                 url      : '/sample',
+
+            },
+            {
+                id       : 'mail',
+                title    : 'Mail',
+                translate: 'E-mail',
+                type     : 'item',
+                icon     : 'email',
+                url      : '/apps/mail',
                 badge    : {
                     title    : '25',
                     translate: 'NAV.SAMPLE.BADGE',
@@ -128,6 +137,33 @@ export const navigation: FuseNavigation[] = [
                         type : 'item',
                         url  : '/rel3'
                     }
+                ]
+            },
+        ]
+    },
+    {
+        id       : 'configuracoes',
+        title    : 'FINANCEIRO',
+        type     : 'group',
+        children : [
+            {
+                id       : 'receitasedespesasa',
+                title    : 'Despesas e Receitas',
+                type     : 'collapsable',
+                icon     : 'account_balance_wallet',
+                children : [
+                    {
+                        id   : 'despesas',
+                        title: 'Despesas',
+                        type : 'item',
+                        url  : '/operador'
+                    },
+                    {
+                        id   : 'Receitas',
+                        title: 'Despesas',
+                        type : 'item',
+                        url  : '/operador'
+                    },
                 ]
             },
         ]

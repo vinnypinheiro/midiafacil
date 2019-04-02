@@ -28,7 +28,7 @@
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Procurar Pedido de Inserção...">
+                    <input matInput (keyup)="applyFilter($event.target.value)"   placeholder="Pedido de Inserção...">
                 </div>
             </div>
             <!-- / SEARCH -->
@@ -86,7 +86,6 @@
                         <p class="text-truncate status">{{pedidoinsercao.status}}</p>
                     </mat-cell>
                 </ng-container>
-
 
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>

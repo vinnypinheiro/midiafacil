@@ -21,6 +21,13 @@ public class ProgramaController {
         return this.buildResponse(programaService.save(bean));
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity update(@RequestBody Programa bean) {
+
+
+        return this.buildResponse(programaService.save(bean));
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity query(@RequestBody FilterData filterData) {
 

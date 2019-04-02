@@ -20,7 +20,7 @@ import {
 
 
 import {VeiculoGridComponent} from './veiculo-grid/veiculo-grid.component'; 
-import {VeiculoFormComponent} from './veiculo-form/veiculo-form.component'; 
+import {VeiculoFormComponent, DialogEnderecoForm, DialogContatoForm, DialogTelefoneForm, DialogEmailForm, DialogSitesForm, DialogContaBancariaForm} from './veiculo-form/veiculo-form.component';
 import {AuthGuard} from '../../security/auth.guard'; 
 import {NgModule} from '@angular/core';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -74,9 +74,9 @@ const ROUTES  = [
                 ], 
                 declarations: [ 
                 VeiculoGridComponent, 
-                VeiculoFormComponent, VeiculoViewComponent, DialogProgramaForm
+                VeiculoFormComponent, VeiculoViewComponent, DialogProgramaForm, DialogEnderecoForm, DialogContatoForm, DialogTelefoneForm, DialogEmailForm, DialogSitesForm, DialogContaBancariaForm
                 ], 
-                entryComponents: [VeiculoGridComponent,VeiculoFormComponent, DialogProgramaForm],
+                entryComponents: [VeiculoGridComponent,VeiculoFormComponent, DialogProgramaForm, DialogEnderecoForm, DialogContatoForm, DialogTelefoneForm, DialogEmailForm, DialogSitesForm, DialogContaBancariaForm],
                 schemas: [], 
                 providers: [] 
                 }) 

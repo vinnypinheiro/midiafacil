@@ -1,0 +1,35 @@
+
+<form [formGroup]="telefoneForm" (ngSubmit)="saveTelefone()"  class="  mr-24" fxLayout="column" fxLayoutAlign="start"
+      name="form">
+
+    <div class="tab-content p-24" fusePerfectScrollbar >
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" class="30">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder=""
+                       name="tipotelefone"
+                       formControlName="tipotelefone"
+                       required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Telefone</mat-label>
+                <input matInput placeholder=""
+                       name="numero"
+                       formControlName="numero">
+            </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button
+                class="save-product-button">
+            <span>Salvar</span>
+        </button>
+
+    </div>
+
+</form>
+
+

@@ -5,6 +5,8 @@ import br.com.solutis.desafio.service.MailPiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.integration.mail.MailReceiver;
+import org.springframework.integration.mail.Pop3MailReceiver;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("MailPiController")
@@ -21,13 +23,13 @@ public class MailPiController {
         return this.buildResponse(mailpiService.save(bean));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity query(@RequestBody FilterData filterData) {
+    @RequestMapping(value = "/popget", method = RequestMethod.GET)
+    public ResponseEntity query() {
 
-        //mailpiService.getList(filterData.getPage());
-        //mailpiService.select(filterData);
+        MailReceiver receiver = new Pop3MailReceiver("pop3://fat@multimidia.xyz:fat110203@pop.hostinger.com.br/INBOX");
 
-        return this.buildResponse( mailpiService.getList(filterData.getPage()));
+
+        return this.buildResponse(receiver);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

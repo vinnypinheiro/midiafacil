@@ -20,6 +20,7 @@ public class Veiculo implements Serializable {
     private Long id;
 
     private String cnpj;
+    private String praca;
     private String cpf;
     private String cep;
     private Instant data_cadastro;
@@ -232,5 +233,13 @@ public class Veiculo implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getPraca() {
+        return praca;
+    }
+
+    public void setPraca(String praca) {
+        this.praca = praca;
     }
 }

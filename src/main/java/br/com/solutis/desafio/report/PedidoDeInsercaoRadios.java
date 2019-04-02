@@ -15,12 +15,12 @@ public class PedidoDeInsercaoRadios extends Report {
 	  sql += " v.nomefantasia as veiculo,\n" ;
 	  sql += " v.razaosocial as razao_social,\n" ;
 	  sql += "  upper(v.cidade) as cidade,\n" ;
-	  sql += " v.contato as contato,\n" ;
+	  sql += " co.contato as contato,\n" ;
 	  sql += " 'BA' as uf,\n" ;
 	  sql += " 'midia' as midia,\n" ;
-	  sql += " v.cep as cep,\n" ;
+	  sql += " en.cep as cep,\n" ;
 	  sql += " v.fax as fax,\n" ;
-	  sql += " v.telefone as tel,\n" ;
+	  sql += " co.telefone as tel,\n" ;
 	  sql += " c.telefone as tel2,\n" ;
 	  sql += " c.nomefantasia as veiculo2,\n" ;
 	  sql += " c.razaosocial as razao_social2,\n" ;
@@ -41,13 +41,13 @@ public class PedidoDeInsercaoRadios extends Report {
 	  sql += " '' as fax2,\n" ;
 	  sql += " 'DIAS DAVILA2' as cidade2,\n" ;
 	  sql += " a.nomefantasia as representante,\n" ;
-	  sql += " a.endereco as endereco,\n" ;
-	  sql += " a.cnpj as cnpj,\n" ;
-	  sql += " 'STJ' as praca,\n" ;
-	  sql += " a.bairro as bairro,\n" ;
+	  sql += " v.endereco as endereco,\n" ;
+	  sql += " v.cnpj as cnpj,\n" ;
+	  sql += " v.praca as praca,\n" ;
+	  sql += " v.bairro as bairro,\n" ;
 	  sql += " a.inscricaoestadual as incricao_estadual,\n" ;
 	  sql += " a.inscricaomunicipal as inscricao_municipal,\n" ;
-	  sql += " v.email as email,\n" ;
+	  sql += " co.email as email,\n" ;
 	  sql += " 'pruduto' as produto,\n" ;
 	  sql += " p.peca as peca,\n" ;
 	  sql += " 'nomeXXX' as nome,\n" ;
@@ -94,6 +94,8 @@ public class PedidoDeInsercaoRadios extends Report {
 	  sql += " pi.vencimentotxt as vencimentotxt,\n" ;
 	  sql += " pi.faturamentotxt as faturamentotxt,\n" ;
 	  sql += " pi.obs as observacao,\n" ;
+        sql += " pi.codigo as codigo,\n" ;
+        sql += " pi.dataemissao as data_emissao,\n" ;
 	  sql += " pii.ano as ano,\n" ;
 	  sql += " pii.planomidia_id as planomidia,\n" ;
 	  sql += " pm.desconto as desconto,\n" ;
@@ -108,14 +110,17 @@ public class PedidoDeInsercaoRadios extends Report {
 	  sql += " (pii.pedidoinsercao_id = pi.id)\n" ;
 	  sql += " left join veiculo v on\n" ;
 	  sql += " (v.id = pi.veiculo_id)\n" ;
+	  sql += " left join  contato co on (co.veiculo_id = pi.veiculo_id)\n" ;
+		sql += " left join  endereco en on (en.veiculo_id = pi.veiculo_id)\n" ;
 	  sql += " left join cliente c on\n" ;
 	  sql += " (c.id = pi.cliente_id)\n" ;
-	  sql += " left join agencia a on\n" ;
+	  sql += " left join agencia a on \n" ;
 	  sql += " (a.id =4)\n" ;
 	  sql += " left join peca p on\n" ;
 	  sql += " (p.id = pii.peca_id)\n" ;
 	  sql += " where\n" ;
 	  sql += " pi.id = "+id+" \n" ;
+        sql += " LIMIT 1 \n" ;
 	  sql += "";
     }
 
@@ -124,6 +129,12 @@ public class PedidoDeInsercaoRadios extends Report {
 
         String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
+
+		String CNPJ = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\cnpj.png";
+		parametros.put("CNPJ", CNPJ);
+
+		String ASSINATURA = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\assinatura.png";
+		parametros.put("ASSINATURA", ASSINATURA);
 
 
         return  parametros;

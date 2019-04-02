@@ -7,13 +7,13 @@
         <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
              fxLayoutAlign.gt-sm="start center">
             <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                {{entity?.nomefantasia}}
+                {{activeBean?.nomefantasia}}
             </div>
         </div>
 
         <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
             <button mat-raised-button color="accent" aria-label="Send Message">Enviar Mensagem</button>
-            <button mat-raised-button color="primary" [routerLink]="'/veiculo/edit/'+entity.id+'/'" aria-label="Follow">Editar Veiculo</button>
+            <button mat-raised-button color="primary" [routerLink]="'/veiculo/edit/'+activeBean?.id+'/'" aria-label="Follow">Editar Veiculo</button>
             <mat-chip (click)="printAccount('client')" color="primary"><i class="material-icons">
                 print
             </i></mat-chip>
@@ -44,7 +44,7 @@
                                         person
                                     </i>
                                         Nome Fantasia</div>
-                                    <div class="info">{{entity.nomefantasia}}</div>
+                                    <div class="info">{{activeBean.nomefantasia}}</div>
                                 </div>
 
                                 <div class="info-line">
@@ -52,7 +52,7 @@
                                     <div class="title"><i class="material-icons">
                                         work
                                     </i> Razão Social</div>
-                                    <div class="info">{{entity.razaosocial}}</div>
+                                    <div class="info">{{activeBean.razaosocial}}</div>
                                 </div>
 
                                 <div class="info-line">
@@ -60,21 +60,28 @@
                                     <div class="title"><i class="material-icons">
                                         chevron_right
                                     </i> CNPJ</div>
-                                    <div class="info">{{entity.cnpj}}</div>
+                                    <div class="info">{{activeBean.cnpj}}</div>
                                 </div>
 
                                 <div class="info-line">
                                     <div class="title"><i class="material-icons">
                                         chevron_right
                                     </i>Incrição Estadual</div>
-                                    <div class="info">{{entity.cnpj}}</div>
+                                    <div class="info">{{activeBean.inscricaoestadual}}</div>
                                 </div>
 
                                 <div class="info-line">
                                     <div class="title"><i class="material-icons">
                                         chevron_right
                                     </i>Inscrição Municipal</div>
-                                    <div class="info">{{entity.cnpj}}</div>
+                                    <div class="info">{{activeBean.inscricaomunicipal}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title"><i class="material-icons">
+                                        pin_drop
+                                    </i>Mercado de atuação</div>
+                                    <div class="info">{{activeBean.praca}}</div>
                                 </div>
 
 
@@ -83,7 +90,7 @@
                                         map
                                     </i>Endereços</div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let endereco of entity.enderecoList">
+                                         *ngFor="let endereco of activeBean?.enderecoList">
                                         <div class="title"><i class="material-icons">
                                             pin_drop
                                         </i></div>
@@ -97,7 +104,7 @@
 
                                 <div class="info-line">
                                     <div class="title">Obs.</div>
-                                    <div class="info">{{entity.obs}}</div>
+                                    <div class="info">{{activeBean.obs}}</div>
                                 </div>
                             </div>
 
@@ -115,7 +122,7 @@
                                         contacts
                                     </i>Contatos</div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let contato of entity.contatoList">
+                                         *ngFor="let contato of activeBean?.contatoList">
                                         <div class="info">
                                             {{contato.contato}} - {{contato.telefone}} - {{contato.email}}
                                         </div>
@@ -128,7 +135,7 @@
                                         contact_phone
                                     </i>Telefones</div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let telefone of entity.telefoneList">
+                                         *ngFor="let telefone of activeBean?.telefoneList">
                                         <div class="info">
                                             {{telefone.tipotelefone}} - {{telefone.numero}}
                                         </div>
@@ -141,7 +148,7 @@
                                         contact_mail
                                     </i>E-mails </div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let email of entity.emailList">
+                                         *ngFor="let email of activeBean?.emailList">
                                         <div class="info">
                                             {{email.tipoemail}} - {{email.email}}
                                         </div>
@@ -153,7 +160,7 @@
                                         language
                                     </i>Sites e Links</div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let site of entity.siteList">
+                                         *ngFor="let site of activeBean?.siteList">
                                         <div class="info">
                                             {{site.tiposite}} -  <a href="'site.site'">{{site.site}}</a>
                                         </div>
@@ -173,13 +180,13 @@
                                 <div class="info-line">
                                     <div class="title"></div>
                                     <div class="info location" fxLayout="row" fxLayoutAlign="start center"
-                                         *ngFor="let conta of entity.contaBancariaList">
+                                         *ngFor="let conta of activeBean?.contaBancariaList">
 
 
                                         <!-- PREVIEW -->
                                         <div id="{{conta.id}}" class="card-preview">
 
-                                            <div class="account-entity-card">
+                                            <div class="account-activeBean-card">
 
                                                 <div  class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
                                                     <div class="h1 pr-16">{{conta.banco}}</div>
@@ -279,10 +286,9 @@
 
                             <div class="content">
 
-                                <button mat-raised-button color="primary" (click)="openDialog(entity.id)">Adicionar Programa</button>
+                                <button mat-raised-button color="primary" (click)="openDialog(activeBean?.id)">Adicionar Programa</button>
 
-
-
+                                
                                 <table class="simple">
                                     <thead>
                                     <tr>
@@ -290,6 +296,7 @@
                                         <th>Descrição</th>
                                         <th >Horário</th>
                                         <th >valor</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -307,6 +314,15 @@
                                         </td>
                                         <td>
                                             {{programa.valor}}
+                                        </td>
+                                        <td>
+                                            <button (click)="openProgramaEditDialog(programa)" mat-icon-button color="primary">
+                                                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+                                            </button>
+
+                                            <button (click)="deletePrograma(programa.id)" mat-icon-button color="primary">
+                                                <mat-icon aria-label="Example icon-button with a heart icon warn--fg">delete_forever</mat-icon>
+                                            </button>
                                         </td>
                                     </tr>
                                     </tbody>

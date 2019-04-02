@@ -27,6 +27,7 @@ export class VeiculoViewComponent  extends CommonsForm<Veiculo> implements OnIni
 
     constructor(
         public dialog: MatDialog,
+        private programaService: ProgramaService,
         apiService: VeiculoService,
         route: ActivatedRoute,
         router: Router ) {
@@ -85,6 +86,33 @@ export class VeiculoViewComponent  extends CommonsForm<Veiculo> implements OnIni
 
     }
 
+    openProgramaEditDialog(programa): void {
+        const dialogRef = this.dialog.open(DialogProgramaForm, {
+
+            data:{
+                entidade: this.activeBean,
+                programa: programa,
+                edit: true,
+
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit()
+        });
+
+    }
+
+    deletePrograma(id){
+
+        this.programaService.delete(id).subscribe(response => {
+            console.log(response);
+            this.ngOnInit()
+        });
+
+    }
+
 
 
     getLookupService(lookupName: string): CommonsService<any> {
@@ -126,9 +154,10 @@ export class VeiculoViewComponent  extends CommonsForm<Veiculo> implements OnIni
     templateUrl: './adicionar-programa.html',
     encapsulation: ViewEncapsulation.None,
 })
-export class DialogProgramaForm {
+export class DialogProgramaForm implements OnInit{
 
     programa: Programa;
+    programaLocal: Programa;
 
     constructor(
         public dialogRef: MatDialogRef<DialogProgramaForm>,
@@ -139,21 +168,42 @@ export class DialogProgramaForm {
 
     }
 
+    ngOnInit(){
+        if( this.data.edit == true){
+
+            this.programaLocal = this.data.programa;
+            console.log(this.programaLocal);
+
+            this.activeForm.patchValue(
+                {
+                    id: this.programaLocal.id,
+                    descricao:  this.programaLocal.descricao,
+                    horario: this.programaLocal.horario,
+                    valor:   this.programaLocal.valor,
+                }
+            );
+
+        }
+    }
+
     savePrograma(){
         this.activeForm.patchValue(
             {
                 veiculo_id: this.data.entidade,
+
             }
         );
 
-        this.programaService.save(this.activeForm.value).subscribe(response => {
+        this.programaService.update(this.activeForm.value).subscribe(response => {
             console.log(response);
 
         });
     }
 
+
     //Cliente reactive form
     activeForm = this.fb.group({
+        id: null,
         descricao:  [''],
         horario: [''],
         valor:  [''],

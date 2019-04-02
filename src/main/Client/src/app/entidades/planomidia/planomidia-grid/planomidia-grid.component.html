@@ -56,10 +56,18 @@
                        fusePerfectScrollbar>
 
                 <!-- ID Column -->
-                <ng-container matColumnDef="ID">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                <ng-container matColumnDef="pmn">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>PM Nº</mat-header-cell>
                     <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate">{{planomidia.id}}</p>
+                        <p class="text-truncate">{{planomidia.codigo}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="tipo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                    <mat-cell *matCellDef="let planomidia">
+                        <p class="text-truncate">{{planomidia.tipo}}</p>
                     </mat-cell>
                 </ng-container>
 
@@ -77,14 +85,6 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
                     <mat-cell *matCellDef="let planomidia">
                         <p class="text-truncate">{{planomidia.cliente_id.nomefantasia}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="campanha">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Campanha</mat-header-cell>
-                    <mat-cell *matCellDef="let planomidia">
-                        <p class="text-truncate">{{planomidia.campanha_id.nome}}</p>
                     </mat-cell>
                 </ng-container>
 

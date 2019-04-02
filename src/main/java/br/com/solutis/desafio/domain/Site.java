@@ -13,8 +13,6 @@ public class Site implements Serializable {
     @GeneratedValue
     private Long id;
 
-
-
     private String tiposite;
     private String site;
 

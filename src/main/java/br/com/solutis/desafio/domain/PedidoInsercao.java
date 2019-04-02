@@ -18,6 +18,8 @@ public class PedidoInsercao implements Serializable {
     private Long id;
 
     private Date dataemissao;
+    private Date datavencimento;
+    private Date datapagamento;
     private String status;
     private String periodo;
     private String osagencia;
@@ -207,5 +209,21 @@ public class PedidoInsercao implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getDatavencimento() {
+        return datavencimento;
+    }
+
+    public void setDatavencimento(Date datavencimento) {
+        this.datavencimento = datavencimento;
+    }
+
+    public Date getDatapagamento() {
+        return datapagamento;
+    }
+
+    public void setDatapagamento(Date datapagamento) {
+        this.datapagamento = datapagamento;
     }
 }

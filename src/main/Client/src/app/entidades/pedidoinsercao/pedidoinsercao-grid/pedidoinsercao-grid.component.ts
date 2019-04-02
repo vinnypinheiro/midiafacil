@@ -30,7 +30,6 @@ export class PedidoInsercaoGridComponent extends CommonsGrid<PedidoInsercao> imp
     @ViewChild('filter')
     filter: ElementRef;
 
-
      constructor(apiService: PedidoInsercaoService, router: Router) { 
          super(apiService, router); 
      } 
@@ -39,6 +38,12 @@ export class PedidoInsercaoGridComponent extends CommonsGrid<PedidoInsercao> imp
          this.dataSource.paginator = this.paginator;
          this.loadByFilter(this.getDefaultFilter());
      }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+
 
     loadByFilter(filterData: FilterData) {
         this.apiService.loadByFilter(filterData).subscribe(response => {

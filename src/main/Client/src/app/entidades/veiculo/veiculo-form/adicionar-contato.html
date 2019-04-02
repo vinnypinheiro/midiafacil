@@ -1,0 +1,54 @@
+
+<form [formGroup]="contatoForm" (ngSubmit)="saveContato()"  class="  mr-24" fxLayout="column" fxLayoutAlign="start"
+      name="form">
+
+    <div class="tab-content p-24" fusePerfectScrollbar >
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Tipo de Contato</mat-label>
+                <input matInput placeholder=""
+                       name="tipocontato"
+                       formControlName="tipocontato"
+                       required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Nome do Contato</mat-label>
+                <input matInput placeholder=""
+                       name="contato"
+                       formControlName="contato"
+                       required>
+            </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Telefone</mat-label>
+                <input matInput placeholder=""
+                       name="telefone"
+                       formControlName="telefone">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="60">
+                <mat-label>E-mail</mat-label>
+                <input matInput placeholder=""
+                       name="email"
+                       formControlName="email">
+            </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button
+                class="save-product-button">
+            <span>Salvar</span>
+        </button>
+
+    </div>
+
+</form>
+
+

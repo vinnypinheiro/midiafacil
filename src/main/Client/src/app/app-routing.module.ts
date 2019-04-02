@@ -9,6 +9,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
 
+    { path: 'apps', loadChildren: './main/apps/apps.module#AppsModule'},
+
   {path: 'usuario', loadChildren: './entidades/usuario/usuario.module#UsuarioModule'},
 
 

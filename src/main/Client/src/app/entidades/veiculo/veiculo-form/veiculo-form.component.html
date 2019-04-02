@@ -36,12 +36,6 @@
             <button mat-raised-button
                     class="save-product-button"
                     (click)="saveVeiculo()">
-                <span>Salvar</span>
-            </button>
-
-            <button mat-raised-button
-                    class="save-product-button"
-                    (click)="saveVeiculo()">
                 <span>Salvar Veiculo</span>
             </button>
         </div>
@@ -53,11 +47,12 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <form name="activeForm" [formGroup]="activeForm" (ngSubmit)="saveVeiculo()" class="product w-100-p" fxLayout="column" fxFlex>
 
                     <mat-tab-group>
 
                         <mat-tab label="Dados Cadastrais">
+
+                            <form name="activeForm" [formGroup]="activeForm" (ngSubmit)="saveVeiculo()" class="product w-100-p" fxLayout="column" fxFlex>
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
 
@@ -73,8 +68,7 @@
                                     <mat-label>Razão Social</mat-label>
                                     <input matInput placeholder="Razão Social"
                                            name="razaosocial"
-                                           formControlName="razaosocial"
-                                    >
+                                           formControlName="razaosocial" >
                                 </mat-form-field>
 
 
@@ -103,6 +97,13 @@
 
                                 </div>
 
+                                <mat-form-field appearance="outline" floatLabel="always"  class="w-20-p">
+                                    <mat-label>Mercado de atuação</mat-label>
+                                    <input matInput placeholder=""
+                                           name="praca"
+                                           formControlName="praca">
+                                </mat-form-field>
+
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
                                     <mat-label>Observação</mat-label>
                                     <textarea matInput placeholder=""
@@ -116,121 +117,61 @@
 
                             </div>
 
-                        </mat-tab>
-
-                        <mat-tab label="Endereços" formArrayName="enderecoList">
-
-                            <div class="p-24">
-                                <button (click)="addAddress()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
-
-
-
-
-                            <div class="p-24" fxLayout="row wrap">
-
-                                <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
-
-                                    <div class="profile-box info-box general" fxLayout="column">
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <button mat-raised-button color="primary" >Adicionar Endereço</button>
-                                <table class="simple">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Endereço</th>
-                                        <th >Cidade</th>
-                                        <th >UF</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="product-row"
-                                        *ngFor="let x of activeBean.enderecoList " >
-                                        <td>
-                                            {{x.id}}
-                                        </td>
-
-                                        <td>
-                                            {{x.endereco}}
-                                        </td>
-                                        <td>
-                                            {{x.cidade}}
-                                        </td>
-                                        <td>
-                                            {{x.UF}}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
+                            </form>
 
                         </mat-tab>
 
-                        <mat-tab label="Contatos" formArrayName="contatoList">
-                            <div class="p-24">
-                                <button (click)="addContato()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
+                <mat-tab label="Endereços" >
 
+                    <div class="p-24" fxLayout="row wrap">
 
-                            <div *ngFor="let group of contatoArray.controls; let i = index;" [formGroupName]="i">
+                        <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
 
-                                <div class="tab-content p-24" fusePerfectScrollbar >
+                            <div class="profile-box info-box general" fxLayout="column">
 
-                                    <div fxLayout="row" fxLayoutGap="20px">
+                                <div class="content">
 
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Tipo de Contato</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="tipocontato"
-                                                   formControlName="tipocontato"
-                                                   required>
-                                        </mat-form-field>
+                                    <button mat-raised-button color="primary" (click)="openEderecoDialog()" >Adicionar Endereço</button>
 
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Nome do Contato</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="contato"
-                                                   formControlName="contato"
-                                                   required>
-                                        </mat-form-field>
+                                    <table class="simple">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Endereço</th>
+                                            <th >Cidade</th>
+                                            <th >UF</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="product-row"
+                                            *ngFor="let x of activeBean.enderecoList " >
+                                            <td>
+                                                {{x.id}}
+                                            </td>
 
-                                    </div>
-
-
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Telefone</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="telefone"
-                                                   formControlName="telefone">
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="60">
-                                            <mat-label>E-mail</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="email"
-                                                   formControlName="email">
-                                        </mat-form-field>
-
-                                    </div>
-
-
-
+                                            <td>
+                                                {{x.endereco}}
+                                            </td>
+                                            <td>
+                                                {{x.cidade}}
+                                            </td>
+                                            <td>
+                                                {{x.estado}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+
                             </div>
+                        </div>
+                    </div>
+
+
+                </mat-tab>
+
+                 <mat-tab label="Contatos" >
+
 
                             <div class="p-24" fxLayout="row wrap">
 
@@ -240,7 +181,7 @@
 
                                         <div class="content">
 
-                                            <button mat-raised-button color="primary" >Adicionar Contato</button>
+                                            <button mat-raised-button color="primary" (click)="openContatoDialog()" >Adicionar Contato</button>
 
 
 
@@ -284,67 +225,93 @@
 
                         </mat-tab>
 
-                        <mat-tab label="Telefones" formArrayName="telefoneList">
-
-                            <div class="p-24">
-                                <button (click)="addTelefone()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
-
-
-                            <div *ngFor="let group of telefoneArray.controls; let i = index;" [formGroupName]="i">
-                                <div class="tab-content p-24" fusePerfectScrollbar >
-
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
-                                            <mat-label>Tipo</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="tipotelefone"
-                                                   formControlName="tipotelefone"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Telefone</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="numero"
-                                                   formControlName="numero">
-                                        </mat-form-field>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                 <mat-tab label="Telefones">
 
                             <div class="content">
-                                <button mat-raised-button color="primary" >Adicionar Endereço</button>
+                                <button mat-raised-button color="primary" (click)="openTelefoneDialog()" >Adicionar Telefone</button>
                                 <table class="simple">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Endereço</th>
-                                        <th >Cidade</th>
-                                        <th >UF</th>
+                                        <th>Tipo</th>
+                                        <th >Número</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr class="product-row"
-                                        *ngFor="let x of activeBean.enderecoList " >
+                                        *ngFor="let x of activeBean.telefoneList " >
                                         <td>
                                             {{x.id}}
                                         </td>
 
                                         <td>
-                                            {{x.endereco}}
+                                            {{x.tipotelefone}}
                                         </td>
                                         <td>
-                                            {{x.cidade}}
+                                            {{x.numero}}
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </mat-tab>
+
+                 <mat-tab label="E-mails" >
+
+                        <div class="content">
+                                <button mat-raised-button color="primary" (click)="openEmailDialog()" >Adicionar E-mail</button>
+                                <table class="simple">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tipo E-mail</th>
+                                        <th >E-mail</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="product-row"
+                                        *ngFor="let x of activeBean.emailList " >
+                                        <td>
+                                            {{x.id}}
+                                        </td>
+
+                                        <td>
+                                            {{x.tipoemail}}
                                         </td>
                                         <td>
-                                            {{x.UF}}
+                                            {{x.email}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                 <mat-tab label="Sites" >
+
+
+                            <div class="content">
+                                <button mat-raised-button color="primary" (click)="openSiteDialog()">Adicionar Site</button>
+                                <table class="simple">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tipo</th>
+                                        <th >Site</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="product-row"
+                                        *ngFor="let x of activeBean.siteList " >
+                                        <td>
+                                            {{x.id}}
+                                        </td>
+
+                                        <td>
+                                            {{x.tiposite}}
+                                        </td>
+                                        <td>
+                                            {{x.site}}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -353,255 +320,43 @@
 
                         </mat-tab>
 
-                        <mat-tab label="E-mails" formArrayName="emailList">
+                 <mat-tab label="Contas Bancárias" >
 
-                            <div class="p-24">
-                                <button (click)="addEmail()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
-
-
-                            <div *ngFor="let group of emailArray.controls; let i = index;" [formGroupName]="i">
-                                <div class="tab-content p-24" fusePerfectScrollbar >
-
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
-                                            <mat-label>Tipo</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="tipoemail"
-                                                   formControlName="tipoemail"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>E-mail</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="email"
-                                                   formControlName="email">
-                                        </mat-form-field>
-
-
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
 
                             <div class="content">
-                                <button mat-raised-button color="primary" >Adicionar Endereço</button>
+                                <button mat-raised-button color="primary" (click)="openContaDialog()">Adicionar Conta</button>
                                 <table class="simple">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Endereço</th>
-                                        <th >Cidade</th>
-                                        <th >UF</th>
+                                        <th>Banco</th>
+                                        <th >Conta</th>
+                                        <th >Tipo</th>
+                                        <th >CPF/CNPJ</th>
+                                        <th >Favorecido</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr class="product-row"
-                                        *ngFor="let x of activeBean.enderecoList " >
+                                        *ngFor="let x of activeBean.contaBancariaList " >
                                         <td>
                                             {{x.id}}
                                         </td>
 
                                         <td>
-                                            {{x.endereco}}
+                                            {{x.banco}}
                                         </td>
                                         <td>
-                                            {{x.cidade}}
+                                            {{x.conta}}
                                         </td>
                                         <td>
-                                            {{x.UF}}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Sites" formArrayName="siteList">
-
-                            <div class="p-24">
-                                <button (click)="addSite()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
-
-
-                            <div *ngFor="let group of siteArray.controls; let i = index;" [formGroupName]="i">
-                                <div class="tab-content p-24" fusePerfectScrollbar >
-
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
-                                            <mat-label>Tipo</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="tiposite"
-                                                   formControlName="tiposite"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Endereço do Site</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="site"
-                                                   formControlName="site">
-                                        </mat-form-field>
-
-
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-                            <div class="content">
-                                <button mat-raised-button color="primary" >Adicionar Endereço</button>
-                                <table class="simple">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Endereço</th>
-                                        <th >Cidade</th>
-                                        <th >UF</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="product-row"
-                                        *ngFor="let x of activeBean.enderecoList " >
-                                        <td>
-                                            {{x.id}}
-                                        </td>
-
-                                        <td>
-                                            {{x.endereco}}
+                                            {{x.tipoconta}}
                                         </td>
                                         <td>
-                                            {{x.cidade}}
+                                            {{x.cnpjcpf}}
                                         </td>
                                         <td>
-                                            {{x.UF}}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </mat-tab>
-
-                        <mat-tab label="Contas Bancárias" formArrayName="contaBancariaList">
-
-                            <div class="p-24">
-                                <button (click)="addContasBancarias()" mat-stroked-button>
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </div>
-
-
-                            <div *ngFor="let group of contasBancariasArray.controls; let i = index;" [formGroupName]="i">
-                                <div class="tab-content p-24" fusePerfectScrollbar >
-
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
-                                            <mat-label>Banco</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="banco"
-                                                   formControlName="banco"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Agência</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="agencia"
-                                                   formControlName="agencia">
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Conta</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="conta"
-                                                   formControlName="conta">
-                                        </mat-form-field>
-
-                                    </div>
-
-                                    <div fxLayout="row" fxLayoutGap="20px">
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="30">
-                                            <mat-label>Tipo da Conta</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="tipoconta"
-                                                   formControlName="tipoconta"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                            <mat-label>Operação</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="operacao"
-                                                   formControlName="operacao">
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                            <mat-label>Favorecido</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="favorecido"
-                                                   formControlName="favorecido"
-                                                   required>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                            <mat-label>CNPJ/CPF</mat-label>
-                                            <input matInput placeholder=""
-                                                   name="cnpjcpf"
-                                                   formControlName="cnpjcpf"
-                                                   required>
-                                        </mat-form-field>
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <button mat-raised-button color="primary" >Adicionar Endereço</button>
-                                <table class="simple">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Endereço</th>
-                                        <th >Cidade</th>
-                                        <th >UF</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="product-row"
-                                        *ngFor="let x of activeBean.enderecoList " >
-                                        <td>
-                                            {{x.id}}
-                                        </td>
-
-                                        <td>
-                                            {{x.endereco}}
-                                        </td>
-                                        <td>
-                                            {{x.cidade}}
-                                        </td>
-                                        <td>
-                                            {{x.UF}}
+                                            {{x.favorecido}}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -612,7 +367,6 @@
 
                     </mat-tab-group>
 
-                </form>
 
             </div>
             <!-- / CONTENT -->

@@ -4,6 +4,8 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Midia facil"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="CNPJ" class="java.lang.String"/>
+	<parameter name="ASSINATURA" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select         
  'SITES' as midia, 
@@ -15,6 +17,7 @@
  v.nomefantasia as veiculo, 
  v.site as site, 
  pii.qtd as qtd,  
+ pm.codigo as codigo,
  p.valor as custo_unitario, 
  p.descricao as responsavel, 
  'JAN/2019' as periodo, 
@@ -57,13 +60,14 @@
 	<field name="custo_unitario" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="codigo" class="java.lang.String"/>
 	<variable name="total_produto" class="java.lang.Float">
 		<variableExpression><![CDATA[$F{qtd}*$F{custo_unitario}]]></variableExpression>
 	</variable>
 	<variable name="total_bruto" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$V{total_produto}]]></variableExpression>
 	</variable>
-	<variable name="qtd_total" class="java.lang.Integer">
+	<variable name="qtd_total" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtd}]]></variableExpression>
 	</variable>
 	<variable name="total_blogs" class="java.lang.Float" calculation="Sum">
@@ -80,7 +84,7 @@
 	<title>
 		<band height="85" splitType="Stretch">
 			<staticText>
-				<reportElement x="290" y="40" width="490" height="30" uuid="16e06a41-11d7-4fc2-bdef-7eb9453f6566"/>
+				<reportElement x="222" y="40" width="448" height="30" uuid="16e06a41-11d7-4fc2-bdef-7eb9453f6566"/>
 				<textElement textAlignment="Center">
 					<font size="18"/>
 				</textElement>
@@ -95,6 +99,14 @@
 				<reportElement x="10" y="10" width="210" height="63" uuid="69977c63-58a2-43c7-bc50-be99f948c13c"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="660" y="0" width="28" height="20" uuid="dcd7dde8-74fd-44c3-afe1-189469a51b90"/>
+				<text><![CDATA[PM -]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="685" y="0" width="115" height="20" uuid="be55b3fc-131d-4929-9a1a-da21c746b23f"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -1424,7 +1436,7 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_produto}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("R$ #,##0.00").format(Double.valueOf($V{total_bruto}))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="615" y="-1" width="36" height="12" uuid="a9642402-a2ec-440a-8692-3ae4e4767d1c">
@@ -1435,6 +1447,14 @@ Av. Luiz Viana Filho, 13223, Condomínio Hangar Business Park, Torre 01, Sala 22
 				</textElement>
 				<textFieldExpression><![CDATA[$V{qtd_total}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="20" y="-18" width="265" height="83" uuid="ff889581-cf28-44ee-bba9-7d0820c9c958"/>
+				<imageExpression><![CDATA[$P{ASSINATURA}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement positionType="Float" x="330" y="-7" width="265" height="150" uuid="02a966d2-6eb4-46e6-88a0-5af12b8af4c5"/>
+				<imageExpression><![CDATA[$P{CNPJ}]]></imageExpression>
+			</image>
 		</band>
 	</lastPageFooter>
 </jasperReport>

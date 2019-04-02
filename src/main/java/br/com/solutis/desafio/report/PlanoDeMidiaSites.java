@@ -26,7 +26,8 @@ public class PlanoDeMidiaSites extends Report {
         sql += " 'JAN/2019' as periodo, \n" ;
         sql += " 'ROTATIVO' as programa, \n" ;
         sql += " 'ROTATIVO' as hora, \n" ;
-        sql += " cp.nome as campanha \n" ;
+        sql += " cp.nome as campanha, \n" ;
+        sql += " pm.codigo as codigo \n";
         sql += " from pedido_insercao_item pii \n" ;
         sql += " left join plano_midia pm on (pm.id =  "+id+") \n" ;
         sql += " left join agencia ag on (ag.id = pm.agencia_id) \n" ;
@@ -43,6 +44,12 @@ public class PlanoDeMidiaSites extends Report {
 
         String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
+
+        String CNPJ = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\cnpj.png";
+        parametros.put("CNPJ", CNPJ);
+
+        String ASSINATURA = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\assinatura.png";
+        parametros.put("ASSINATURA", ASSINATURA);
 
         return  parametros;
     }

@@ -41,6 +41,9 @@ public abstract class Report {
                 // fill out the report into a print object, ready for export.
 
                 print = JasperFillManager.fillReport(report, parametros, new JRResultSetDataSource(dados));
+                if (reportName != null && reportName.length() > 0) {
+                    print.setName(reportName);
+                }
             }else{
                 InputStream template = ReportManager.class.getResourceAsStream( "BlankReport.jasper");
                 // compile the report from the stream
@@ -59,8 +62,8 @@ public abstract class Report {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType("application/pdf"));
-            //String filename = "Relatorio.pdf";
-            //headers.setContentDispositionFormData(filename, filename);
+            String filename = "Relatorio.pdf";
+            headers.setContentDispositionFormData(filename, filename);
             headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
             myResponse = new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
         }catch(Exception e){

@@ -16,13 +16,13 @@ public class PlanoDeMidiaRadios extends Report {
         sql += " c.nomefantasia as cliente,  \n";
         sql += " '' as responsavel, \n";
         sql += "         ca.nome as campanha, \n";
-        sql += " v.cidade as mercado, \n";
+        sql += " UPPER(v.praca)  as mercado, \n";
         sql += " 'GIF PADRÃO' as formato, \n";
         sql += " '' as periodo, \n";
         sql += " '' as programa, \n";
         sql += " '' as hora, \n";
-        sql += " '' as mercado, \n";
-        sql += "v.nomefantasia as veiculo,  \n";
+        sql += " pm.codigo as codigo, \n";
+        sql +=  " UPPER(v.nomefantasia) as veiculo,  \n";
         sql += "  'ww.com.br' as site, \n";
         sql += " '' as responsavel, \n";
         sql += " pii.qtd as qtd, \n";
@@ -69,7 +69,9 @@ public class PlanoDeMidiaRadios extends Report {
         sql += " left join agencia a on (a.id = pm.agencia_id) \n";
         sql += " left join cliente c on (c.id = pm.cliente_id) \n";
         sql += " left join campanha ca on (ca.id = pm.campanha_id)  \n";
-        sql += " where pii.planomidia_id = "+id+" \n order by pii.id";
+        sql += " where pii.planomidia_id = "+id+" \n  order by v.praca ASC";
+
+
 
 
 
@@ -80,6 +82,12 @@ public class PlanoDeMidiaRadios extends Report {
 
         String LOGO = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\logo.jpg";
         parametros.put("LOGO", LOGO);
+
+        String CNPJ = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\cnpj.png";
+        parametros.put("CNPJ", CNPJ);
+
+        String ASSINATURA = "X:\\IdeiaProjects\\novo\\midiafacil\\midiafacil\\resources\\assinatura.png";
+        parametros.put("ASSINATURA", ASSINATURA);
 
 
         return  parametros;

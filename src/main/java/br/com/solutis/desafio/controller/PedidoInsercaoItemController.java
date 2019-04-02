@@ -1,6 +1,5 @@
 package br.com.solutis.desafio.controller;
 import br.com.solutis.desafio.domain.PedidoInsercaoItem;
-import br.com.solutis.desafio.domain.PlanoMidiaInsersaoItem;
 import br.com.solutis.desafio.helper.filter.FilterData;
 import br.com.solutis.desafio.service.PedidoInsercaoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ public class PedidoInsercaoItemController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity query(@RequestBody FilterData filterData) {
+
 
         //pedidoinsercaoitemService.getList(filterData.getPage());
         //pedidoinsercaoitemService.select(filterData);

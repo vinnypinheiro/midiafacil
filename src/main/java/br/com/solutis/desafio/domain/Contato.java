@@ -23,7 +23,7 @@ public class Contato implements Serializable {
 
 
     @JsonBackReference(value="veiculo-contato")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "veiculo_id", nullable = true, foreignKey = @ForeignKey(name = "fk_contato_veiculo"))    private Veiculo veiculo_id;
 
     @JsonBackReference(value="cliente-contato")

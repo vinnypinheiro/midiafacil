@@ -14,10 +14,19 @@ import {VeiculoService} from '../veiculo.service';
 import {TipoMidiaService} from '../../tipomidia/tipomidia.service';
 import {DialogPecaForm} from "../../planomidia/planomidia-view/planomidia-view.component";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {Peca} from "../../peca/peca";
-import {PecaService} from "../../peca/peca.service";
 import {Endereco} from "../../endereco/endereco";
 import {EnderecoService} from "../../endereco/endereco.service";
+import {ContatoService} from "../../contato/contato.service";
+import {Contato} from "../../contato/contato";
+import {Cliente} from "../../cliente/cliente";
+import {Telefone} from "../../telefone/telefone";
+import {TelefoneService} from "../../telefone/telefone.service";
+import {Email} from "../../email/email";
+import {EmailService} from "../../email/email.service";
+import {Sites} from "../../sites/sites";
+import {SitesService} from "../../sites/sites.service";
+import {ContaBancaria} from "../../contabancaria/contabancaria";
+import {ContaBancariaService} from "../../contabancaria/contabancaria.service";
 
 @Component({
  selector: 'gov-veiculo-form', 
@@ -55,6 +64,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
                     id: this.activeBean.id,
                     nomefantasia: this.activeBean.nomefantasia, 
                     cnpj: this.activeBean.cnpj,
+                    praca: this.activeBean.praca,
                     cpf: this.activeBean.cpf,
                     data_cadastro: this.activeBean.data_cadastro,
                     inscricaoestadual: this.activeBean.inscricaoestadual,
@@ -64,12 +74,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
                                        
                   });
 
-                  this.setEnderecosArray();
-                  this.setEmailArray();
-                  this.setTelefoneListArray();
-                  this.setContatoListArray();
-                  this.setSiteListArray();
-                  this.setcontaBancariaArray();
 
                 
               });
@@ -82,83 +86,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
        
      }
 
-    setcontaBancariaArray(){
-        let control = <FormArray>this.activeForm.controls.contabancariaList;
-        this.activeBean.contaBancariaList.forEach(x => {
-            control.push(this.fb.group({
-                id: x.id,
-                agencia: x.agencia,
-                banco: x.banco,
-                cnpjcpf: x.cnpjcpf,
-                conta: x.conta,
-                favorecido: x.favorecido,
-                operacao: x.operacao,
-                tipoconta: x.tipoconta
-            }))
-        })
-
-    }
-
-     setEnderecosArray(){
-        let control = <FormArray>this.activeForm.controls.enderecoList;
-        this.activeBean.enderecoList.forEach(x => {
-          control.push(this.fb.group({
-              id: x.id,
-              endereco: x.endereco,
-              cidade: x.cidade,
-              bairro: x.bairro,
-              estado: x.estado,
-              cep: x.cep
-        }))
-        })
-      }
-
-      setEmailArray(){
-        let control = <FormArray>this.activeForm.controls.emailList;
-        this.activeBean.emailList.forEach(e => {
-          control.push(this.fb.group({
-              id: e.id,
-              tipoemail: e.tipoemail,
-              email: e.email
-        }))
-        })
-      }
-
-    setTelefoneListArray(){
-        let control = <FormArray>this.activeForm.controls.telefoneList;
-        this.activeBean.telefoneList.forEach(t => {
-            control.push(this.fb.group({
-                id: t.id,
-                tipotelefone: t.tipotelefone,
-                numero: t.numero
-
-            }))
-        })
-    }
-
-    setContatoListArray(){
-        let control = <FormArray>this.activeForm.controls.contatoList;
-        this.activeBean.contatoList.forEach(c => {
-            control.push(this.fb.group({
-                contato: c.contato,
-                email: c.email,
-                telefone: c.telefone,
-                tipocontato: c.tipocontato,
-            }))
-        })
-    }
-
-    setSiteListArray(){
-        let control = <FormArray>this.activeForm.controls.siteList;
-        this.activeBean.siteList.forEach(s => {
-            control.push(this.fb.group({
-                id: s.id,
-                tiposite: s.tiposite,
-                site: s.site
-            }))
-        })
-    }
-
        //Cliente reactive form
      activeForm = this.fb.group({
         id: [''],
@@ -168,8 +95,9 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         inscricaoestadual:  [''],
         inscricaomunicipal: [''],
         cnpj: [''],
-        cpf:  [''],     
-        obs:  [''],
+        cpf:  [''],
+         praca:  [''],
+         obs:  [''],
        
        
         contaBancariaList: this.fb.array([this.addContasBancariasGroup()]),
@@ -222,7 +150,7 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
       addTelefoneGroup() {
         return this.fb.group({
           tipotelefone: [null],
-          telefone: [null]
+            numero: [null]
         });
       }
 
@@ -233,110 +161,96 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
         });
       }
 
-     addAddress() {
-       this.addressArray.push(this.addAddressGroup());
-     }
-     removeAddress(index) {
-       this.addressArray.removeAt(index);
-     }
-     get addressArray() {
-       return <FormArray>this.activeForm.get('enderecoList');
-     }
-       ////// Contas Bancarias List //////////
-       addContasBancarias() {
-        this.contasBancariasArray.push(this.addContasBancariasGroup());
-      }
-      removeContasBancarias(index) {
-        this.contasBancariasArray.removeAt(index);
-      }
-      get contasBancariasArray() {
-        return <FormArray>this.activeForm.get('contaBancariaList');
-      }
 
-     addContato() {
-        this.contatoArray.push(this.addContasBancariasGroup());
-      }
-
-      removeContato(index) {
-        this.contatoArray.removeAt(index);
-      }
-
-      get contatoArray() {
-        return <FormArray>this.activeForm.get('contatoList');
-      }
-
-     addSite() {
-        this.siteArray.push(this.addSiteGroup());
-      }
-
-      removeSite(index) {
-        this.siteArray.removeAt(index);
-      }
-      get siteArray() {
-        return <FormArray>this.activeForm.get('siteList');
-      }
-
-     addTelefone() {
-        this.telefoneArray.push(this.addTelefoneGroup());
-      }
-      removeTelefone(index) {
-        this.telefoneArray.removeAt(index);
-      }
-      get telefoneArray() {
-        return <FormArray>this.activeForm.get('telefoneList');
-      }
-
-     addEmail() {
-        this.emailArray.push(this.addEmailGroup());
-      }
-      removeEmail(index) {
-        this.emailArray.removeAt(index);
-      }
-      get emailArray() {
-        return <FormArray>this.activeForm.get('emailList');
-      }
-
-
-
-      ////////////////////////
-
-    openEditDialog(entity, dialog): void {
-        const dialogRef = this.dialog.open(DialogPecaForm, {
+    openEderecoDialog(): void {
+        const dialogRef = this.dialog.open(DialogEnderecoForm, {
 
             data:{
-            },
+                entidade: this.activeBean
+            }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
-            this.setEnderecoArray();
+            this.ngOnInit();
         });
 
     }
 
-    setEnderecoArray(){
+    openContatoDialog(): void {
+        const dialogRef = this.dialog.open(DialogContatoForm, {
 
-        this.operation = Operation.SELECT;
-        this.apiService.findById(this.beanId).subscribe(response => {
-            this.activeBean = (<any>response);
-            this.entity = this.activeBean;
-            console.log(this.activeBean);
+            data:{
+                entidade: this.activeBean
+            }
+        });
 
-            let control = <FormArray>this.activeForm.controls.enderecoList;
-            this.entity.pecalist.forEach(x => {
-                control.push(this.fb.group({
-                    peca: x.peca,
-                    titulo: x.titulo,
-                    duracao: x.duracao
-                }))
-            });
-
-
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit();
         });
 
     }
 
+    openContaDialog(): void {
+        const dialogRef = this.dialog.open(DialogContaBancariaForm, {
 
+            data:{
+                entidade: this.activeBean
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit();
+        });
+
+    }
+
+    openEmailDialog(): void {
+        const dialogRef = this.dialog.open(DialogEmailForm, {
+
+            data:{
+                entidade: this.activeBean
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit();
+        });
+
+    }
+
+    openSiteDialog(): void {
+        const dialogRef = this.dialog.open(DialogSitesForm, {
+
+            data:{
+                entidade: this.activeBean
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit();
+        });
+
+    }
+
+    openTelefoneDialog(): void {
+        const dialogRef = this.dialog.open(DialogTelefoneForm, {
+
+            data:{
+                entidade: this.activeBean
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            this.ngOnInit();
+        });
+
+    }
 
 
     saveVeiculo() {
@@ -346,9 +260,6 @@ export class VeiculoFormComponent extends CommonsForm<Veiculo> implements OnInit
        this.save();
        //this.apiService.save(this.clienteForm.value);
      }
-
-
-
 
      getLookupService(lookupName: string): CommonsService<any> {
          switch (lookupName) { 
@@ -406,14 +317,16 @@ export class DialogEnderecoForm {
     }
 
     saveEndereco(){
+
         this.enderecoForm.patchValue(
             {
-                planomidia_id: this.data.entidade,
+                veiculo_id: this.data.entidade,
             }
         );
 
         this.enderecoService.save(this.enderecoForm.value).subscribe(response => {
             console.log(response);
+            this.closeDialog();
         });
     }
 
@@ -423,13 +336,250 @@ export class DialogEnderecoForm {
         bairro: [null],
         cidade: [null],
         cep: [null],
-        estado: [null]
+        estado: [null],
+        veiculo_id: null,
     });
-
 
 
     closeDialog(): void {
         this.dialogRef.close();
     }
 }
+
+@Component({
+    selector: 'dialog-content-contato-dialog',
+    templateUrl: './adicionar-contato.html',
+})
+export class DialogContatoForm {
+
+    contato: Contato;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogContatoForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private contatoService: ContatoService
+    ) {
+
+    }
+
+    saveContato(){
+
+        this.contatoForm.patchValue(
+            {
+                veiculo_id: this.data.entidade,
+            }
+        );
+
+        this.contatoService.save(this.contatoForm.value).subscribe(response => {
+            console.log(response);
+            this.closeDialog();
+        });
+    }
+
+    //Cliente reactive form
+    contatoForm = this.fb.group({
+
+    contato: [null],
+    email: [null],
+    telefone: [null],
+    tipocontato: [null],
+        veiculo_id: null,
+    });
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+@Component({
+    selector: 'dialog-content-telefone-dialog',
+    templateUrl: './adicionar-telefone.html',
+})
+export class DialogTelefoneForm {
+
+    telefone: Telefone;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogTelefoneForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private telefoneService: TelefoneService
+    ) {
+
+    }
+
+    saveTelefone(){
+
+        this.telefoneForm.patchValue(
+            {
+                veiculo_id: this.data.entidade,
+            }
+        );
+
+        this.telefoneService.save(this.telefoneForm.value).subscribe(response => {
+            console.log(response);
+            this.closeDialog();
+        });
+    }
+
+    //Cliente reactive form
+    telefoneForm = this.fb.group({
+
+        tipotelefone: null,
+    numero:null,
+        veiculo_id: null,
+    });
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+@Component({
+    selector: 'dialog-content-email-dialog',
+    templateUrl: './adicionar-email.html',
+})
+export class DialogEmailForm {
+
+    email: Email;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogEmailForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private emailService: EmailService
+    ) {
+
+    }
+
+    saveEmail(){
+
+        this.emailForm.patchValue(
+            {
+                veiculo_id: this.data.entidade,
+            }
+        );
+
+        this.emailService.save(this.emailForm.value).subscribe(response => {
+            console.log(response);
+            this.closeDialog();
+        });
+    }
+
+    //Cliente reactive form
+    emailForm = this.fb.group({
+
+        email: [null],
+        tipoemail: [null],
+        veiculo_id: null,
+    });
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+@Component({
+    selector: 'dialog-content-sites-dialog',
+    templateUrl: './adicionar-site.html',
+})
+export class DialogSitesForm {
+
+    sites: Sites;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogSitesForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private sitesService: SitesService
+    ) {
+
+    }
+
+    saveSites(){
+
+        this.sitesForm.patchValue(
+            {
+                veiculo_id: this.data.entidade,
+            }
+        );
+
+        this.sitesService.save(this.sitesForm.value).subscribe(response => {
+            console.log(response);
+            this.closeDialog();
+        });
+    }
+
+    //Cliente reactive form
+    sitesForm = this.fb.group({
+
+        tiposite: null,
+     site: null,
+        veiculo_id: null,
+    });
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+@Component({
+    selector: 'dialog-content-contabancaria-dialog',
+    templateUrl: './adicionar-conta.html',
+})
+export class DialogContaBancariaForm {
+
+    contabancaria: ContaBancaria;
+
+    constructor(
+        public dialogRef: MatDialogRef<DialogContaBancariaForm>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private fb: FormBuilder,
+        private contabancariaService: ContaBancariaService
+    ) {
+
+    }
+
+    saveContaBancaria(){
+
+        this.contabancariaForm.patchValue(
+            {
+                veiculo_id: this.data.entidade,
+            }
+        );
+
+        this.contabancariaService.save(this.contabancariaForm.value).subscribe(response => {
+            console.log(response);
+            this.closeDialog();
+        });
+    }
+
+    //Cliente reactive form
+    contabancariaForm = this.fb.group({
+
+        banco: null,
+    agencia: null,
+    conta: null,
+    operacao: null,
+    tipoconta: null,
+    cnpjcpf:null,
+    favorecido: null,
+        veiculo_id: null,
+    });
+
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+}
+
+
+
+
+
 

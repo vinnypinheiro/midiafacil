@@ -1,0 +1,78 @@
+
+<form [formGroup]="contabancariaForm" (ngSubmit)="saveContaBancaria()"  class="  mr-24" fxLayout="column" fxLayoutAlign="start"
+      name="form">
+
+    <div class="tab-content p-24" fusePerfectScrollbar >
+
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" class="30">
+                <mat-label>Banco</mat-label>
+                <input matInput placeholder=""
+                       name="banco"
+                       formControlName="banco"
+                       required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Agência</mat-label>
+                <input matInput placeholder=""
+                       name="agencia"
+                       formControlName="agencia">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Conta</mat-label>
+                <input matInput placeholder=""
+                       name="conta"
+                       formControlName="conta">
+            </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+
+            <mat-form-field appearance="outline" floatLabel="always" class="30">
+                <mat-label>Tipo da Conta</mat-label>
+                <input matInput placeholder=""
+                       name="tipoconta"
+                       formControlName="tipoconta"
+                       required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
+                <mat-label>Operação</mat-label>
+                <input matInput placeholder=""
+                       name="operacao"
+                       formControlName="operacao">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                <mat-label>Favorecido</mat-label>
+                <input matInput placeholder=""
+                       name="favorecido"
+                       formControlName="favorecido"
+                       required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                <mat-label>CNPJ/CPF</mat-label>
+                <input matInput placeholder=""
+                       name="cnpjcpf"
+                       formControlName="cnpjcpf"
+                       required>
+            </mat-form-field>
+
+        </div>
+        <button mat-raised-button
+                class="save-product-button">
+            <span>Salvar</span>
+        </button>
+
+
+    </div>
+
+</form>
+
+

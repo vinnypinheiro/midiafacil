@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 @RestController("PedidoInsercaoController")
 @RequestMapping("/pedidoinsercao")
@@ -24,17 +27,32 @@ public class PedidoInsercaoController {
     @RequestMapping(value = "/saveLote", method = RequestMethod.POST)
     public ResponseEntity saveLote(@RequestBody PlanoMidia bean) {
 
+        PlanoMidia teste = new PlanoMidia();
 
+        bean.getPedidoDeInsercaoItemlist().sort(Comparator.comparing(a -> a.getVeiculo_id().getNomefantasia()));
+
+        AtomicInteger counter = new AtomicInteger(1);
 
         bean.getPedidoDeInsercaoItemlist().forEach(pil -> {
+
+            int cod = counter.getAndIncrement();
+
 
             PedidoInsercao pi = new PedidoInsercao();
             pi.setPlanomidia_id(bean);
             pi.setCliente_id(bean.getCliente_id());
             pi.setAgencia_id(bean.getAgencia_id());
             pi.setVeiculo_id(pil.getVeiculo_id());
+            pi.setDataemissao(bean.getData());
+            pi.setOsagencia(bean.getOsagencia());
+
+            pi.setCodigo("2019.01.1"+cod);
 
              pi.setStatus("APROVADO");
+
+             pi.setFaturamentotxt("- FATURAR PELO VALOR LIQUIDO A FAVOR DO CLIENTE \n - PAGAMENTO VIA TRANSFERÊNCIA BANCÁRIA ");
+             pi.setVencimentotxt("- CONTRA APRESENTAÇÃO \n - FATURAR APÓS TÉRMINO DA VEICULAÇÃO ");
+             pi.setObs("- ENVIAR NOTA FISCAL E COMPROVANTE DE VEÍCULAÇÃO PARA \n - FAT@MULTIMIDIA.XYZ ");
 
              pi.setPeriodo(pil.getMes()+"/"+pil.getAno());
              pi.setTotalbruto(pil.getValor());

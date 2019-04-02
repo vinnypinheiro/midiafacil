@@ -22,7 +22,7 @@ export class PlanoMidiaGridComponent extends CommonsGrid<PlanoMidia> implements 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     dataSource = new MatTableDataSource;
-    displayedColumns: string[] = ['ID','agencia', 'cliente', 'campanha', 'situacao'];
+    displayedColumns: string[] = ['pmn', 'tipo','agencia', 'cliente',  'situacao'];
 
     @ViewChild(MatSort)
     sort: MatSort;

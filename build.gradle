@@ -65,5 +65,9 @@ dependencies {
     compile("net.sf.jasperreports:jasperreports:6.4.0")
     compile('org.apache.xmlgraphics:batik-bridge:1.8')
 
+    //email
+    compile "org.springframework.integration:spring-integration-mail:5.1.2.RELEASE"
+
+
 
 }

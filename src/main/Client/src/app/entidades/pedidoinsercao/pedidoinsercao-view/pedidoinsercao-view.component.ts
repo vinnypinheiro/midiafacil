@@ -90,7 +90,7 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
         agencia_id:  [''],
         cliente_id:  [''],
 
-        pecalist: this.fb.array([this.addPecaListGroup()]),
+        pecaList: this.fb.array([this.addPecaListGroup()]),
         pedidoDeInsercaoItemlist: this.fb.array([this.addpedidoDeInsercaoItemlistGroup()])
 
     });
@@ -115,7 +115,7 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
             console.log(this.activeBean);
 
             let control = <FormArray>this.activeForm.controls.pecalist;
-            this.entity.pecalist.forEach(x => {
+            this.entity.pecaList.forEach(x => {
                 control.push(this.fb.group({
                     peca: x.peca,
                     titulo: x.titulo,
@@ -205,7 +205,13 @@ export class PedidoinsercaoViewComponent extends CommonsForm<PedidoInsercao> imp
 
     reportname: string;
     printReport( id: number) {
-        this.reportname = "PedidoDeInsercaoRadios"
+    console.log(this.activeBean.planomidia_id.tipo );
+        if(this.activeBean.planomidia_id.tipo == "RADIO"){
+            this.reportname = "PedidoDeInsercaoRadios"
+        } else {
+            this.reportname = "PedidoDeInsercaoSites"
+        }
+
         this.sharedService.printReport( this.reportname, id)
     }
 

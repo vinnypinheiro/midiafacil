@@ -327,7 +327,7 @@ export class PlanomidiaViewComponent extends CommonsForm<PlanoMidia> implements 
         if(this.activeBean.tipo == "RADIO"){
             this.reportname = "PlanoDeMidiaRadios"
         } else {
-            this.reportname = "PlanoDeMidiaSites"
+            this.reportname = "PlanoDeMidiaRadios"
         }
 
         this.sharedService.printReport( this.reportname, id)
